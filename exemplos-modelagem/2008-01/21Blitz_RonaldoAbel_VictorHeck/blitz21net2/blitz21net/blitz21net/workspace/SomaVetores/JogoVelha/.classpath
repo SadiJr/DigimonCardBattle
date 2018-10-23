@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="figuras"/>
+	<classpathentry kind="lib" path="netgames"/>
+	<classpathentry kind="lib" path="new-lib/analizer.jar"/>
+	<classpathentry kind="lib" path="new-lib/ngnrtFramework.jar"/>
+	<classpathentry kind="output" path="src"/>
+</classpath>

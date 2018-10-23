@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="deployed/|verified/" kind="src" path=""/>
+	<classpathentry kind="con" path="J2MELIB"/>
+	<classpathentry kind="output" path=""/>
+</classpath>

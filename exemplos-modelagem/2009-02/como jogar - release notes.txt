@@ -1,0 +1,49 @@
+===========================================================
+
+BANCO IMOBILIÁRIO, VERSÃO 1.0 -- RELEASE NOTES
+
+===========================================================
+
+O objetivo pro trás do jogo é tornar-se o mais rico 
+jogador, através de compra, aluguel e venda de propriedades.
+
+-----------------------------------------------------------
+
+DESCRIÇÃO:
+ 
+      LIMITAÇÕES:
+
+            * Nesta versão não é possível negociações entre jogadores.
+            * Nesta versão o banco sempre será o alvo das vendas de propriedades, ou seja, não haverá venda entre jogadores.
+
+      FUNCIOMENTO DE ALGUMAS OPÇÕES:
+
+            *Opção vender: você poderá vender suas propriedades ou companhias somente para o banco.
+ 
+                - Quando tiver casas construídas sobre seu terreno, o "vender" irá vender 1 casa por vez.
+                - Quando na ausência de casas, será vendido o terreno, ou seja, você não o terá mais posse. 
+
+            *Opção Finalizar:
+               
+                - Quando habilitada no menu de botões, esta opção irá passar sua vez para o outro jogador conectado.
+
+      REQUISITOS
+
+            *Maquina Virtual Java (JVM) Instalada no computador
+            *Conexão com Internet
+
+      INSTALAÇÃO - INICIAR PARTIDA
+
+            1 - Antes de tudo certifique-se de que o netgames.jar e o bancoImobiliario.jar estão na mesma pasta
+            2 - Conecte-se à Internet
+            3 - Executar o arquivo "bancoimobiliario.jar"
+            4 - Inserir seu nome
+            5 - Digitar o servidor
+                 5.1 - INTERNET:
+
+                        4.1.1 - venus.inf.ufsc.br ou
+
+            6 - Um dos participantes clica no menu "Jogo" > "Iniciar Partida"
+            7 - Bom jogo!
+------------------------------------------------------------
+ 

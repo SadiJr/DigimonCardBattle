@@ -1,0 +1,71 @@
+package dominioProblema;
+
+public class Posicao {
+ 
+	protected Jogador ocupante;
+	private String acaoRepresentada;	
+	private boolean fileiraTravada;
+	 
+	public boolean ocupada() {
+		return (ocupante != null);
+	}
+	 
+	public void alocarPeao(Jogador umJogador) {
+		ocupante = umJogador;
+	}
+	 
+	public Jogador informarOcupante() {
+		return ocupante;
+	}
+	 
+	public void esvaziar() {
+		ocupante = null;
+	}
+	 
+	public boolean mesmoOcupante(Posicao p1, Posicao p2) {
+		return (  (ocupante == p1.informarOcupante()) && (ocupante == p2.informarOcupante()) );
+	}
+
+	/**
+	 * @return the ocupante
+	 */
+	public Jogador getOcupante() {
+		return ocupante;
+	}
+
+	/**
+	 * @param ocupante the ocupante to set
+	 */
+	public void setOcupante(Jogador ocupante) {
+		this.ocupante = ocupante;
+	}
+
+	/**
+	 * @return the acaoRepresentada
+	 */
+	public String getAcaoRepresentada() {
+		return acaoRepresentada;
+	}
+
+	/**
+	 * @param acaoRepresentada the acaoRepresentada to set
+	 */
+	public void setAcaoRepresentada(String acaoRepresentada) {
+		this.acaoRepresentada = acaoRepresentada;
+	}
+
+	/**
+	 * @return the fileiraTravada
+	 */
+	public boolean isFileiraTravada() {
+		return fileiraTravada;
+	}
+
+	/**
+	 * @param fileiraTravada the fileiraTravada to set
+	 */
+	public void setFileiraTravada(boolean fileiraTravada) {
+		this.fileiraTravada = fileiraTravada;
+	}	 
+}
+ 

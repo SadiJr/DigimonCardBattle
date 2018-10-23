@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="LinhasECores" default="default" basedir=".">
+    <description>Construcao do Linhas e Cores</description>
+
+    <property name="build" value="./build/classes" />
+    <property name="src" value="./src" />
+    <property name="dist" value="./dist" />
+    
+    <target name="compile" depends="">
+      <mkdir dir="${build}" />      
+      <javac destdir="${build}" srcdir="${src}"/>      
+    </target>
+
+    <target name="jar" depends="-pre-jar">
+       <mkdir dir="${dist}" />
+       <manifest file="${build}/../manifest.mf" mode="update">
+          <attribute name="Main-Class" value="br.ufsc.linhasecores.Main" />
+       </manifest>
+       <jar basedir="${build}" destfile="${dist}/LinhasECores.jar" 
+         manifest="${build}/../manifest.mf" />
+    </target>
+    
+    <target name="-pre-jar">
+      <mkdir dir="${build}/images" />
+      <copy todir="${build}/images">
+         <fileset dir="${basedir}/images">
+            <include name="**/*.png" />
+         </fileset>
+      </copy>
+    </target>
+    
+    <target name="default" depends="compile,jar" />
+</project>

@@ -1,0 +1,6 @@
+Alterações na modelaem: 
+- Diagramas de máquinas de estados
+  - Jogador
+      Retiradas transições Jogando -> Perdedor e Jogando -> Perdedor
+  - PosicaoColonia
+      Explicitação dos atributos e métodos de transição entre estados

@@ -1,0 +1,15 @@
+	Através da Disciplina de Análise e Projetos de Sistema, vimos a importância da modelagem em um sistema (no nosso caso, utilizamos a UML 2.0). Além de a modelagem melhorar a visão do funcionamento de um programa e encaixar perfeitamente com a orientação a Objetos, ela ajuda na manutenção e modificações no sistema através de uma documentação completa das funcionalidades e interação do sistema. Aprendemos nesta disciplina, a modelar um sistema desde a sua especificação até os diagramas mais importantes. 
+	Além da aprendizagem com a UML, tivemos que desenvolver outras faculdades como, por exemplo, o desenvolvimento de interfaces gráficas e o trabalho em conjunto.
+	A implementação do jogo foi essencial para a pratica da aprendizagem teórica, complementando assim esta lacuna. Acreditamos que em projetos futuros, faremos bom uso desta ferramenta de modelagem, pois ela facilita e auxilia no desenvolvimento de Softwares, principalmente os mais complexos.
+
+
+VERSÕES FUTURAS
+
+	Gostaríamos de descentralizar as funções do sistema, pois a maioria delas estão na classe tabuleiro para ampliar a modularidade e aumentar a independência entre classes;
+	Desejamos também criar uma interface gráfica para que o usuário possa escolher o tema do jogo, por exemplo: História, Biologia, Assuntos Gerais. Para facilitar ainda mais as mudanças de cartas, textos,dicas e nomes, desejamos implementar uma interface capaz de realizar este tipo de operação.
+	Por fim, precisamos o quanto antes de uma opção de “Ajuda” sanando as duvidas pontuais dos usuários.
+	
+
+
+
+

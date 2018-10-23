@@ -1,0 +1,99 @@
+Projeto: Jogo da Memória Educativa
+Aplicação: Memória Educativa
+Identificador do Documento: Requisitos-Memoria-Educativa-1.0
+Versão: 1.0
+Data: 23/02/2007
+
+Histórico do Documento:
+
+VersãoAutor(es)DataAção1.0Pedro Paulo Fabre Júnior
+Rafael Uriarte23/02/2007Criação do documento.
+ÍNDICE
+ INTRODUÇÃO ................................................................................. 04
+	1.1 Objetivo do Desenvolvimento ............................................... 04
+	1.2 Definições e Abreviaturas ..................................................... 04
+
+2 VISÃO GERAL DA APLICAÇÃO .................................................. 04
+
+	2.1 Arquitetura do Sistema ......................................................... 04
+	2.2 Arquitetura da Aplicação ...................................................... 04
+	2.3 Premissas de Desenvolvimento ............................................. 05
+
+3 REQUISITOS E APLICAÇÃO ......................................................... 06
+
+	3.1 Requisitos Funcionais ........................................................... 06
+	3.2 Requisitos Não-Funcionais ................................................... 07
+
+
+
+	
+
+
+
+
+
+1 INTRODUÇÃO
+
+1.1  Objetivo do Desenvolvimento
+
+   A implementação do jogo Memória Educativa utilizando a Linguagem UML para a estruturação do projeto e da Programação Orientada à Objetos foi feita através da linguagem de programação JAVA, seguindo proposta apresentada em sala de aula na disciplina Análise e Projetos de Sistemas. Memória Educativa é um jogo que o jogador tem como objetivo encontrar os pares corretos entre as figuras, virando-os somente quando selecionados, exercitando assim a memória. Com este software desejamos proporcionar um modo saudável e divertido para prover o aprendizado, principalmente para crianças. Procuramos isolar os textos, nomes, dicas e figuras para facilitar a troca dos mesmos e fomentar a difusão multidisciplinar do Jogo.
+
+1.2  Definições e Abreviaturas
+
+	Tabuleiro: O tabuleiro consiste em dois tamanhos, dependendo do nível do jogo. No nível um, o tabuleiro é uma matriz de três linhas por quatro colunas e no nível dois, o tabuleiro é uma matriz de quatro linhas por cinco colunas.
+
+	Carta: Consiste em uma figura, uma dica, um texto e um nome, sendo que tem um par previamente definido. Diferentemente dos jogos da memória, os pares não são iguais, os pares tem algo em comum que os define como pares. Ex: PC e Notebook são pares pois os dois são tipos de eletrônicos.
+
+
+
+2 VISÃO GERAL DA APLICAÇÃO
+
+2.1  Arquitetura do Sistema
+
+   Trata-se de um único aplicativo, onde será oferecido aos jogadores a configurações do jogo, inicio e a persistência de recordes e níveis.
+
+2.2  Arquitetura da Aplicação
+
+   A aplicação será desenvolvida orientada à objetos com a linguagem de programação JAVA.
+
+2.3  Premissas de Desenvolvimento
+
+Ao iniciar o jogo, o usuário tem a sua disposição a ultima escolha do nível, que é gravada em um arquivo para persistência. O jogo armazena o número de jogadas, logo o jogo terá um ranking dos jogadores que completaram a jogo em menos jogadas. Os dados sobre os jogadores e o nível deverão ser armazenado em um disco.
+3 REQUISITOS E APLICAÇÃO
+
+3.1  Requisitos Funcionais
+
+3.1.01 – O software deve conter dois níveis de dificuldade;
+
+3.1.02 – O software deve iniciar com o ultimo nível escolhido;
+
+3.1.03 – O software deve iniciar com as cartas embaralhadas, de modo que o jogador e não saiba onde estão os pares;
+
+3.1.04 – O software deve iniciar com as cartas viradas para baixo, para que o jogador, inicialmente, não veja as figuras;
+
+3.1.05 – O software deve permitir que o usuário inicie um novo jogo;
+
+3.1.06 – O software deve permitir que o jogador escolha o nível do jogo;
+
+3.1.07 – O software deve conter um ranking de 10 pessoas para cada nível, sendo que a ordem é determinada pelo numero de jogadas;
+
+3.1.08 – O software deve permitir que o jogador veja o ranking com os recordes;
+
+3.1.09 – A aplicação deve permitir que o usuário vire as cartas;
+
+3.1.10 – A aplicação deve manter as cartas viradas caso o usuário acerte os pares;
+
+3.1.11 – A aplicação deve mostrar um texto explicativo quando o usuário acerta o par correto de uma carta;
+
+3.1.12 – A aplicação deve permitir que o jogador coloque seu nome na lista dos recordistas caso o mesmo consiga terminar o jogo em menos jogadas;
+
+
+3.2  Requisitos Não-Funcionais
+
+3.2.01 – O Software deve ter uma interface gráfica que permita ao usuário uma interação com as cartas, podendo desvirá-las;
+
+3.2.02 – O Software deve conter cartas com figuras educativas;
+
+3.2.03 – O Software deve rodar em qualquer computador com a máquina virtual JAVA;
+
+

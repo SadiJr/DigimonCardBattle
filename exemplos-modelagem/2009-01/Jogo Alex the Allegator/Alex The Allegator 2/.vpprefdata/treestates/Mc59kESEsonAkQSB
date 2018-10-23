@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectTreeState projectID="_UgkJgSEsom.AQPB" projectPath="D:\jaiminho\Documentos\Faculdades\Computa\u00e7\u00e3o\3\u00b0Fase\INE 5618 - Analise e projeto de sistemas\Jogo Alex the Allegator\Alex The Allegator 2\Alex The Allegator 2.vpp">
+	<TreeState name="ModelRepository" viewX="0" viewY="0">
+		<ExpandedPath>ModelRepository</ExpandedPath>
+	</TreeState>
+	<TreeState name="DiagramNavigator" viewX="0" viewY="578">
+		<ExpandedPath>DiagramNavigator</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,UML Diagrams</ExpandedPath>
+		<ExpandedPath>UseCaseDiagram</ExpandedPath>
+		<ExpandedPath>ClassDiagram</ExpandedPath>
+		<ExpandedPath>InteractionDiagram</ExpandedPath>
+		<ExpandedPath>StateDiagram</ExpandedPath>
+		<ExpandedPath>ActivityDiagram</ExpandedPath>
+		<ExpandedPath>InteractionOverviewDiagram</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,Requirements Capturing</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,Database Modeling</ExpandedPath>
+		<ExpandedPath>ORMDiagram</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,Others</ExpandedPath>
+		<SelectedPath>InteractionOverviewDiagram,CftcJgSEsom.AQC9</SelectedPath>
+	</TreeState>
+	<TreeState name="ClassBrowser" viewX="0" viewY="0">
+		<ExpandedPath>ClassBrowser</ExpandedPath>
+	</TreeState>
+	<TreeState name="LogicalView" viewX="0" viewY="0"/>
+</ProjectTreeState>

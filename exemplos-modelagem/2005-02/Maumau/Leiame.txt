@@ -1,0 +1,49 @@
+Arquivo Leia-me de Maumau 2.0
+======================================================
+
+Este documento contém informações técnicas sobre
+o jogo Maumau.
+A versão mais atual do jogo pode ser encontrada
+no site http://www.inf.ufsc.br/~fabiokr.
+
+======================================================
+
+Conteúdo deste documento:
+
+I	Histórico de versão
+II	Requerimentos mínimos
+III	Instalação/Utilização
+
+
+======================================================
+I	Histórico da versão
+======================================================
+
+Maumau 2.0	Adicionadas todas as funcionalidades 
+		ao jogo. Compra de cartas, descartes,
+		cartas especiais, inteligência
+		artificial, finalização e opções 
+		do jogo.
+
+Maumau 1.0	Protótipo da interface do jogo.
+
+
+======================================================
+II	Requerimentos Mínimos
+======================================================
+
+Para utilizar o jogo Maumau 2.0 você precisará ter
+instalado em sua máquina uma máquina virtual JAVA
+versão 1.4.2 ou maior.
+Para obter a versão mais atual da máquina virtual JAVA
+visite http://www.java.com.
+
+
+======================================================
+III	Instalação/Utilização
+======================================================
+
+Para utilizar o programa, simplesmente execute o
+arquivo maumau.jar, e o programa deverá ser
+automaticamente iniciado.
+

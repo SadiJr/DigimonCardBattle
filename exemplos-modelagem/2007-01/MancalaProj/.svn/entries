@@ -1,0 +1,58 @@
+8
+
+dir
+7650
+https://svn.inf.ufsc.br/fernandols/MancalaProj
+https://svn.inf.ufsc.br
+
+
+
+2007-07-16T20:28:04.276086Z
+7596
+fernandols
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+62d9fa40-7f12-0410-8967-a910f1bb1c9e
+
+.classpath
+file
+
+
+
+
+2007-06-24T00:34:35.953125Z
+926236ff2a1d29905abfcf9bcddd9826
+2007-06-05T14:02:32.235734Z
+6229
+fernandols
+
+.project
+file
+
+
+
+
+2007-06-24T00:34:35.953125Z
+83ea3395a45d54159b1d74430a7fc864
+2007-06-05T14:02:32.235734Z
+6229
+fernandols
+
+src
+dir
+
+modelagem
+dir
+

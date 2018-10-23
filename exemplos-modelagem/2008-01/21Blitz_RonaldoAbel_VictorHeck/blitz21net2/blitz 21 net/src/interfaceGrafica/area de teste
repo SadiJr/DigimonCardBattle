@@ -1,0 +1,31 @@
+public void iniciarPartida() {
+		
+		
+
+		if (tab == null) {
+			tab = new Tabuleiro();
+			tab.iniciar();
+		}
+		;
+		emAndamento = tab.InformarPartidaEmAndamento();
+		if (emAndamento) {
+			autoriza = this.avaliarInterrupcao();
+		}
+		;
+
+		if (!emAndamento || autoriza) {
+			contraPrograma = this.avaliarContraPrograma();
+			idJ1 = this.obterIdJogador(" 1");
+			simbolo = this.obterSimboloJogador();
+			tab.criarJogadorHumano(idJ1, simbolo);
+			if (contraPrograma) {
+				tab.criarJogadorAutomatico(idJ2, !simbolo);
+			} else {
+				idJ2 = this.obterIdJogador(" 2");
+				tab.criarJogadorHumano(idJ2, !simbolo);
+			}
+			;
+			this.estabelecerSequenciamento();
+		}
+		;
+	}

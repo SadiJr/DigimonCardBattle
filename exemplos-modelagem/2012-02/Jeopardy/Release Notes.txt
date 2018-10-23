@@ -1,0 +1,69 @@
+==================================================================
+Jeopardy! v1.1  26/02/2013
+Release Notes
+
+Barbara Luiza Medeiros dos Santos
+Nataniel Borges Junior
+==================================================================
+
+Sumário
+
+1. Instalação e Execução
+2. Versão atual e seus aspectos
+3. Solução das pistas
+
+
+==================================================================
+1. Instalação e execução
+==================================================================
+
+	-- Não é necessário instalar o jogo para que ele seja executado. Basta possuir Java Runtime Environment (JRE) instalado, na versão 7 ou superior.
+	
+	-- Para rodar o jogo a partir do executável, basta aplicar duplo clique em "jeopardy.jar"
+	   (uma vez que "Java platform SE binary" esteja definido como programa padrão para abertura do arquivo.)
+	
+	-- O jogo também pode ser executado por linha de comando digitando "java -jar jeopardy.jar" na pasta do arquivo executável.
+
+	-- O jogo funciona em rede, sendo necessário conexão com a internet.
+	
+	-- Uma vez em iniciada uma partida, para sair sair do e fechar todas as janelas, feche a janela de pistas.
+	
+
+
+==================================================================
+2. Aspectos da versão atual e características do jogo
+==================================================================
+
+	O jogo conta com uma interface simples porém funcional. 
+	Do ponto de vista lógico o jogo funciona sem apresentar inconsistências graves, atendendo aos requisitos básicos para uma partida razoavelmente desafiadora,
+	exigindo não só conhecimento geral do participante, mas também raciocínio apurado e tomada de decisão competente. 
+ 	Ao selecionar pistas fáceis, ganha-se e arrica-se pouco, no entanto força-se a escolha de pistas mais difíceis por parte do adversário, ao passo que pistas fáceis
+	são desabilitadas. Do mesmo modo ao escolhermos pistas difíceis estamos arricando mais posições.
+	O jogo possui campo para melhoria principalmente na verificação das respostas. Apesar de já possuir um algoritmo que busca inferir respostas corretas ainda que
+	digitadas incorretamente, esta funcionalidade ainda é limitada.
+	Além disso, a navegação pode se tornar muito mais intuitiva e amigável e ainda é necessário forçar o fechamento do jogo em alguns casos. Nestas situações recomenda-se
+	o fechamento pelo gerenciador de tarefas do sistema operacional, para matar o aplicativo/processo. 
+	Nesta versão foram solucionados os problemas relacionados a desabilitação de pistas respondidas corretamente, especialmente no caso do uso de dica.
+	
+
+=================================================================
+3. Solução das pistas (Pergunta - Resposta)
+==================================================================
+
+
+  "Quem foi Allan Turing?" -  "Foi o matemático inventor da máquina de estados."
+  "Quem foi Juscelino Kubitschek?" - "Foi o presidente em cujo mandato foi contruída Brasília."
+  "Quando foi a Revolução Francesa?" - "Foi em 1789."
+  "O que é Rússia?" -  "É o maior país da Europa.", 
+  "O que é Bucareste?" - "É a capital da Romênia."
+  "O que é Volga" -  "É o rio mais longo da Europa."
+  "Quem foi Machado de Assis?" - "Foi o principal escritor do realismo brasileiro."
+  "Quem foi Cruz e Souza?" - "Foi o principal poeta catarinense."
+  "Quem foi Aluísio Azevedo" -  "Foi o autor de 'O Cortiço'."
+  "Quem é Barack Obama?" - "É o vencedor das últimas eleições presidenciais americanas."
+  "Quem é Roselane Neckel" -  "É a reitora eleita da UFSC."
+  "O que é Primavera Árabe?" -  "É o movimento de democratização dos países do norte da África."
+  "Quem é Lionel Messi?" -  "É o jogador eleito pela FIFA como melhor de 2012."
+  "O que é Copa do Mundo?" -  "É o evento esportivo mundial a ser sediado no Brasil em 2014."
+  "Quem é Usain Bolt?" - "É o velocista mais rápido da atualidade."
+ 

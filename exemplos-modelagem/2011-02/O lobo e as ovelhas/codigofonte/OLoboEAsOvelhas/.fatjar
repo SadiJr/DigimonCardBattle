@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Dec 08 02:40:33 BRST 2011
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=Lobo3_fat.jar
+manifest.mergeall=true
+manifest.mainclass=interfaceGrafica.JogoLobo
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
