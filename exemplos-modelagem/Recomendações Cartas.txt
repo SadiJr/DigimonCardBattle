@@ -1,0 +1,15 @@
+2015-02 - MauMau
+2016-02 - Cerco
+2007-01 - Fanorona
+2008-01 - Blitz
+2009-01 - Blackjack
+		  Settlers
+2009-02 - O único que tem
+2010-01 - Truco
+2011-02 - JCastle Siege
+2015-01 - JogoDeCartasSabonete
+2016-01 - CheckCard
+2017-02 - BR_FINAL
+	* Verificar "game" 2017-02 no note
+2018-01 - ColiseumRpg
+	* Verificar "nim" 2018-01 no note
