@@ -1,0 +1,74 @@
+==================================================================
+Jogo de Cartas Sabonete v1.0  12/07/2015
+Release Notes
+
+Francisco Sacco Flores Almeida Teixeira 
+Irenio Lima Jesus de Aragão
+Julia Baldissera
+==================================================================
+
+Sumário
+
+1. Requisitos do sistema
+2. Instalação
+3. Versão atual e seus aspectos
+4. Restrições
+5. Melhorias para próximas versões
+
+==================================================================
+1. Requisitos do sistema
+==================================================================
+
+Para executar o jogo é necessário:
+- Java Runtime Environment (JRE) instalado na máquina, na versão 8 ou superior
+- Conexão com a internet para jogar com outros usuários em rede.
+
+==================================================================
+2. Instalação e execução
+==================================================================
+
+- Descompactar o arquivo JogoDeCartasSabonete.zip que contém:
+	 pasta: Código Fonte
+	 pasta: Documentação
+	 pasta: Executavel
+	 Release Notes.txt
+- Não é necessário instalar o jogo para que ele seja executado.
+- Para executar o jogo há duas possibilidades
+	1º Diretamente no arquivo "jogodecartassabonete.jar" (que consta na pasta Executavel) considerando as restrições:
+	Se  "Java platform SE binary" estiver definido como programa padrão para abrir arquivo: Dar duplo clique em "jogodecartassabonete.jar";
+	Caso contrário: Clicar com o botão direito do mouse no arquivo "jogodecartassabonete.jar" e clicar em "Abrir com..." para procurar o JRE 8 em seu computador. 
+
+	2º Através da linha de comando:
+	No diretório onde consta o arquivo "jogodecartassabonete.jar" executar o comando java -jar jogodecartassabonete.jar
+
+==================================================================
+3. Versão atual e seus aspectos
+==================================================================
+
+- O jogo encontra-se na sua primeira versão com uma interface simples e funcional.
+- Número de jogadores suportado: 2.
+- Ambos jogadores devem se conectar ao servidor "venus.inf.ufsc.br" ou "localhost".
+- Um dos jogadores deve iniciar a partida, e este mesmo iniciará jogando.
+- São distribuídas 13 cartas retiradas do monte, formando a mesa de cada jogador.
+- Em cada turno o jogador busca uma carta do monte ou do lixo, fazendo quantas jogadas forem possíveis.
+- Em cada jogada, o jogador observa a carta de sua mão e verifica:
+	1) Se a posição da mesa, respectiva ao número da carta,  não estiver revelada, o jogador troca a carta oculta pela carta de sua mão. 
+A carta oculta passa a ser a carta de sua mão, e o jogador faz uma nova jogada;
+	2) Se a posição da mesa, respectiva ao número da carta, estiver revelada, o jogador descarta a carta no lixo, finalizando seu turno.
+- É vencedor aquele que conseguir revelar todas as cartas de sua mesa primeiro, formando a sequência de cartas A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K.
+
+
+==================================================================
+4. Restrições
+==================================================================
+
+- Caso um dos jogadores decida desconectar durante uma partida, o adversário não é informado e este segue como se a partida ainda estivesse em andamento, aguardando a jogada do outro, a não ser que também desconecte.
+
+==================================================================
+5. Melhorias para próximas versões
+==================================================================
+
+- Melhorar a interface gráfica: Adicionar mensagens facilitando o entendimento das possíveis jogadas que o usuário pode fazer.
+- Atualizar a interface para o adversário a cada jogada, mesmo que o turno não tenha acabado. 
+Assim o adversário consegue visualizar melhor o que aconteceu no turno do jogador.
+- Tratar perdas de conexão no meio da partida, informando os jogadores.

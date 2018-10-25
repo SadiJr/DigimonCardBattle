@@ -1,0 +1,71 @@
+==================================================================
+Battle Spears  01/12/2016
+Release Notes
+
+Ronan Romeu Knob
+Leonardo Machado
+==================================================================
+
+Sumário
+
+1. Requisitos do sistema
+2. Instalação e execução
+3. Versão atual e seus aspectos
+4. Restrições
+5. Melhorias para próximas versões
+
+==================================================================
+1. Requisitos do sistema
+==================================================================
+
+Para executar o jogo é necessário:
+- Java Runtime Environment (JRE) instalado na máquina, na versão 8 ou superior
+- Conexão com a internet para jogar com outros usuários em rede.
+- Servidor local rodando na máquina para caso queira jogar localmente.
+
+==================================================================
+2. Instalação e execução
+==================================================================
+
+- Descompactar o arquivo BattleSpears.zip que contém:
+	 pasta: Código Fonte
+	 pasta: Documentação
+	 pasta: Executavel
+	 Release Notes.txt
+- Não é necessário instalar o jogo para que ele seja executado.
+- Você pode executar o jogo diretamente no arquivo "BattleSpears.jar" (que consta na pasta Executavel) considerando as restrições:
+	Se  "Java platform SE binary" estiver definido como programa padrão para abrir arquivo: Dar duplo clique em "BattleSpears.jar" 
+	Caso contrário: Clicar com o botão direito do mouse no arquivo "BattleSpears.jar" e clicar em "Abrir com..." para procurar o JRE 8 em seu computador. 
+
+==================================================================
+3. Versão atual e seus aspectos
+==================================================================
+
+- O jogo encontra-se na sua primeira versão com uma interface simples e funcional.
+- Número de jogadores suportado: 2.
+- Ambos jogadores devem se conectar ao servidor "venus.inf.ufsc.br" ou "localhost".
+- Um dos jogadores deve iniciar a partida, e este mesmo iniciará jogando com o time branco e o outro com preto.
+- Para uma jogada ,você deve selecionar o tipo de movimento primeiro, e depois o local onde deseja atacar/mover.
+- você só pode fazer 1 movimento por vez.
+Você pode executar os seguintes tipo de movimento:
+	- Mover para a direita: O jogador muda de posição, movendo?-se para direita e passa a vez (se o jogador já se encontra na posição extrema direita, essa ação fica indisponível); 
+	- Mover para a esquerda: O jogador mudadeposição,movendo?-se para esquerda e passa a vez (se o jogadorjáseencontranaposiçãoda extrema esquerda, essa ação indisponível) ; 
+	- Ataque para frente: O jogador ataca a posição que se encontra a sua frente. Caso acerte o adversário,venceacampanha,casocontrário,passa a vez; 
+	- Ataque para a esquerda: O jogador ataca a posição da esquerda a que se encontra a sua frente. Caso acerte o adversário, vence a campanha, caso contrário, passa a vez( se o jogador já se encontra na posição extrema esquerda essa ação fica indisponível);
+ 	- ?Ataque para a direita: O jogador ataca a posição da direita à que se encontra a sua frente. Caso acerte o adversário, vence a campanha, caso contrário, passa a vez (se o jogador já se encontra na posição da  extrema direita, essa ação fica indisponível) 
+- Se o jogador usou a opção de ataque, exibe ao adversário a posição do atacante; 
+- Vence a partida o jogador que acumular 2 vitórias. 
+
+==================================================================
+4. Restrições
+==================================================================
+
+
+
+==================================================================
+5. Melhorias para próximas versões
+==================================================================
+
+- Melhorar a interface gráfica: Adicionar no tabuleiro um placar das campanhas ao invés de mostrar por mensagens.
+- Corrigir possíveis bugs que venham a surgir, e os já conhecidos da versão atual.
+- Melhorar os procedimentos de certos métodos para conseguir um melhor desempenho e menores chances de bugs.
