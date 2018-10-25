@@ -1,14 +1,14 @@
-2015-02 - MauMau
-2016-02 - Cerco
-2007-01 - Fanorona
-2008-01 - Blitz
-2009-01 - Blackjack
-		  Settlers
-2009-02 - O único que tem
-2010-01 - Truco
-2011-02 - JCastle Siege
-2015-01 - JogoDeCartasSabonete
-2016-01 - CheckCard
-2017-02 - BR_FINAL
-		  game
-2018-01 - ColiseumRpg
+2005-02 - MauMau - Erro!
+2006-02 - Cerco - Erro!
+2007-01 - Fanorona - Erro!
+2008-01 - Blitz - Funcional
+2009-01 - Blackjack - Funcional
+		  Settlers - Funcional
+2009-02 - O único que tem - Funcional 
+2010-01 - Truco - Funcional
+2011-02 - JCastle Siege - Funcional
+2015-01 - JogoDeCartasSabonete - Funcional > Já em uso em Workspace
+2016-01 - CheckCard - Funcional > Já em uso em Workspace
+2017-02 - BR_FINAL - Funcional
+		  game - Funcional
+2018-01 - ColiseumRpg - Funcional
