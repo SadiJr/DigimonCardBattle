@@ -1,8 +1,0 @@
-#Thu Jul 03 21:17:05 BRT 2008
-org.eclipse.mylyn.monitor.ui.enabled=true
-org.eclipse.mylyn.monitor.enable.submission=true
-eclipse.preferences.version=1
-org.eclipse.mylyn.monitor.submission.initially.enabled=true
-org.eclipse.mylyn.monitor.monitoring.started=true
-org.eclipse.mylyn.monitor.initially.enabled=true
-org.eclipse.mylyn.monitor.ui.upload.previousTransmit=1215038348428

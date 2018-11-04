@@ -1,7 +1,0 @@
-MIDlet-Version: 1.0.0
-MIDlet-Vendor: Elinton Dozol Machado
-MIDlet-Jar-URL: Worms.jar
-MicroEdition-Configuration: CLDC-1.0
-MIDlet-1: WormsMobile,minhoca.PNG,worms.LAtor
-MicroEdition-Profile: MIDP-2.0
-MIDlet-Name: WormsMobile

@@ -1,6 +1,0 @@
-Esse é o diretório do projeto Worms no eclipse.
-
-Use a IDE eclipse com o plugin eclipseME, para copilar esse projeto.
-
-Elinton Dozol Machado
-Francis Novello Santos
