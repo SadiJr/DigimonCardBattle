@@ -1,0 +1,14 @@
+package InterfaceGrafica;
+
+import javax.swing.JFrame;
+
+public class Isolation {
+
+	public void main() {
+		IntarfaceIsolation janela;
+		janela=new InterfaceIsolation();
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		janela.setVisible(true);
+	}
+
+}

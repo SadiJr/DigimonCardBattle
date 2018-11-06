@@ -1,0 +1,63 @@
+﻿==================================================================
+CaveiraLetters v1.0  06/07/2016
+Release Notes
+
+Giselle dos Santos Nascimento
+Isabelle Pinheiro
+Mayse Espíndula
+==================================================================
+
+Sumário
+
+1. Requisitos do sistema
+2. Instalação
+3. Versão atual e seus aspectos
+4. Restrições
+5. Melhorias para próximas versões
+6. Decisões de projeto
+
+==================================================================
+1. Requisitos do sistema
+==================================================================
+
+Para executar o jogo é necessário:
+- Java Runtime Environment (JRE) instalado na máquina, na versão 7 ou superior
+- Conexão com a internet para jogar com outros usuário em rede.
+
+==================================================================
+2. Instalação e execução
+==================================================================
+
+- Descompactar o arquivo CaveiraLetters.zip que contém:
+    - pasta: Código Fonte
+    - pasta: Documentação
+    - Leia-me antes de jogar.txt
+- Não é necessário instalar o jogo para que ele seja executado.
+- Para executar o jogo deve-se:
+    Através da linha de comando:
+    No diretório (Código Fonte/caveiraletters/dist) onde consta o arquivo "CaveiraLetters.jar" executar o comando java -jar CaveiraLetters.jar
+
+Para saber as regras e mais sobre o jogo acessar a especificação de requisitos
+
+==================================================================
+3. Versão atual e seus aspectos
+==================================================================
+
+- O jogo encontra-se na sua primeira versão, com uma interface simples.
+- O usuário antes de jogar o jogo deve entender o funcionamento do mesmo lendo a especificação de requisitos antes, na sessão que constam as regras do jogo. Caso não queira deverá ler o capítulo 4 deste documento.
+
+==================================================================
+4. Restrições
+==================================================================
+
+- Quando o usuário solicita iniciar uma nova partida e há outra em andamento, não é questionado se o usuário deseja ou não interromper, o jogo automaticamente realiza a interrupção.
+- É possível ocorrer instabilidade ao iniciar uma partida com outra em andamento.
+- Ao iniciar uma partida com outra em andamento e ao desconectar é exibido a mesma mensagem aos usuários.
+
+==================================================================
+5. Melhorias para próximas versões
+==================================================================
+
+- Melhorar a interface gráfica: incluir um plano de fundo, torná-la mais intuitiva.
+- Implementar um placar que possibilitaria uma melhor visualização de quantas partidas um certo jogador já ganhou desde que o jogo foi iniciado.
+- Melhorar os avisos enviados aos jogadores para tornar o jogo mais intuitivo.

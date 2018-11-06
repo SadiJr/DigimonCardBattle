@@ -1,1 +1,0 @@
-#Arquivo que será usado para sintetizar as classes criadas nos diagramas de Sequência, visando evitar repetição.
