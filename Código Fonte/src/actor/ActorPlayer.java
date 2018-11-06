@@ -1,6 +1,9 @@
 package actor;
 
+import javax.swing.JOptionPane;
+
 import controll.TableController;
+import jdk.nashorn.internal.scripts.JO;
 import model.CardPOJO;
 import model.PlayerMovePOJO;
 import view.AttributesScreen;
@@ -12,9 +15,16 @@ public class ActorPlayer {
 	private DigimonScreen screen;
 	private AttributesScreen attributesScreen;
 
+	public ActorPlayer(TableController tableController) {
+		this.tableController = tableController;
+		screen = new DigimonScreen();
+		attributesScreen = new AttributesScreen();
+	}
+
 	public void connect() {
-		// TODO - implement ActorPlayer.connect
-		throw new UnsupportedOperationException();
+		String nameServer = screen.getNameServer();
+		String namePlayer = screen.getNamePlayer();
+		tableController.connect(namePlayer, nameServer);
 	}
 
 	public String getNamePlayer() {
@@ -24,15 +34,6 @@ public class ActorPlayer {
 
 	public String getNameServer() {
 		// TODO - implement ActorPlayer.getNameServer
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param result
-	 */
-	public void informResultConection(int result) {
-		// TODO - implement ActorPlayer.informResultConection
 		throw new UnsupportedOperationException();
 	}
 
@@ -69,8 +70,7 @@ public class ActorPlayer {
 	 * @param error
 	 */
 	public void informError(String error) {
-		// TODO - implement ActorPlayer.informError
-		throw new UnsupportedOperationException();
+		screen.informError(error);
 	}
 
 	/**
@@ -129,8 +129,7 @@ public class ActorPlayer {
 	 * @param nameCard
 	 */
 	public void downDigimonCard(String nameCard) {
-		// TODO - implement ActorPlayer.downDigimonCard
-		throw new UnsupportedOperationException();
+		tableController.downDigimonCard(nameCard);
 	}
 
 	/**

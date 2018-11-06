@@ -26,7 +26,10 @@ public class ActorNetGames implements OuvidorProxy {
 		try {
 			proxy.conectar(server, name);
 			return true;
-		} catch (JahConectadoException | NaoPossivelConectarException | ArquivoMultiplayerException e) {
+		} catch (JahConectadoException e) {
+			tableController.informError("Você já está conectado!");
+			return false;
+		} catch(NaoPossivelConectarException | ArquivoMultiplayerException e) {
 			tableController.informError("Ocorreu um erro ao tentar estabelecer conexão com o servidor.");
 			return false;
 		}
@@ -42,11 +45,6 @@ public class ActorNetGames implements OuvidorProxy {
 		return true;
 	}
 
-	public void receiveStartRequest() {
-		// TODO - implement ActorNetGames.receiveStartRequest
-		throw new UnsupportedOperationException();
-	}
-
 	public String getNameRemotePlayer() {
 		String nameLocalPlayer = tableController.getNameLocalPlayer();
 		for(String name : proxy.obterNomeAdversarios()) {
@@ -55,29 +53,24 @@ public class ActorNetGames implements OuvidorProxy {
 		}
 		return "Anônimo";
 	}
+	
+	public void sendRequestMove() {
+		try {
+			proxy.iniciarNovaPartida(new Integer(2));
+		} catch (Exception e) {
+			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
+		}
+	}
 
 	public boolean startGame() {
 		try {
-			proxy.iniciarNovaPartida(2);
+			proxy.iniciarNovaPartida(new Integer(2));
 		} catch (Exception e) {
 			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
 		}
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param table
-	 */
-	public void receiveTable(Table table) {
-		// TODO - implement ActorNetGames.receiveTable
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param table
-	 */
 	public void sendMove(Table table) {
 		try {
 			proxy.enviaJogada(table);
@@ -86,6 +79,9 @@ public class ActorNetGames implements OuvidorProxy {
 		}
 	}
 
+	/*
+	 * Por motivos que desconheco, esse é o método responsável por receber uma solicitação de início.
+	 */
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
 		tableController.startNewGame();
@@ -116,5 +112,4 @@ public class ActorNetGames implements OuvidorProxy {
 	public void tratarPartidaNaoIniciada(String message) {
 		tableController.informError("Não foi possível iniciar a partida.\nProvavelmente não existem outros jogadores conectados.");		
 	}
-
 }

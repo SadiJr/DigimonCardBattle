@@ -144,4 +144,8 @@ public class DigimonScreen extends JFrame {
 		throw new UnsupportedOperationException();
 	}
 
+	public void informError(String error) {
+		JOptionPane.showMessageDialog(null, error, "Erro", JOptionPane.ERROR_MESSAGE);
+	}
+
 }

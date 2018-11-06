@@ -3,6 +3,7 @@ package model;
 import java.util.Collection;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
+import controll.TableController;
 import enums.Phase;
 
 public class Table implements Jogada {
@@ -63,8 +64,8 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createLocalPlayer(String name) {
-		this.localPlayer = new Player(name);
+	public void createLocalPlayer(String name, int id) {
+		this.localPlayer = new Player(name, id);
 	}
 
 	public void distributeCards() {
@@ -110,8 +111,8 @@ public class Table implements Jogada {
 	 * 
 	 * @param name
 	 */
-	public void createRemotePlayer(String name) {
-		this.remotePlayer = new Player(name);
+	public void createRemotePlayer(String name, int id) {
+		this.remotePlayer = new Player(name, id);
 	}
 
 	public void discardHand() {
@@ -123,22 +124,37 @@ public class Table implements Jogada {
 		addNewHand();
 	}
 
-	/**
-	 * 
-	 * @param nameCard
-	 */
-	public void downDigimonCard(String nameCard) {
-		// TODO - implement Table.downDigimonCard
-		throw new UnsupportedOperationException();
+	public void downDigimonCard(String nameCard) throws Exception {
+		for(Card card : localPlayer.getHand()) {
+			if(card.getName().equals(nameCard)) {
+				if(isDigimonCard(card)) {
+					localPlayer.setDigimonCard((DigimonCard) card);
+					localPlayer.getHand().remove(card);
+					return;
+				} else {
+					throw new Exception("A carta selecionada não é uma DigimonCard!");
+				}
+			}
+		}
+		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
 	}
 
-	/**
-	 * 
-	 * @param cardName
-	 */
-	public void sacrificeCard(String cardName) {
-		// TODO - implement Table.sacrificeCard
-		throw new UnsupportedOperationException();
+	public void sacrificeCard(String cardName) throws Exception {
+		for(Card card : localPlayer.getHand()) {
+			if(card.getName().equals(cardName)) {
+				if(isDigimonCard(card)) {
+					DigimonCard digimon = (DigimonCard) card;
+					int p = digimon.getP();
+					localPlayer.setDp(localPlayer.getDp() + p);
+					localPlayer.getHand().remove(card);
+					cemiteryLocalPlayer.addCard(card);
+					return;
+				} else {
+					throw new Exception("A carta selecionada não é uma DigimonCard!");
+				}
+			}
+		}
+		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
 	}
 
 	/**
@@ -146,18 +162,15 @@ public class Table implements Jogada {
 	 * @param card
 	 */
 	public boolean isDigimonCard(Card card) {
-		// TODO - implement Table.isDigimonCard
-		throw new UnsupportedOperationException();
+		if(card instanceof DigimonCard)
+			return true;
+		return false;
 	}
 
 	public Cemitery getCemiteryLocalPlayer() {
 		return this.cemiteryLocalPlayer;
 	}
-
-	/**
-	 * 
-	 * @param cemiteryLocalPlayer
-	 */
+	
 	public void setCemiteryLocalPlayer(Cemitery cemiteryLocalPlayer) {
 		this.cemiteryLocalPlayer = cemiteryLocalPlayer;
 	}
@@ -166,10 +179,6 @@ public class Table implements Jogada {
 		return this.cemiteryRemotePlayer;
 	}
 
-	/**
-	 * 
-	 * @param cemiteryRemotePlayer
-	 */
 	public void setCemiteryRemotePlayer(Cemitery cemiteryRemotePlayer) {
 		this.cemiteryRemotePlayer = cemiteryRemotePlayer;
 	}
@@ -178,19 +187,13 @@ public class Table implements Jogada {
 		return this.firstPlayer;
 	}
 
-	/**
-	 * 
-	 * @param firstPlayer
-	 */
 	public void setFirstPlayer(Player firstPlayer) {
 		this.firstPlayer = firstPlayer;
 	}
 
 	public void addNewHand() {
-		Deck deck2 = localPlayer.getDeck();
+		Collection<Card> cards = localPlayer.getDeck().getCards();
 		
-		// TODO - implement Table.addNewHand
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -253,13 +256,14 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param supportName
-	 */
-	public void downSupportCard(String supportName) {
-		// TODO - implement Table.downSupportCard
-		throw new UnsupportedOperationException();
+	public void downSupportCard(String supportName) throws Exception {
+		for(Card card : localPlayer.getHand()) {
+			if(card.getName().equals(supportName)) {
+				localPlayer.setSupportCard(card);
+				localPlayer.getHand().remove(card);
+			}
+		}
+		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
 	}
 
 	public void battle() {

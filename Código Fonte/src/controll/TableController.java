@@ -1,9 +1,11 @@
 package controll;
-import javax.smartcardio.Card;
+import model.Card;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
 import model.CardPOJO;
+import model.DigimonCard;
+import model.Player;
 import model.PlayerMovePOJO;
 import model.Table;
 
@@ -12,15 +14,45 @@ public class TableController {
 	private Table table;
 	private ActorNetGames network;
 	private ActorPlayer player;
-
-	public int connect() {
-		// TODO - implement TableController.connect
-		throw new UnsupportedOperationException();
+	
+	public TableController() {
+		table = new Table();
+		network = new ActorNetGames(this);
+		player = new ActorPlayer(this);
 	}
 
-	public int disconnect() {
-		// TODO - implement TableController.disconnect
-		throw new UnsupportedOperationException();
+	public Table getTable() {
+		return this.table;
+	}
+	
+	public void setTable(Table table) {
+		this.table = table;
+	}
+	
+	public ActorNetGames getNetwork() {
+		return this.network;
+	}
+	
+	public void setNetwork(ActorNetGames network) {
+		this.network = network;
+	}
+	
+	public ActorPlayer getPlayer() {
+		return this.player;
+	}
+	
+	public void setPlayer(ActorPlayer player) {
+		this.player = player;
+	}
+	
+	public void connect(String player, String server) {
+		boolean connect = network.connect(player, server);
+		if(connect)
+			this.player.informMessage("Conexão estabelecida com sucesso");
+	}
+
+	public void disconnect() {
+		network.disconnect();
 	}
 
 	public void startNewGame() {
@@ -29,17 +61,11 @@ public class TableController {
 	}
 
 	public String getNameRemotePlayer() {
-		// TODO - implement TableController.getNameRemotePlayer
-		throw new UnsupportedOperationException();
+		return table.getRemotePlayer().getName();
 	}
 
-	/**
-	 * 
-	 * @param remotePlayerName
-	 */
 	public void informRemotePlayerName(String remotePlayerName) {
-		// TODO - implement TableController.informRemotePlayerName
-		throw new UnsupportedOperationException();
+		player.informRemotePlayerName(getNameRemotePlayer());
 	}
 
 	public int start() {
@@ -47,58 +73,17 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param table
-	 */
 	public void treatMove(Table table) {
 		// TODO - implement TableController.treatMove
 		throw new UnsupportedOperationException();
 	}
 
-	public Table getTable() {
-		return this.table;
-	}
 
-	/**
-	 * 
-	 * @param table
-	 */
-	public void setTable(Table table) {
-		this.table = table;
-	}
-
-	public ActorNetGames getNetwork() {
-		return this.network;
-	}
-
-	/**
-	 * 
-	 * @param network
-	 */
-	public void setNetwork(ActorNetGames network) {
-		this.network = network;
-	}
-
-	public ActorPlayer getPlayer() {
-		return this.player;
-	}
-
-	/**
-	 * 
-	 * @param player
-	 */
-	public void setPlayer(ActorPlayer player) {
-		this.player = player;
-	}
-
-	/**
-	 * 
-	 * @param receivedTable
-	 */
 	public Table invertOrderPlayersReceivedTable(Table receivedTable) {
-		// TODO - implement TableController.invertOrderPlayersReceivedTable
-		throw new UnsupportedOperationException();
+		Player aux = receivedTable.getLocalPlayer();
+		receivedTable.setLocalPlayer(receivedTable.getRemotePlayer());
+		receivedTable.setRemotePlayer(aux);
+		return receivedTable;
 	}
 
 	public void drawPhase() {
@@ -112,17 +97,28 @@ public class TableController {
 	}
 
 	public void discardHand() {
-		// TODO - implement TableController.discardHand
-		throw new UnsupportedOperationException();
+		if(table.getLocalPlayer().getHand().isEmpty()) {
+			player.informError("Você não possuí cartas na mão para descartar!");
+			return;
+		}
+		
+		if(table.existsDigimonCardOnSlot()) {
+			table.addNewHand();
+		} else {
+			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck!\nPelas regras do jogo, você perdeu!");
+			table.getRemotePlayer().setVictories(3);
+			player.informWinner(table.getNameRemotePlayer());
+			network.sendMove(this.table);
+			exit();
+		}
 	}
 
-	/**
-	 * 
-	 * @param nameCard
-	 */
 	public void downDigimonCard(String nameCard) {
-		// TODO - implement TableController.downDigimonCard
-		throw new UnsupportedOperationException();
+		try {
+			table.downDigimonCard(nameCard);
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+		}
 	}
 
 	public void digivolvePhase() {
@@ -130,24 +126,20 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param nameCard
-	 */
 	public void sacrificeCard(String nameCard) {
-		// TODO - implement TableController.sacrificeCard
-		throw new UnsupportedOperationException();
+		try {
+			table.sacrificeCard(nameCard);
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+		}
 	}
 
 	public boolean isYourTurn() {
-		// TODO - implement TableController.isYourTurn
-		throw new UnsupportedOperationException();
+		if(table.getLocalPlayer().equals(table.getFirstPlayer()))
+			return true;
+		return false;
 	}
 
-	/**
-	 * 
-	 * @param receivedTable
-	 */
 	public Table invertOrderCemiteryReceivedTable(Table receivedTable) {
 		// TODO - implement TableController.invertOrderCemiteryReceivedTable
 		throw new UnsupportedOperationException();
@@ -173,8 +165,7 @@ public class TableController {
 	}
 	
 	public void informError(String error) {
-		// TODO - implement TableController.informError
-		throw new UnsupportedOperationException();
+		player.informError(error);
 	}
 
 	public void dissableButtonsDrawPhase() {
@@ -192,10 +183,6 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void updateCard(String name) {
 		// TODO - implement TableController.updateCard
 		throw new UnsupportedOperationException();
@@ -211,22 +198,16 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param attack
-	 */
 	public void choiceAttack(int attack) {
-		// TODO - implement TableController.choiceAttack
-		throw new UnsupportedOperationException();
+		table.getLocalPlayer().setAttackChoice(attack);
 	}
 
-	/**
-	 * 
-	 * @param supportName
-	 */
 	public void downSupportCard(String supportName) {
-		// TODO - implement TableController.downSupportCard
-		throw new UnsupportedOperationException();
+		try {
+			table.downSupportCard(supportName);
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+		}
 	}
 
 	public void battle() {
@@ -234,22 +215,34 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void viewAttributes(String name) {
 		// TODO - implement TableController.viewAttributes
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param card
-	 */
 	public CardPOJO createCardPOJO(Card card) {
-		// TODO - implement TableController.createCardPOJO
-		throw new UnsupportedOperationException();
+		CardPOJO pojo = null;
+		
+		String name = card.getName();
+		String effect = card.getCardEffect().name();
+		String description = card.getDescriptionEffect();
+		
+		if(table.isDigimonCard(card)) {
+			DigimonCard digimon = (DigimonCard) card;
+			int attack1 = digimon.getAttack1();
+			int attack2 = digimon.getAttack2();
+			int attack3 = digimon.getAttack3();
+			int dp = digimon.getDp();
+			int hp = digimon.getHp();
+			char level = digimon.getLevel().name().charAt(0);
+			int p = digimon.getP();
+			String specialty = digimon.getSpecialty().name();
+			pojo = new CardPOJO(hp, attack1, attack2, attack3, dp, p, specialty, level, name, 
+					effect, description, false);
+		} else {
+			pojo = new CardPOJO(name, effect, description);
+		}		
+		return pojo;
 	}
 
 	public void exit() {
@@ -257,22 +250,13 @@ public class TableController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param table
-	 */
 	public void sendMove(Table table) {
 		// TODO - implement TableController.sendMove
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void notifyWinnerTurn(String name) {
-		// TODO - implement TableController.notifyWinnerTurn
-		throw new UnsupportedOperationException();
+		player.informMessage("O vencedor deste turno é " + name);
 	}
 
 	public String getNameLocalPlayer() {
