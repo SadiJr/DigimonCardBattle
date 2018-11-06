@@ -57,8 +57,12 @@ public class ActorNetGames implements OuvidorProxy {
 	}
 
 	public boolean startGame() {
-		// TODO - implement ActorNetGames.startGame
-		throw new UnsupportedOperationException();
+		try {
+			proxy.iniciarNovaPartida(2);
+		} catch (Exception e) {
+			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
+		}
+		return true;
 	}
 
 	/**
