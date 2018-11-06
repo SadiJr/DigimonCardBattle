@@ -1,8 +1,14 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Cemitery {
+	
+	public Cemitery() {
+		this.deadCards = new ArrayList<>();
+		this.quantity = 0;
+	}
 
 	private Collection<Card> deadCards;
 	private int quantity;

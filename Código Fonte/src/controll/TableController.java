@@ -1,9 +1,12 @@
 package controll;
 import model.Card;
 
+import java.util.Collection;
+
 import actor.ActorNetGames;
 import actor.ActorPlayer;
 import model.CardPOJO;
+import model.Cemitery;
 import model.DigimonCard;
 import model.Player;
 import model.PlayerMovePOJO;
@@ -141,11 +144,24 @@ public class TableController {
 	}
 
 	public Table invertOrderCemiteryReceivedTable(Table receivedTable) {
-		// TODO - implement TableController.invertOrderCemiteryReceivedTable
-		throw new UnsupportedOperationException();
+		Cemitery aux = receivedTable.getCemiteryLocalPlayer();
+		receivedTable.setCemiteryLocalPlayer(receivedTable.getCemiteryRemotePlayer());
+		receivedTable.setCemiteryRemotePlayer(aux);
+		return receivedTable;
 	}
 
 	public PlayerMovePOJO createPOJORemotePlayer() {
+		Player remotePlayer = table.getRemotePlayer();
+		
+		String name = remotePlayer.getName();
+		int deckSize = remotePlayer.getDeck().getCards().size();
+		int quantity = table.getCemiteryRemotePlayer().getQuantity();
+		Collection<Card> hand = remotePlayer.getHand();
+		DigimonCard digimonCard = remotePlayer.getDigimonCard();
+		Card supportCard = remotePlayer.getSupportCard();
+		int dp = remotePlayer.getDp();
+		int victories = remotePlayer.getVictories();
+		
 		// TODO - implement TableController.createPOJORemotePlayer
 		throw new UnsupportedOperationException();
 	}

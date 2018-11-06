@@ -7,7 +7,7 @@ public class PlayerMovePOJO {
 	private int deckSize;
 	private Collection<Card> hand;
 	private DigimonCard digimonCard;
-	private OptionCard supportCard;
+	private Card supportCard;
 	private int dp;
 	private int victories;
 
@@ -15,10 +15,6 @@ public class PlayerMovePOJO {
 		return this.deadCards;
 	}
 
-	/**
-	 * 
-	 * @param deadCards
-	 */
 	public void setDeadCards(int deadCards) {
 		this.deadCards = deadCards;
 	}
@@ -27,10 +23,6 @@ public class PlayerMovePOJO {
 		return this.deckSize;
 	}
 
-	/**
-	 * 
-	 * @param deckSize
-	 */
 	public void setDeckSize(int deckSize) {
 		this.deckSize = deckSize;
 	}
@@ -39,10 +31,6 @@ public class PlayerMovePOJO {
 		return this.hand;
 	}
 
-	/**
-	 * 
-	 * @param hand
-	 */
 	public void setHand(Collection<Card> hand) {
 		this.hand = hand;
 	}
@@ -51,23 +39,15 @@ public class PlayerMovePOJO {
 		return this.digimonCard;
 	}
 
-	/**
-	 * 
-	 * @param digimonCard
-	 */
 	public void setDigimonCard(DigimonCard digimonCard) {
 		this.digimonCard = digimonCard;
 	}
 
-	public OptionCard getSupportCard() {
+	public Card getSupportCard() {
 		return this.supportCard;
 	}
 
-	/**
-	 * 
-	 * @param supportCard
-	 */
-	public void setSupportCard(OptionCard supportCard) {
+	public void setSupportCard(Card supportCard) {
 		this.supportCard = supportCard;
 	}
 
@@ -75,10 +55,6 @@ public class PlayerMovePOJO {
 		return this.dp;
 	}
 
-	/**
-	 * 
-	 * @param dp
-	 */
 	public void setDp(int dp) {
 		this.dp = dp;
 	}
@@ -87,10 +63,6 @@ public class PlayerMovePOJO {
 		return this.victories;
 	}
 
-	/**
-	 * 
-	 * @param victories
-	 */
 	public void setVictories(int victories) {
 		this.victories = victories;
 	}
