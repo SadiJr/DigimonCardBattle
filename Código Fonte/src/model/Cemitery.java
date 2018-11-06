@@ -1,10 +1,13 @@
-package src.model;
+package model;
+
+import java.util.Collection;
+
 public class Cemitery {
 
-	private Card deadCards;
+	private Collection<Card> deadCards;
 	private int quantity;
 
-	public Card getDeadCards() {
+	public Collection<Card> getDeadCards() {
 		return this.deadCards;
 	}
 
@@ -12,7 +15,7 @@ public class Cemitery {
 	 * 
 	 * @param deadCards
 	 */
-	public void setDeadCards(Card deadCards) {
+	public void setDeadCards(Collection<Card> deadCards) {
 		this.deadCards = deadCards;
 	}
 
@@ -20,21 +23,13 @@ public class Cemitery {
 		return this.quantity;
 	}
 
-	/**
-	 * 
-	 * @param quantity
-	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	/**
-	 * 
-	 * @param deadCard
-	 */
 	public void addCard(Card deadCard) {
-		// TODO - implement Cemitery.addCard
-		throw new UnsupportedOperationException();
+		this.deadCards.add(deadCard);
+		setQuantity(getQuantity() + 1);
 	}
 
 }

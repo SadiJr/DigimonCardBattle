@@ -1,31 +1,35 @@
-package src.model;
-public class Card {
+package model;
+
+import enums.Effect;
+
+public abstract class Card {
 
 	private String name;
-	private CardEffect cardEffect;
+	private Effect cardEffect;
+	
+	public Card(String name, Effect cardEffect) {
+		this.name = name;
+		this.cardEffect = cardEffect;
+	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public CardEffect getCardEffect() {
+	public Effect getCardEffect() {
 		return this.cardEffect;
 	}
 
-	/**
-	 * 
-	 * @param cardEffect
-	 */
-	public void setCardEffect(CardEffect cardEffect) {
+	public void setCardEffect(Effect cardEffect) {
 		this.cardEffect = cardEffect;
+	}
+	
+	public String getDescriptionEffect() {
+		return cardEffect.getDescription();
 	}
 
 }

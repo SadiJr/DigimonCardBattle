@@ -1,8 +1,9 @@
-package src.model;
+package model;
 
 import java.util.Collection;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
+import enums.Phase;
 
 public class Table implements Jogada {
 

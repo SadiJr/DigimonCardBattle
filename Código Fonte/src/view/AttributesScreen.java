@@ -1,6 +1,6 @@
-package src.view;
+package view;
 
-import src.model.CardPOJO;
+import model.CardPOJO;
 
 public class AttributesScreen {
 

@@ -1,10 +1,11 @@
-package src.controll;
-import src.actor.ActorNetGames;
-import src.actor.ActorPlayer;
-import src.model.Card;
-import src.model.CardPOJO;
-import src.model.PlayerMovePOJO;
-import src.model.Table;
+package controll;
+import javax.smartcardio.Card;
+
+import actor.ActorNetGames;
+import actor.ActorPlayer;
+import model.CardPOJO;
+import model.PlayerMovePOJO;
+import model.Table;
 
 public class TableController {
 
@@ -272,6 +273,10 @@ public class TableController {
 	public void notifyWinnerTurn(String name) {
 		// TODO - implement TableController.notifyWinnerTurn
 		throw new UnsupportedOperationException();
+	}
+
+	public String getNameLocalPlayer() {
+		return table.getLocalPlayer().getName();
 	}
 
 }

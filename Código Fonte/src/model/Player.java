@@ -1,5 +1,6 @@
-package src.model;
+package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Player {
@@ -12,19 +13,16 @@ public class Player {
 	private DigimonCard digimonCard;
 	private Card supportCard;
 	private int attackChoice;
-	
+		
 	public Player(String name) {
 		this.name = name;
+		hand = new ArrayList<>();
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -33,10 +31,6 @@ public class Player {
 		return this.deck;
 	}
 
-	/**
-	 * 
-	 * @param deck
-	 */
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
@@ -45,10 +39,6 @@ public class Player {
 		return this.hand;
 	}
 
-	/**
-	 * 
-	 * @param hand
-	 */
 	public void setHand(Collection<Card> hand) {
 		this.hand = hand;
 	}
@@ -57,10 +47,6 @@ public class Player {
 		return this.victories;
 	}
 
-	/**
-	 * 
-	 * @param victories
-	 */
 	public void setVictories(int victories) {
 		this.victories = victories;
 	}
@@ -69,10 +55,6 @@ public class Player {
 		return this.dp;
 	}
 
-	/**
-	 * 
-	 * @param dp
-	 */
 	public void setDp(int dp) {
 		this.dp = dp;
 	}
@@ -81,10 +63,6 @@ public class Player {
 		return this.digimonCard;
 	}
 
-	/**
-	 * 
-	 * @param digimonCard
-	 */
 	public void setDigimonCard(DigimonCard digimonCard) {
 		this.digimonCard = digimonCard;
 	}
@@ -93,49 +71,32 @@ public class Player {
 		return this.supportCard;
 	}
 
-	/**
-	 * 
-	 * @param supportCard
-	 */
 	public void setSupportCard(Card supportCard) {
 		this.supportCard = supportCard;
 	}
 
-	/**
-	 * 
-	 * @param card
-	 */
 	public void discardCard(Card card) {
-		// TODO - implement Player.discardCard
-		throw new UnsupportedOperationException();
+		hand.remove(card);
 	}
 
-	/**
-	 * 
-	 * @param digimoCard
-	 */
-	public void setDigimonCardIrregularLevelC(DigimonCard digimoCard) {
-		// TODO - implement Player.setDigimonCardIrregularLevelC
-		throw new UnsupportedOperationException();
+	public void setDigimonCardIrregularLevelC(DigimonCard digimonCard) {
+		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.50));
+		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.50));
+		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.50));
+		setDigimonCard(digimonCard);
 	}
 
-	/**
-	 * 
-	 * @param digimonCard
-	 */
 	public void setDigimonCardIrregularLevelU(DigimonCard digimonCard) {
-		// TODO - implement Player.setDigimonCardIrregularLevelU
-		throw new UnsupportedOperationException();
+		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.25));
+		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.25));
+		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.25));
+		setDigimonCard(digimonCard);
 	}
 
 	public int getAttackChoice() {
 		return this.attackChoice;
 	}
 
-	/**
-	 * 
-	 * @param attackChoice
-	 */
 	public void setAttackChoice(int attackChoice) {
 		this.attackChoice = attackChoice;
 	}

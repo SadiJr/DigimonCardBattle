@@ -1,17 +1,16 @@
-package src.model;
+package model;
+
+import java.util.Collection;
+
 public class Deck {
 
-	private Card cards;
+	private Collection<Card> cards;
 
-	public Card getCards() {
+	public Collection<Card> getCards() {
 		return this.cards;
 	}
-
-	/**
-	 * 
-	 * @param cards
-	 */
-	public void setCards(Card cards) {
+	
+	public void setCards(Collection<Card> cards) {
 		this.cards = cards;
 	}
 

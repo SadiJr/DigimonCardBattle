@@ -1,4 +1,4 @@
-package src.model;
+package model;
 public class CardPOJO {
 
 	private int hp;

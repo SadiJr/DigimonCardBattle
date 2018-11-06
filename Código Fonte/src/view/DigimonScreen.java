@@ -1,8 +1,11 @@
-package src.view;
+package view;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class DigimonScreen {
+public class DigimonScreen extends JFrame {
+	
+	
 
 	public void connect() {
 		// TODO - implement DigimonScreen.connect
@@ -10,19 +13,13 @@ public class DigimonScreen {
 	}
 
 	public String getNamePlayer() {
-		// TODO - implement DigimonScreen.getNamePlayer
-		throw new UnsupportedOperationException();
+		return JOptionPane.showInputDialog("Digite seu nome");
 	}
 
 	public String getNameServer() {
-		// TODO - implement DigimonScreen.getNameServer
-		throw new UnsupportedOperationException();
+		return JOptionPane.showInputDialog("Digite o nome do servidor", "ufsc.algumacoisa-alterar-depois");
 	}
 
-	/**
-	 * 
-	 * @param message
-	 */
 	public void sendMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
@@ -37,10 +34,6 @@ public class DigimonScreen {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param phase
-	 */
 	public void updatePhaseName(String phase) {
 		// TODO - implement DigimonScreen.updatePhaseName
 		throw new UnsupportedOperationException();
