@@ -1,4 +1,7 @@
-import NetGames.*;
+package DominioDoProblema;
+
+import br.ufsc.inf.leobr.cliente.Jogada;
+
 
 public class Lance implements Jogada {
 
@@ -11,18 +14,16 @@ public class Lance implements Jogada {
 	 * @param coluna
 	 */
 	public void assumir(int linha, int coluna) {
-		// TODO - implement Lance.assumir
-		throw new UnsupportedOperationException();
+		this.linha=linha;
+		this.coluna=coluna;
 	}
 
-	public void informarLinha() {
-		// TODO - implement Lance.informarLinha
-		throw new UnsupportedOperationException();
+	public int informarLinha() {
+		return this.linha;
 	}
 
-	public void informarColuna() {
-		// TODO - implement Lance.informarColuna
-		throw new UnsupportedOperationException();
+	public int informarColuna() {
+		return this.coluna;
 	}
 
 }

@@ -1,10 +1,14 @@
 package InterfaceGrafica;
 
+import javax.swing.JFrame;
+
 public class Isolation {
 
-	public void main() {
-		// TODO - implement Isolation.main
-		throw new UnsupportedOperationException();
+	public static void main(String[] args) {
+		InterfaceIsolation janela;
+		janela=new InterfaceIsolation();
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		janela.setVisible(true);
 	}
 
 }

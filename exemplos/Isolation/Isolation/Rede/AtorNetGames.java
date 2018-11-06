@@ -2,8 +2,8 @@ package Rede;
 
 import javax.swing.JOptionPane;
 
-import InterfaceGrafica.AtorJogador;
 import DominioDoProblema.Lance;
+import InterfaceGrafica.AtorJogador;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
 import br.ufsc.inf.leobr.cliente.Proxy;

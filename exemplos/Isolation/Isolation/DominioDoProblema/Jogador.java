@@ -1,23 +1,24 @@
+package DominioDoProblema;
+
 public class Jogador {
 
-	protected string nome;
+	protected String nome;
 	protected int fase;
 	protected boolean vencedor;
 	protected int simbolo;
 	protected Posicao ocupando;
 
 	public void iniciar() {
-		// TODO - implement Jogador.iniciar
-		throw new UnsupportedOperationException();
+		fase=0;
+		vencedor=false;
 	}
 
 	/**
 	 * 
 	 * @param idJogador
 	 */
-	public void assumirNome(string idJogador) {
-		// TODO - implement Jogador.assumirNome
-		throw new UnsupportedOperationException();
+	public void assumirNome(String idJogador) {
+		this.nome=idJogador;
 	}
 
 	/**
@@ -25,18 +26,15 @@ public class Jogador {
 	 * @param cor
 	 */
 	public void assumirCor(int cor) {
-		// TODO - implement Jogador.assumirCor
-		throw new UnsupportedOperationException();
+		this.simbolo=cor;
 	}
 
 	public boolean informarDaVez() {
-		// TODO - implement Jogador.informarDaVez
-		throw new UnsupportedOperationException();
+		return fase!=0;
 	}
 
 	public int verificarFase() {
-		// TODO - implement Jogador.verificarFase
-		throw new UnsupportedOperationException();
+		return fase;
 	}
 
 	/**
@@ -45,8 +43,7 @@ public class Jogador {
 	 * @param coluna
 	 */
 	public boolean verificarAdjacente(int linha, int coluna) {
-		// TODO - implement Jogador.verificarAdjacente
-		throw new UnsupportedOperationException();
+		return this.ocupando.verificarAdjacente(linha, coluna);
 	}
 
 	/**
@@ -54,33 +51,45 @@ public class Jogador {
 	 * @param nova
 	 */
 	public void atualizar(Posicao nova) {
-		// TODO - implement Jogador.atualizar
-		throw new UnsupportedOperationException();
+		if(this.ocupando==null) {
+			this.ocupando=nova;
+		}else {
+			this.ocupando.esvaziar();
+			this.ocupando=nova;
+			this.ocupando.modOcupacao(simbolo);
+		}
 	}
 
 	public void mudarFase() {
-		// TODO - implement Jogador.mudarFase
-		throw new UnsupportedOperationException();
+		if(this.fase==2) {
+			this.fase=0;
+		}else {
+			this.fase++;
+		}
 	}
 
 	public Posicao informarPosicao() {
-		// TODO - implement Jogador.informarPosicao
-		throw new UnsupportedOperationException();
+		return this.ocupando;
 	}
 
 	public void assumirVencedor() {
-		// TODO - implement Jogador.assumirVencedor
-		throw new UnsupportedOperationException();
+		this.vencedor=true;
 	}
 
-	public string informarNome() {
-		// TODO - implement Jogador.informarNome
-		throw new UnsupportedOperationException();
+	public String informarNome() {
+		return this.nome;
 	}
 
 	public boolean informarVencedor() {
-		// TODO - implement Jogador.informarVencedor
-		throw new UnsupportedOperationException();
+		return this.vencedor;
+	}
+	
+	public void desabilitar() {
+		this.fase=0;
+	}
+
+	public int informarSimbolo() {
+		return this.simbolo;
 	}
 
 }

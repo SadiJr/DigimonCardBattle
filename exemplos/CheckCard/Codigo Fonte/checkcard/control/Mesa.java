@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.sun.org.apache.xalan.internal.utils.Objects;
-
 import br.ufsc.inf.leobr.cliente.Jogada;
 import model.Baralho;
 import model.Carta;

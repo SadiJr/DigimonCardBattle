@@ -1,9 +1,7 @@
 package InterfaceGrafica;
 
-import Isolation.DominioDoProblema.ImagemTabuleiro;
-import Isolation.DominioDoProblema.Lance;
-import Isolation.DominioDoProblema.Tabuleiro;
-import Isolation.Rede.AtorNetGames;
+import DominioDoProblema.*;
+import Rede.AtorNetGames;
 
 public class AtorJogador {
 
@@ -12,52 +10,83 @@ public class AtorJogador {
 	protected String idUsuario;
 	protected InterfaceIsolation janela;
 
-	/**
-	 * 
-	 * @param cod
-	 */
-	public void informarIrregularidade(int cod) {
-		// TODO - implement AtorJogador.informarIrregularidade
-		throw new UnsupportedOperationException();
+	public AtorJogador(InterfaceIsolation jan) {
+		super();
+		rede= new AtorNetGames(this);
+		janela=jan;
+		tab=new Tabuleiro();
+		tab.iniciar();
 	}
-
-	public String obterServidor() {
-		// TODO - implement AtorJogador.obterServidor
-		throw new UnsupportedOperationException();
-	}
-
-	public String obterIdJogardor() {
-		// TODO - implement AtorJogador.obterIdJogardor
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean avaliarInterrupcao() {
-		// TODO - implement AtorJogador.avaliarInterrupcao
-		throw new UnsupportedOperationException();
+	
+	public InterfaceIsolation informarJanela() {
+		return this.janela;
 	}
 
 	/**
 	 * 
 	 * @param posicao
 	 */
-	public void iniciarNovaPartida(int posicao) {
-		// TODO - implement AtorJogador.iniciarNovaPartida
-		throw new UnsupportedOperationException();
+	public void iniciarNovaPartida(Integer posicao) {
+		tab.esvaziar();
+		tab.criarJogador(idUsuario);
+		String idJogador=rede.informarNomeAdversario(idUsuario);
+		tab.criarJogador(idJogador);
+		tab.habilitar(posicao);
+		janela.exibirEstado();
 	}
 
 	public int conectar() {
-		// TODO - implement AtorJogador.conectar
-		throw new UnsupportedOperationException();
+		boolean conectado=tab.informarConectado();
+		if(!conectado) {
+			String servidor=janela.obterServidor();
+			idUsuario=janela.obterIdJogador();
+			boolean exito=rede.conectar(servidor, idUsuario);
+			if(exito) {
+				tab.estabelecerConectado(true);
+				return 0;
+			}else {
+				return 2;
+			}
+		}
+		return 1;
 	}
 
 	public int desconectar() {
-		// TODO - implement AtorJogador.desconectar
-		throw new UnsupportedOperationException();
+		boolean conectado=tab.informarConectado();
+		if(conectado) {
+			boolean exito=rede.desconectar();
+			if(exito) {
+				tab.estabelecerConectado(false);
+				return 3;
+			}else {
+				return 5;
+			}
+			
+		}
+		return 4;
 	}
 
 	public int iniciarPartida() {
-		// TODO - implement AtorJogador.iniciarPartida
-		throw new UnsupportedOperationException();
+		boolean emAndamento=tab.informarEmAndamento();
+		boolean interromper=false;
+		boolean conectado=false;
+		if(emAndamento) {
+			interromper=avaliarInterrupcao();
+		}else {
+			conectado=tab.informarConectado();
+		}
+		if(interromper||(!emAndamento&&conectado)) {
+			rede.iniciarPartida();
+			return 6;
+		}
+		if(!conectado) {
+			return 7;
+		}
+		return 13;
+	}
+
+	private boolean avaliarInterrupcao() {
+		return true;
 	}
 
 	/**
@@ -66,8 +95,11 @@ public class AtorJogador {
 	 * @param coluna
 	 */
 	public int click(int linha, int coluna) {
-		// TODO - implement AtorJogador.click
-		throw new UnsupportedOperationException();
+		int resultado=tab.click(linha, coluna);
+		if(resultado==9||resultado==10) {
+			enviarJogada(linha, coluna);
+		}
+		return resultado;
 	}
 
 	/**
@@ -76,8 +108,8 @@ public class AtorJogador {
 	 * @param coluna
 	 */
 	public void enviarJogada(int linha, int coluna) {
-		// TODO - implement AtorJogador.enviarJogada
-		throw new UnsupportedOperationException();
+		Lance lance=tab.informarJogada(linha, coluna);
+		rede.enviarJogada(lance);
 	}
 
 	/**
@@ -85,13 +117,12 @@ public class AtorJogador {
 	 * @param jogada
 	 */
 	public void receberJogada(Lance jogada) {
-		// TODO - implement AtorJogador.receberJogada
-		throw new UnsupportedOperationException();
+		tab.receberJogada(jogada);
+		janela.exibirEstado();
 	}
 
 	public ImagemTabuleiro informarEstado() {
-		// TODO - implement AtorJogador.informarEstado
-		throw new UnsupportedOperationException();
+		return tab.informarEstado();
 	}
 
 }

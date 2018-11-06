@@ -1,26 +1,24 @@
+package DominioDoProblema;
+
 public class ImagemTabuleiro {
 
-	protected string mensagem;
-	protected int mapa;
+	protected String mensagem;
+	protected int mapa[][]= new int [7][7];
 
-	/**
-	 * 
-	 * @param mensagem
-	 */
-	public void assumirMensagem(string mensagem) {
-		// TODO - implement ImagemTabuleiro.assumirMensagem
-		throw new UnsupportedOperationException();
+	public void assumirMensagem(String mensagem) {
+		this.mensagem=mensagem;
 	}
 
-	/**
-	 * 
-	 * @param linha
-	 * @param coluna
-	 * @param valor
-	 */
 	public void assumirValor(int linha, int coluna, int valor) {
-		// TODO - implement ImagemTabuleiro.assumirValor
-		throw new UnsupportedOperationException();
+		mapa[linha][coluna]=valor;
+	}
+	
+	public String informarMensagem() {
+		return this.mensagem;
+	}
+	
+	public int informarValor(int linha, int coluna) {
+		return this.mapa[linha][coluna];
 	}
 
 }
