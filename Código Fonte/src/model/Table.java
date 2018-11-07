@@ -121,9 +121,13 @@ public class Table implements Jogada {
 	}
 
 	public void downDigimonCard(String nameCard) throws Exception {
+		//TODO verificar diagrama de sequência
 		for(Card card : localPlayer.getHand()) {
 			if(card.getName().equals(nameCard)) {
 				if(isDigimonCard(card)) {
+					if(existsDigimonCardOnSlot()) {
+						throw new Exception("Já existe uma DigimonCard no campo de batalha!");
+					} 
 					localPlayer.setDigimonCard((DigimonCard) card);
 					localPlayer.getHand().remove(card);
 					return;

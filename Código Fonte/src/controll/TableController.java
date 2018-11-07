@@ -86,16 +86,21 @@ public class TableController {
 			player.informWinner(winner.getName());
 			exit();
 		} else {
-			int turns = table.getTurns();
-			if(turns < 2) {
-				table.setTurns(turns + 1);
-				drawPhase();
-			} else if(turns == 2) {
-				battle();
-			} else {
-				player.informError("Ocorreu um erro durante o tratamento do lance!");
-				network.finalizarPartidaComErro("Ocorreu um erro durante o tratamento do lance!");
+			if(table.getPhase().equals(Phase.QUIT)) {
+				player.informMessage("O jogador " + table.getNameRemotePlayer() + " é um covarde desistente!");
 				exit();
+			} else {
+				int turns = table.getTurns();
+				if(turns < 2) {
+					table.setTurns(turns + 1);
+					drawPhase();
+				} else if(turns == 2) {
+					battle();
+				} else {
+					player.informError("Ocorreu um erro durante o tratamento do lance!");
+					network.finalizarPartidaComErro("Ocorreu um erro durante o tratamento do lance!");
+					exit();
+				}
 			}
 		}
 	}
@@ -121,9 +126,16 @@ public class TableController {
 		}
 	}
 
-	public String quit() {
-		// TODO - implement TableController.quit
-		throw new UnsupportedOperationException();
+	public void quit() {
+		if(table.isGameInProggress()) {
+			table.setGameInProggress(false);
+			table.setPhase(Phase.QUIT);
+			network.sendMove(this.table);
+			player.informMessage("Desistência realizada com sucesso! Parabéns, você é um perdedor!");
+			exit();
+		} else {
+			player.informMessage("Sua covardia já o fez desistir!");
+		}
 	}
 
 	public void discardHand() {
@@ -146,12 +158,18 @@ public class TableController {
 	public void downDigimonCard(String nameCard) {
 		try {
 			table.downDigimonCard(nameCard);
+			digivolvePhase();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
 	}
 
 	public void digivolvePhase() {
+		table.setPhase(Phase.DIGIVOLVE_PHASE);
+		player.notifyPhase(Phase.DIGIVOLVE_PHASE.getDescription());
+		updateInterface();
+		player.informTurn();
+		player.enableButtonsDigivolvePhase();
 		// TODO - implement TableController.digivolvePhase
 		throw new UnsupportedOperationException();
 	}
@@ -236,7 +254,8 @@ public class TableController {
 		case DRAW_PHASE:
 			if(table.existsDigimonCardOnSlot())
 				digivolvePhase();
-			player.informError("Você precisa ter uma DigimonCard em campo para realizar essa operação!");
+			else
+				player.informError("Você precisa ter uma DigimonCard em campo para realizar essa operação!");
 			break;
 		
 		case DIGIVOLVE_PHASE:
