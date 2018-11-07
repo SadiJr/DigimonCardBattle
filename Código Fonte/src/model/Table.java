@@ -1,9 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
-import controll.TableController;
 import enums.Phase;
 
 public class Table implements Jogada {
@@ -107,10 +107,6 @@ public class Table implements Jogada {
 		return null;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void createRemotePlayer(String name, int id) {
 		this.remotePlayer = new Player(name, id);
 	}
@@ -157,10 +153,6 @@ public class Table implements Jogada {
 		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
 	}
 
-	/**
-	 * 
-	 * @param card
-	 */
 	public boolean isDigimonCard(Card card) {
 		if(card instanceof DigimonCard)
 			return true;
@@ -192,28 +184,29 @@ public class Table implements Jogada {
 	}
 
 	public void addNewHand() {
-		Collection<Card> cards = localPlayer.getDeck().getCards();
-		
+		createHandLocalPlayer();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public Card getCardByName(String name) {
-		// TODO - implement Table.getCardByName
-		throw new UnsupportedOperationException();
+		for(Card card : localPlayer.getHand()) {
+			if(card.getName().equals(name)) {
+				return card;
+			}
+		}
+		for(Card card : remotePlayer.getHand()) {
+			if(card.getName().equals(name)) {
+				return card;
+			}
+		}
+		return null;
 	}
 
 	public boolean existsDigimonCardOnSlot() {
-		// TODO - implement Table.existsDigimonCardOnSlot
-		throw new UnsupportedOperationException();
+		if(localPlayer.getDigimonCard() != null)
+			return true;
+		return false;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void updateCard(String name) {
 		// TODO - implement Table.updateCard
 		throw new UnsupportedOperationException();
@@ -229,30 +222,13 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param card
-	 */
 	public void removeCardOfHand(Card card) {
 		// TODO - implement Table.removeCardOfHand
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param digimonCard
-	 */
 	public void downDigimonCard(DigimonCard digimonCard) {
 		// TODO - implement Table.downDigimonCard
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param attack
-	 */
-	public void choiceAttack(int attack) {
-		// TODO - implement Table.choiceAttack
 		throw new UnsupportedOperationException();
 	}
 
@@ -272,18 +248,23 @@ public class Table implements Jogada {
 	}
 
 	public void createHandLocalPlayer() {
-		// TODO - implement Table.createHandLocalPlayer
-		throw new UnsupportedOperationException();
+		int size = localPlayer.getHand().size();
+		if(size < 4) {
+			while(size < 4 && !localPlayer.getDeck().getCards().isEmpty()) {
+				addMissingCards();
+			}
+		}
 	}
 
 	public int getSizeHandLocalPlayer() {
-		// TODO - implement Table.getSizeHandLocalPlayer
-		throw new UnsupportedOperationException();
+		return localPlayer.getHand().size();
 	}
 
 	public void addMissingCards() {
-		// TODO - implement Table.addMissingCards
-		throw new UnsupportedOperationException();
+		ArrayList<Card> cards = (ArrayList<Card>) localPlayer.getDeck().getCards();
+		Card card = cards.get(0);
+		localPlayer.getDeck().getCards().remove(card);
+		localPlayer.getHand().add(card);
 	}
 
 	public boolean existsDigimonCardInHand() {
@@ -291,6 +272,14 @@ public class Table implements Jogada {
 			if(card instanceof DigimonCard)
 				return true;
 		} 
+		return false;
+	}
+	
+	public boolean existsDigimonCardInDeck() {
+		for(Card card : localPlayer.getDeck().getCards()) {
+			if(card instanceof DigimonCard)
+				return true;
+		}
 		return false;
 	}
 

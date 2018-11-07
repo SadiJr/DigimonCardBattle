@@ -2,7 +2,7 @@ package model;
 import java.util.*;
 
 public class PlayerMovePOJO {
-
+	private String name;
 	private int deadCards;
 	private int deckSize;
 	private Collection<Card> hand;
@@ -10,6 +10,18 @@ public class PlayerMovePOJO {
 	private Card supportCard;
 	private int dp;
 	private int victories;
+	
+	public PlayerMovePOJO(String name, int deadCards, int deckSize, Collection<Card> hand, DigimonCard digimon, 
+			Card support, int dp, int victories) {
+		this.setName(name);
+		this.deadCards = deadCards;
+		this.deckSize = deckSize;
+		this.hand = hand;
+		this.digimonCard = digimon;
+		this.supportCard = support;
+		this.dp = dp;
+		this.victories = victories;
+	}
 
 	public int getDeadCards() {
 		return this.deadCards;
@@ -65,6 +77,14 @@ public class PlayerMovePOJO {
 
 	public void setVictories(int victories) {
 		this.victories = victories;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

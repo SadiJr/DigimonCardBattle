@@ -90,6 +90,7 @@ public class ActorNetGames implements OuvidorProxy {
 	@Override
 	public void finalizarPartidaComErro(String message) {
 		tableController.informError(message);
+		tableController.exit();
 	}
 
 	@Override

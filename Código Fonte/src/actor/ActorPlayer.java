@@ -101,8 +101,7 @@ public class ActorPlayer {
 	}
 
 	public void informTurn() {
-		// TODO - implement ActorPlayer.informTurn
-		throw new UnsupportedOperationException();
+		screen.sendMessage("É a sua vez!");
 	}
 
 	/**
