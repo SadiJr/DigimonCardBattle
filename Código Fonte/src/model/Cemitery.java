@@ -17,10 +17,6 @@ public class Cemitery {
 		return this.deadCards;
 	}
 
-	/**
-	 * 
-	 * @param deadCards
-	 */
 	public void setDeadCards(Collection<Card> deadCards) {
 		this.deadCards = deadCards;
 	}

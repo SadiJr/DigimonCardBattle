@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
+import enums.Effect;
+import enums.Level;
 import enums.Phase;
 import model.CardPOJO;
 import model.Cemitery;
@@ -122,7 +124,8 @@ public class TableController {
 			player.enableButtonsDrawPhase();
 		} else {
 			player.informMessage("Você não possuí nenhuma DigimonCard em sua mão ou no campo de batalha! "
-					+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");			
+					+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
+			player.enableButtonsDrawPhase();
 		}
 	}
 
@@ -158,6 +161,7 @@ public class TableController {
 	public void downDigimonCard(String nameCard) {
 		try {
 			table.downDigimonCard(nameCard);
+			player.dissableButtonsDrawPhase();
 			digivolvePhase();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
@@ -170,13 +174,13 @@ public class TableController {
 		updateInterface();
 		player.informTurn();
 		player.enableButtonsDigivolvePhase();
-		// TODO - implement TableController.digivolvePhase
-		throw new UnsupportedOperationException();
 	}
 
 	public void sacrificeCard(String nameCard) {
 		try {
 			table.sacrificeCard(nameCard);
+			player.dissableButtonSacrificeCard();
+			updateInterface();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
@@ -223,27 +227,18 @@ public class TableController {
 		player.informError(error);
 	}
 
-	public void dissableButtonsDrawPhase() {
-		// TODO - implement TableController.dissableButtonsDrawPhase
-		throw new UnsupportedOperationException();
-	}
-
-	public void dissableButtonsDigivolvePhase() {
-		// TODO - implement TableController.dissableButtonsDigivolvePhase
-		throw new UnsupportedOperationException();
-	}
-
-	public void dissableButtonSacrificeCard() {
-		// TODO - implement TableController.dissableButtonSacrificeCard
-		throw new UnsupportedOperationException();
-	}
-
 	public void updateCard(String name) {
+		table.updateCard(name);
 		// TODO - implement TableController.updateCard
 		throw new UnsupportedOperationException();
 	}
 
 	public void battlePhase() {
+		table.setPhase(Phase.BATTLE_PHASE);
+		player.notifyPhase(Phase.BATTLE_PHASE.getDescription());
+		updateInterface();
+		player.informTurn();
+		player.enableButtonsBattlePhase();
 		// TODO - implement TableController.battlePhase
 		throw new UnsupportedOperationException();
 	}
@@ -264,23 +259,117 @@ public class TableController {
 
 		default:
 			player.informError("Essa fase não pode ser pulada!");
-		
+			break;
 		}
 	}
 
 	public void choiceAttack(int attack) {
 		table.getLocalPlayer().setAttackChoice(attack);
+		player.dissableButtonsAttack();
 	}
 
 	public void downSupportCard(String supportName) {
 		try {
 			table.downSupportCard(supportName);
+			player.dissableAllButtons();
+			network.sendMove(table);
+			int turns = table.getTurns();
+			if(turns < 2) {
+				player.informWaitMoveRemotePlayer(getNameRemotePlayer());
+			} else if(turns == 2) {
+				battle();
+			} else {
+				throw new Exception("Erro de programação na linha 208 na classe TabbeController! Possível erro de lógica ou de implementação");
+			}
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
 	}
 
 	public void battle() {
+		DigimonCard aux1 = null;
+		DigimonCard aux2 = null;
+		
+		if(table.getLocalPlayer().equals(table.getFirstPlayer())) {
+			Player localPlayer = table.getLocalPlayer();
+			aux1 = localPlayer.getDigimonCard();
+			DigimonCard digimonCard = localPlayer.getDigimonCard();
+			Card supportCard = localPlayer.getSupportCard();
+			Effect cardEffect = supportCard.getCardEffect();
+			switch (cardEffect) {
+			
+			case ATK1_100:
+				digimonCard.setAttack1(digimonCard.getAttack1() + 100);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+				
+			case ATK1_X2:
+				digimonCard.setAttack1(digimonCard.getAttack1() * 2);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+				
+			case ATK300:
+				digimonCard.setAttack1(digimonCard.getAttack1() + 300);
+				digimonCard.setAttack2(digimonCard.getAttack2() + 300);
+				digimonCard.setAttack3(digimonCard.getAttack3() + 300);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+			
+			case ATK3_X2:
+				digimonCard.setAttack3(digimonCard.getAttack3() * 2);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+				
+			case ATK500:
+				digimonCard.setAttack1(digimonCard.getAttack1() + 500);
+				digimonCard.setAttack2(digimonCard.getAttack2() + 500);
+				digimonCard.setAttack3(digimonCard.getAttack3() + 500);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+			
+			case C_ATK400:
+				if(digimonCard.getLevel().equals(Level.C)) {
+					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+					localPlayer.setDigimonCard(digimonCard);
+				}
+				break;
+			
+			case HP1000:
+				digimonCard.setHp(digimonCard.getHp() + 1000);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+			
+			case HP1_500_HP2_200: 
+				break;
+			
+			case HP300:
+				digimonCard.setHp(digimonCard.getHp() + 300);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+			
+			case HP500:
+				digimonCard.setHp(digimonCard.getHp() + 500);
+				localPlayer.setDigimonCard(digimonCard);
+				break;
+
+			case U_ATK400:
+				if(digimonCard.getLevel().equals(Level.U)) {
+					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+					localPlayer.setDigimonCard(digimonCard);
+				}
+				break;
+			
+			default:
+				player.informError("Erro de programação na fase de batalha!");
+				break;
+			}
+		} else {
+			
+		}
 		// TODO - implement TableController.battle
 		throw new UnsupportedOperationException();
 	}

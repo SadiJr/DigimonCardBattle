@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
+import enums.Level;
 import enums.Phase;
+import javafx.scene.control.Tab;
 
 public class Table implements Jogada {
 
+	private static final Card DigimonCard = null;
 	private Deck deck;
 	private Player localPlayer;
 	private Player remotePlayer;
@@ -121,15 +124,28 @@ public class Table implements Jogada {
 	}
 
 	public void downDigimonCard(String nameCard) throws Exception {
-		//TODO verificar diagrama de sequência
+		if(existsDigimonCardOnSlot()) {
+			throw new Exception("Já existe uma DigimonCard no campo de batalha! Pule para a próxima fase, caso não queira descartar sua mão atual");
+		}
 		for(Card card : localPlayer.getHand()) {
 			if(card.getName().equals(nameCard)) {
 				if(isDigimonCard(card)) {
-					if(existsDigimonCardOnSlot()) {
-						throw new Exception("Já existe uma DigimonCard no campo de batalha!");
-					} 
-					localPlayer.setDigimonCard((DigimonCard) card);
-					localPlayer.getHand().remove(card);
+					DigimonCard digimon = (DigimonCard) card;
+					Level level = digimon.getLevel();
+					switch(level) {
+					case C:
+						localPlayer.setDigimonCardIrregularLevelC(digimon);
+						localPlayer.getHand().remove(digimon);
+						break;
+					case U:
+						localPlayer.setDigimonCardIrregularLevelU(digimon);
+						localPlayer.getHand().remove(digimon);
+						break;
+					default:
+						localPlayer.setDigimonCard(digimon);
+						localPlayer.getHand().remove(digimon);						
+						break;
+					}
 					return;
 				} else {
 					throw new Exception("A carta selecionada não é uma DigimonCard!");
@@ -146,8 +162,8 @@ public class Table implements Jogada {
 					DigimonCard digimon = (DigimonCard) card;
 					int p = digimon.getP();
 					localPlayer.setDp(localPlayer.getDp() + p);
-					localPlayer.getHand().remove(card);
-					cemiteryLocalPlayer.addCard(card);
+					localPlayer.getHand().remove(digimon);
+					cemiteryLocalPlayer.addCard(digimon);
 					return;
 				} else {
 					throw new Exception("A carta selecionada não é uma DigimonCard!");
@@ -211,7 +227,21 @@ public class Table implements Jogada {
 		return false;
 	}
 
-	public void updateCard(String name) {
+	public void updateCard(String name) throws Exception {
+		//TODO verificar com o Higor se a evolução das cartas será feita automaticamento ou o usuário irá escolher.
+		Card card = getCardByName(name);
+		if(card != null) {
+			for(Card c : localPlayer.getHand()) {
+				if(c.equals(card)) {
+					if(isDigimonCard(card)) {
+						
+					} else {
+						throw new Exception("Tantativa inválida de evoluir uma carta que não é DigimonCard!");
+					}
+				}
+			}
+			
+		}
 		// TODO - implement Table.updateCard
 		throw new UnsupportedOperationException();
 	}
@@ -226,14 +256,13 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	public void removeCardOfHand(Card card) {
-		// TODO - implement Table.removeCardOfHand
-		throw new UnsupportedOperationException();
-	}
-
-	public void downDigimonCard(DigimonCard digimonCard) {
-		// TODO - implement Table.downDigimonCard
-		throw new UnsupportedOperationException();
+	public void removeCardOfHand(Card card) throws Exception {
+		for(Card hand : localPlayer.getHand()) {
+			if(card.equals(hand)) {
+				localPlayer.getHand().remove(card);
+			}
+		}
+		throw new Exception("A carta selecionada não existe na mão do jogador!");
 	}
 
 	public void downSupportCard(String supportName) throws Exception {
