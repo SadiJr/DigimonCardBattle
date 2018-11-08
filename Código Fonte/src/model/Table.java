@@ -6,7 +6,6 @@ import java.util.Collection;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Level;
 import enums.Phase;
-import javafx.scene.control.Tab;
 
 public class Table implements Jogada {
 
@@ -288,6 +287,13 @@ public class Table implements Jogada {
 			}
 		}
 	}
+	
+	public Collection<Player> getListPlayers() {
+		Collection<Player> players = new ArrayList<>();
+		players.add(localPlayer);
+		players.add(remotePlayer);
+		return players;
+	}
 
 	public int getSizeHandLocalPlayer() {
 		return localPlayer.getHand().size();
@@ -321,14 +327,66 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	public void battleTurn() {
+	public void battleTurn() throws Exception {
+		Player first = getFirstPlayer();
+		int attackChoice = first.getAttackChoice();
+		int damage = 0;
+		switch (attackChoice) {
+		
+		case 1:
+			damage = first.getDigimonCard().getAttack1();
+			break;
+		
+		case 2:
+			damage = first.getDigimonCard().getAttack2();
+			break;
+
+		case 3:
+			damage = first.getDigimonCard().getAttack3();
+			break;
+			
+		default:
+			throw new Exception("Um erro inesperado ocorreu!");
+		}
+		
+		boolean attack = attack(localPlayer.equals(first) ? remotePlayer : localPlayer, damage);
+
+		if(attack) {
+			return;
+		} else {
+			Player second = localPlayer.equals(first) ? remotePlayer : localPlayer;
+			int secondAttackChoice = second.getAttackChoice();
+			int secondDamage = 0;
+			switch (secondAttackChoice) {
+			
+			case 1:
+				secondDamage = second.getDigimonCard().getAttack1();
+				break;
+			
+			case 2:
+				secondDamage = second.getDigimonCard().getAttack2();
+				break;
+
+			case 3:
+				secondDamage = second.getDigimonCard().getAttack3();
+				break;
+				
+			default:
+				throw new Exception("Um erro inesperado ocorreu!");
+			}
+			
+			attack(first, secondDamage);
+		}
+		
 		// TODO - implement Table.battleTurn
 		throw new UnsupportedOperationException();
 	}
 	
 	public boolean attack(Player playerAttacked, int attack) {
-		// TODO - implement Table.attack
-		throw new UnsupportedOperationException();
+		playerAttacked.getDigimonCard().setHp(playerAttacked.getDigimonCard().getHp() - attack);
+		if(playerAttacked.getDigimonCard().getHp() <= 0)
+			return true;
+		return false;
 	}
 
 	public void addCardToCemiteryByPlayer(Player player, Card card) {

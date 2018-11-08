@@ -3,6 +3,8 @@ import model.Card;
 
 import java.util.Collection;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.LocalAttribute;
+
 import actor.ActorNetGames;
 import actor.ActorPlayer;
 import enums.Effect;
@@ -289,42 +291,45 @@ public class TableController {
 	public void battle() {
 		DigimonCard aux1 = null;
 		DigimonCard aux2 = null;
-		
-		if(table.getLocalPlayer().equals(table.getFirstPlayer())) {
-			Player localPlayer = table.getLocalPlayer();
-			aux1 = localPlayer.getDigimonCard();
-			DigimonCard digimonCard = localPlayer.getDigimonCard();
-			Card supportCard = localPlayer.getSupportCard();
+		for(Player player : table.getListPlayers()) {
+			
+			if(player.equals(table.getFirstPlayer())) {
+				aux1 = player.getDigimonCard();
+			} else {
+				aux2 = player.getDigimonCard();
+			}
+			DigimonCard digimonCard = player.getDigimonCard();
+			Card supportCard = player.getSupportCard();
 			Effect cardEffect = supportCard.getCardEffect();
 			switch (cardEffect) {
 			
 			case ATK1_100:
 				digimonCard.setAttack1(digimonCard.getAttack1() + 100);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 				
 			case ATK1_X2:
 				digimonCard.setAttack1(digimonCard.getAttack1() * 2);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 				
 			case ATK300:
 				digimonCard.setAttack1(digimonCard.getAttack1() + 300);
 				digimonCard.setAttack2(digimonCard.getAttack2() + 300);
 				digimonCard.setAttack3(digimonCard.getAttack3() + 300);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 			
 			case ATK3_X2:
 				digimonCard.setAttack3(digimonCard.getAttack3() * 2);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 				
 			case ATK500:
 				digimonCard.setAttack1(digimonCard.getAttack1() + 500);
 				digimonCard.setAttack2(digimonCard.getAttack2() + 500);
 				digimonCard.setAttack3(digimonCard.getAttack3() + 500);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 			
 			case C_ATK400:
@@ -332,13 +337,13 @@ public class TableController {
 					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
 					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
 					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
-					localPlayer.setDigimonCard(digimonCard);
+					player.setDigimonCard(digimonCard);
 				}
 				break;
 			
 			case HP1000:
 				digimonCard.setHp(digimonCard.getHp() + 1000);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 			
 			case HP1_500_HP2_200: 
@@ -346,12 +351,12 @@ public class TableController {
 			
 			case HP300:
 				digimonCard.setHp(digimonCard.getHp() + 300);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 			
 			case HP500:
 				digimonCard.setHp(digimonCard.getHp() + 500);
-				localPlayer.setDigimonCard(digimonCard);
+				player.setDigimonCard(digimonCard);
 				break;
 
 			case U_ATK400:
@@ -359,16 +364,50 @@ public class TableController {
 					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
 					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
 					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
-					localPlayer.setDigimonCard(digimonCard);
+					player.setDigimonCard(digimonCard);
 				}
 				break;
 			
 			default:
-				player.informError("Erro de programação na fase de batalha!");
+				this.player.informError("Erro de programação na fase de batalha!");
 				break;
 			}
+			player.setSupportCard(null);
+			table.addCardToCemiteryByPlayer(player, supportCard);
+		}
+		
+		try {
+			table.battleTurn();
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+		}
+		for(Player player : table.getListPlayers()) {
+			if(player.getDigimonCard().getHp() <= 0) {
+				this.player.notifyWinnerTurn(player.equals(table.getLocalPlayer()) ? table.getLocalPlayer().getName() 
+						: table.getRemotePlayer().getName());
+				Player aux = player.equals(table.getLocalPlayer()) ? table.getLocalPlayer()
+						: table.getRemotePlayer();
+				table.addCardToCemiteryByPlayer(aux, aux.getDigimonCard());
+				aux.setDigimonCard(null);
+				return;
+			} else {
+				DigimonCard reset = player.equals(table.getFirstPlayer()) ? aux1 : aux2;
+				int hp = player.getDigimonCard().getHp();
+				player.setDigimonCard(reset);
+				player.getDigimonCard().setHp(hp);
+			}
+		}
+		if(table.verifyWinner() != null) {
+			this.player.informWinner(table.verifyWinner().getName());
+			exit();
+		}
+		
+		if(table.getLocalPlayer().equals(table.getFirstPlayer())) {
+			table.setTurns(1);
+			drawPhase();
 		} else {
-			
+			sendMove(this.table);
+			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
 		// TODO - implement TableController.battle
 		throw new UnsupportedOperationException();
