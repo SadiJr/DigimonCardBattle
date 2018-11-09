@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
+import enums.Effect;
 import enums.Level;
 import enums.Phase;
 
@@ -228,31 +229,60 @@ public class Table implements Jogada {
 
 	public void updateCard(String name) throws Exception {
 		//TODO verificar com o Higor se a evolução das cartas será feita automaticamento ou o usuário irá escolher.
-		Card card = getCardByName(name);
-		if(card != null) {
-			for(Card c : localPlayer.getHand()) {
-				if(c.equals(card)) {
-					if(isDigimonCard(card)) {
-						
-					} else {
-						throw new Exception("Tantativa inválida de evoluir uma carta que não é DigimonCard!");
+		if(localPlayer.getDigimonCard() != null) {
+			Card card = getCardByName(name);
+			if(card != null) {
+				for(Card c : localPlayer.getHand()) {
+					if(c.equals(card)) {
+						if(isDigimonCard(card)) {
+							if(levelNecessary(((DigimonCard) card).getLevel())) {
+								if(isDpEnough(((DigimonCard) card).getDp())) {
+									cemiteryLocalPlayer.addCard(localPlayer.getDigimonCard());
+									localPlayer.setDigimonCard((DigimonCard) card);
+									localPlayer.setDp(0);
+								} else {
+									throw new Exception("Você não possuí DP suficiente para realizar essa evolução");
+								}
+							} else {
+								throw new Exception("Essa carta não pode ser evoluída para esse nível!");
+							}
+						} else {
+							throw new Exception("Tantativa inválida de evoluir uma carta que não é DigimonCard!");
+						}
 					}
 				}
+			} else {
+				throw new Exception("A carta selecionada para evolução não existe em sua mão!");
 			}
-			
+		} else {
+			throw new Exception("Erro! Não existe nenhuma digimonCard no campo de batalha");
 		}
+		
 		// TODO - implement Table.updateCard
 		throw new UnsupportedOperationException();
 	}
+	
+	public boolean levelNecessary(Level level) throws Exception {
+		Level levelPlayer = localPlayer.getDigimonCard().getLevel();
+		switch (level) {
+		case C:
+			if(levelPlayer.equals(Level.R))
+				return true;
+			break;
 
-	public boolean isDpEnough() {
-		// TODO - implement Table.isDpEnough
-		throw new UnsupportedOperationException();
+		case U:
+			if(levelPlayer.equals(Level.C))
+				return false;
+		default:
+			throw new Exception("Essa carta não pode ser evoluída para esse nível!");
+		}
+		return false;
 	}
 
-	public DigimonCard evolutionPossible() {
-		// TODO - implement Table.evolutionPossible
-		throw new UnsupportedOperationException();
+	public boolean isDpEnough(int dpNecessary) {
+		if(localPlayer.getDp() >= dpNecessary)
+			return true;
+		return false;
 	}
 
 	public void removeCardOfHand(Card card) throws Exception {
@@ -322,9 +352,89 @@ public class Table implements Jogada {
 		return false;
 	}
 
-	public void supportCardEffect() {
-		// TODO - implement Table.supportCardEffect
-		throw new UnsupportedOperationException();
+	public void supportCardEffect(Player player) throws Exception {
+		DigimonCard digimonCard = player.getDigimonCard();
+		Card supportCard = player.getSupportCard();
+		Effect cardEffect = supportCard.getCardEffect();
+		switch (cardEffect) {
+		
+		case ATK1_100:
+			digimonCard.setAttack1(digimonCard.getAttack1() + 100);
+			player.setDigimonCard(digimonCard);
+			break;
+			
+		case ATK1_X2:
+			digimonCard.setAttack1(digimonCard.getAttack1() * 2);
+			player.setDigimonCard(digimonCard);
+			break;
+			
+		case ATK300:
+			digimonCard.setAttack1(digimonCard.getAttack1() + 300);
+			digimonCard.setAttack2(digimonCard.getAttack2() + 300);
+			digimonCard.setAttack3(digimonCard.getAttack3() + 300);
+			player.setDigimonCard(digimonCard);
+			break;
+		
+		case ATK3_X2:
+			digimonCard.setAttack3(digimonCard.getAttack3() * 2);
+			player.setDigimonCard(digimonCard);
+			break;
+			
+		case ATK500:
+			digimonCard.setAttack1(digimonCard.getAttack1() + 500);
+			digimonCard.setAttack2(digimonCard.getAttack2() + 500);
+			digimonCard.setAttack3(digimonCard.getAttack3() + 500);
+			player.setDigimonCard(digimonCard);
+			break;
+		
+		case C_ATK400:
+			if(digimonCard.getLevel().equals(Level.C)) {
+				digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+				digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+				digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+				player.setDigimonCard(digimonCard);
+			}
+			break;
+		
+		case HP1000:
+			digimonCard.setHp(digimonCard.getHp() + 1000);
+			player.setDigimonCard(digimonCard);
+			break;
+		
+		case HP1_500_HP2_200:
+			player.getDigimonCard().setHp(player.getDigimonCard().getHp() + 500);
+			if(player.equals(localPlayer)) {
+				remotePlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
+			} else {
+				localPlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
+			}
+			break;
+		
+		case HP300:
+			digimonCard.setHp(digimonCard.getHp() + 300);
+			player.setDigimonCard(digimonCard);
+			break;
+		
+		case HP500:
+			digimonCard.setHp(digimonCard.getHp() + 500);
+			player.setDigimonCard(digimonCard);
+			break;
+
+		case U_ATK400:
+			if(digimonCard.getLevel().equals(Level.U)) {
+				digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+				digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+				digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+				player.setDigimonCard(digimonCard);
+			}
+			break;
+		
+		default:
+			throw new Exception("Erro de programação na fase de batalha!");
+		}
+		
+		player.setSupportCard(null);
+		addCardToCemiteryByPlayer(player, supportCard);
 	}
 
 	public void battleTurn() throws Exception {

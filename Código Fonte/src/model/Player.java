@@ -109,5 +109,4 @@ public class Player {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 }

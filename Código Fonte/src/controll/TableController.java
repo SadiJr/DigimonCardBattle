@@ -230,7 +230,13 @@ public class TableController {
 	}
 
 	public void updateCard(String name) {
-		table.updateCard(name);
+		try {
+			table.updateCard(name);
+			player.dissableButtonsDigivolvePhase();
+			battlePhase();
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+		}
 		// TODO - implement TableController.updateCard
 		throw new UnsupportedOperationException();
 	}
@@ -289,117 +295,45 @@ public class TableController {
 	}
 
 	public void battle() {
-		DigimonCard aux1 = null;
-		DigimonCard aux2 = null;
-		for(Player player : table.getListPlayers()) {
-			
-			if(player.equals(table.getFirstPlayer())) {
-				aux1 = player.getDigimonCard();
-			} else {
-				aux2 = player.getDigimonCard();
-			}
-			DigimonCard digimonCard = player.getDigimonCard();
-			Card supportCard = player.getSupportCard();
-			Effect cardEffect = supportCard.getCardEffect();
-			switch (cardEffect) {
-			
-			case ATK1_100:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 100);
-				player.setDigimonCard(digimonCard);
-				break;
-				
-			case ATK1_X2:
-				digimonCard.setAttack1(digimonCard.getAttack1() * 2);
-				player.setDigimonCard(digimonCard);
-				break;
-				
-			case ATK300:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 300);
-				digimonCard.setAttack2(digimonCard.getAttack2() + 300);
-				digimonCard.setAttack3(digimonCard.getAttack3() + 300);
-				player.setDigimonCard(digimonCard);
-				break;
-			
-			case ATK3_X2:
-				digimonCard.setAttack3(digimonCard.getAttack3() * 2);
-				player.setDigimonCard(digimonCard);
-				break;
-				
-			case ATK500:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 500);
-				digimonCard.setAttack2(digimonCard.getAttack2() + 500);
-				digimonCard.setAttack3(digimonCard.getAttack3() + 500);
-				player.setDigimonCard(digimonCard);
-				break;
-			
-			case C_ATK400:
-				if(digimonCard.getLevel().equals(Level.C)) {
-					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
-					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
-					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
-					player.setDigimonCard(digimonCard);
-				}
-				break;
-			
-			case HP1000:
-				digimonCard.setHp(digimonCard.getHp() + 1000);
-				player.setDigimonCard(digimonCard);
-				break;
-			
-			case HP1_500_HP2_200: 
-				break;
-			
-			case HP300:
-				digimonCard.setHp(digimonCard.getHp() + 300);
-				player.setDigimonCard(digimonCard);
-				break;
-			
-			case HP500:
-				digimonCard.setHp(digimonCard.getHp() + 500);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case U_ATK400:
-				if(digimonCard.getLevel().equals(Level.U)) {
-					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
-					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
-					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
-					player.setDigimonCard(digimonCard);
-				}
-				break;
-			
-			default:
-				this.player.informError("Erro de programação na fase de batalha!");
-				break;
-			}
-			player.setSupportCard(null);
-			table.addCardToCemiteryByPlayer(player, supportCard);
-		}
+		Player first = table.getLocalPlayer().equals(table.getFirstPlayer()) ? table.getLocalPlayer() : table.getRemotePlayer();
+		Player second= table.getLocalPlayer().equals(table.getFirstPlayer()) ? table.getRemotePlayer() : table.getLocalPlayer();
+		DigimonCard aux1 = DigimonCard.copy(first.getDigimonCard());
+		DigimonCard aux2 = DigimonCard.copy(second.getDigimonCard());
 		
 		try {
+			table.supportCardEffect(first);
+			table.supportCardEffect(second);
 			table.battleTurn();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
-		for(Player player : table.getListPlayers()) {
-			if(player.getDigimonCard().getHp() <= 0) {
-				this.player.notifyWinnerTurn(player.equals(table.getLocalPlayer()) ? table.getLocalPlayer().getName() 
-						: table.getRemotePlayer().getName());
-				Player aux = player.equals(table.getLocalPlayer()) ? table.getLocalPlayer()
-						: table.getRemotePlayer();
-				table.addCardToCemiteryByPlayer(aux, aux.getDigimonCard());
-				aux.setDigimonCard(null);
-				return;
-			} else {
-				DigimonCard reset = player.equals(table.getFirstPlayer()) ? aux1 : aux2;
-				int hp = player.getDigimonCard().getHp();
-				player.setDigimonCard(reset);
-				player.getDigimonCard().setHp(hp);
+		
+		if(first.getDigimonCard().getHp() <= 0 || second.getDigimonCard().getHp() <= 0) {
+			for(Player player : table.getListPlayers()) {
+				if(player.getDigimonCard().getHp() <= 0) {
+					this.player.notifyWinnerTurn(player.equals(table.getLocalPlayer()) ? table.getRemotePlayer().getName() 
+							: table.getLocalPlayer().getName());
+					table.addCardToCemiteryByPlayer(player, player.getDigimonCard());
+					player.setDigimonCard(null);
+					Player winner = player.equals(table.getLocalPlayer()) ? table.getLocalPlayer() : table.getRemotePlayer();
+					winner.setVictories(winner.getVictories() + 1);
+					return;
+				}
 			}
-		}
-		if(table.verifyWinner() != null) {
-			this.player.informWinner(table.verifyWinner().getName());
-			exit();
+
+			if(table.verifyWinner() != null) {
+				this.player.informWinner(table.verifyWinner().getName());
+				exit();
+			}
+			
+		} else {
+				int hp = first.getDigimonCard().getHp();
+				first.setDigimonCard(aux1);
+				first.getDigimonCard().setHp(hp);
+				
+				int hp2 = second.getDigimonCard().getHp();
+				second.setDigimonCard(aux2);
+				second.getDigimonCard().setHp(hp2);
 		}
 		
 		if(table.getLocalPlayer().equals(table.getFirstPlayer())) {

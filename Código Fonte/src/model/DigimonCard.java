@@ -91,5 +91,19 @@ public class DigimonCard extends Card {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+	
+	public static DigimonCard copy(DigimonCard digimon) {
+		int attack1 = digimon.getAttack1();
+		int attack2 = digimon.getAttack2();
+		int attack3 = digimon.getAttack3();
+		Effect effect = digimon.getCardEffect();
+		int dp2 = digimon.getDp();
+		int hp2 = digimon.getHp();
+		Level level2 = digimon.getLevel();
+		String name2 = digimon.getName();
+		int p2 = digimon.getP();
+		Specialty specialty2 = digimon.getSpecialty();
+		return new DigimonCard(name2, effect, hp2, attack1, attack2, attack3, dp2, p2, specialty2, level2);
+	}
 
 }
