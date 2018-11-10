@@ -1,15 +1,10 @@
 package controll;
-import model.Card;
-
 import java.util.Collection;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.LocalAttribute;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
-import enums.Effect;
-import enums.Level;
 import enums.Phase;
+import model.Card;
 import model.CardPOJO;
 import model.Cemitery;
 import model.DigimonCard;
@@ -63,9 +58,23 @@ public class TableController {
 		network.disconnect();
 	}
 
-	public void startNewGame() {
-		// TODO - implement TableController.startNewGame
-		throw new UnsupportedOperationException();
+	public void startNewGame(Integer posicao) {
+		String nameRemotePlayer = network.getNameRemotePlayer();
+		player.informRemotePlayerName(nameRemotePlayer);
+		table.getLocalPlayer().setId(posicao);
+		table.setRemotePlayer(new Player(nameRemotePlayer, posicao == 1 ? 2 : 1));
+		createDeck();
+		table.distributeCards();
+		table.setPhase(Phase.START_GAME);
+		table.setGameInProggress(true);
+		table.setFirstPlayer(table.getRemotePlayer());
+		network.sendMove(table);
+		player.informWaitMoveRemotePlayer(nameRemotePlayer);
+	}
+
+	private void createDeck() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public String getNameRemotePlayer() {
@@ -76,9 +85,12 @@ public class TableController {
 		player.informRemotePlayerName(getNameRemotePlayer());
 	}
 
-	public int start() {
-		// TODO - implement TableController.start
-		throw new UnsupportedOperationException();
+	public void start() {
+		network.sendRequestMove();
+	}
+	
+	public void init() {
+		player.init();;
 	}
 
 	public void treatMove(Table table) {
@@ -91,7 +103,7 @@ public class TableController {
 			exit();
 		} else {
 			if(table.getPhase().equals(Phase.QUIT)) {
-				player.informMessage("O jogador " + table.getNameRemotePlayer() + " é um covarde desistente!");
+				player.informMessage("O jogador " + getNameRemotePlayer() + " é um covarde desistente!");
 				exit();
 			} else {
 				int turns = table.getTurns();
@@ -154,7 +166,7 @@ public class TableController {
 		} else {
 			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck!\nPelas regras do jogo, você perdeu!");
 			table.getRemotePlayer().setVictories(3);
-			player.informWinner(table.getNameRemotePlayer());
+			player.informWinner(getNameRemotePlayer());
 			network.sendMove(this.table);
 			exit();
 		}
@@ -237,8 +249,6 @@ public class TableController {
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
-		// TODO - implement TableController.updateCard
-		throw new UnsupportedOperationException();
 	}
 
 	public void battlePhase() {
@@ -247,8 +257,6 @@ public class TableController {
 		updateInterface();
 		player.informTurn();
 		player.enableButtonsBattlePhase();
-		// TODO - implement TableController.battlePhase
-		throw new UnsupportedOperationException();
 	}
 
 	public void jumpPhase() {
@@ -343,8 +351,6 @@ public class TableController {
 			sendMove(this.table);
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
-		// TODO - implement TableController.battle
-		throw new UnsupportedOperationException();
 	}
 
 	public void viewAttributes(String name) {
@@ -382,8 +388,13 @@ public class TableController {
 	}
 
 	public void exit() {
-		// TODO - implement TableController.exit
-		throw new UnsupportedOperationException();
+		String name = table.getLocalPlayer().getName();
+		Integer id = table.getLocalPlayer().getId();
+		table = null;
+		table = new Table();
+		table.setLocalPlayer(new Player(name, id));
+		PlayerMovePOJO createPOJOPlayer = createPOJOPlayer(table.getLocalPlayer());
+		player.updateInterface(null, createPOJOPlayer);
 	}
 
 	public void sendMove(Table table) {

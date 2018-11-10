@@ -84,7 +84,7 @@ public class ActorNetGames implements OuvidorProxy {
 	 */
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
-		tableController.startNewGame();
+		tableController.startNewGame(posicao);
 	}
 
 	@Override

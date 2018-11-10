@@ -9,8 +9,6 @@ import enums.Level;
 import enums.Phase;
 
 public class Table implements Jogada {
-
-	private static final Card DigimonCard = null;
 	private Deck deck;
 	private Player localPlayer;
 	private Player remotePlayer;
@@ -22,6 +20,13 @@ public class Table implements Jogada {
 	private Cemitery cemiteryLocalPlayer;
 	private Cemitery cemiteryRemotePlayer;
 
+	public Table() {
+		deck = new Deck();
+		phase = Phase.WAIT;
+		cemiteryLocalPlayer = new Cemitery();
+		cemiteryRemotePlayer = new Cemitery();
+	}
+	
 	public Deck getDeck() {
 		return this.deck;
 	}
@@ -76,11 +81,6 @@ public class Table implements Jogada {
 		throw new UnsupportedOperationException();
 	}
 
-	public void takeAction() {
-		// TODO - implement Table.takeAction
-		throw new UnsupportedOperationException();
-	}
-
 	public Phase getPhase() {
 		return this.phase;
 	}
@@ -95,11 +95,6 @@ public class Table implements Jogada {
 
 	public void setTurns(int turns) {
 		this.turns = turns;
-	}
-
-	public String getNameRemotePlayer() {
-		// TODO - implement Table.getNameRemotePlayer
-		throw new UnsupportedOperationException();
 	}
 
 	public Player verifyWinner() {
@@ -228,7 +223,6 @@ public class Table implements Jogada {
 	}
 
 	public void updateCard(String name) throws Exception {
-		//TODO verificar com o Higor se a evolução das cartas será feita automaticamento ou o usuário irá escolher.
 		if(localPlayer.getDigimonCard() != null) {
 			Card card = getCardByName(name);
 			if(card != null) {
@@ -257,9 +251,6 @@ public class Table implements Jogada {
 		} else {
 			throw new Exception("Erro! Não existe nenhuma digimonCard no campo de batalha");
 		}
-		
-		// TODO - implement Table.updateCard
-		throw new UnsupportedOperationException();
 	}
 	
 	public boolean levelNecessary(Level level) throws Exception {
@@ -302,11 +293,6 @@ public class Table implements Jogada {
 			}
 		}
 		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
-	}
-
-	public void battle() {
-		// TODO - implement Table.battle
-		throw new UnsupportedOperationException();
 	}
 
 	public void createHandLocalPlayer() {
@@ -487,9 +473,6 @@ public class Table implements Jogada {
 			
 			attack(first, secondDamage);
 		}
-		
-		// TODO - implement Table.battleTurn
-		throw new UnsupportedOperationException();
 	}
 	
 	public boolean attack(Player playerAttacked, int attack) {
