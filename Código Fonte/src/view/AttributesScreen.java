@@ -9,12 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import actor.ActorPlayer;
 import model.CardPOJO;
 
-public class AttributesScreen extends JPanel {
+public class AttributesScreen extends JFrame {
 	private ActorPlayer player;
 	private JLabel cardImage;
 	private JLabel jcomp2;
@@ -73,13 +72,15 @@ public class AttributesScreen extends JPanel {
 
 	public AttributesScreen(ActorPlayer actorPlayer) {
 		this.player = actorPlayer;
+		config();
 	}
 	
 	public AttributesScreen() {
-		// TODO Auto-generated constructor stub
+		config();
 	}
 
 	public void config() {
+		setTitle("Detalhes");
 		cardImage = new JLabel("");
 		jcomp2 = new JLabel("Nome");
 		jcomp3 = new JLabel("Efeito");
@@ -120,7 +121,9 @@ public class AttributesScreen extends JPanel {
 		attack3.setVisible(false);
 		attack3.setEnabled(false);
 
-		setPreferredSize(new Dimension(830, 515));
+//		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/backCard.jpg");
+//		cardImage.setIcon(iconLogo);
+		setPreferredSize(new Dimension(830, 570));
 		setLayout(null);
 
 		add(cardImage);
@@ -185,11 +188,10 @@ public class AttributesScreen extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("MyPanel");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.getContentPane().add(new AttributesScreen());
-		frame.pack();
-		frame.setVisible(true);
+		AttributesScreen attributesScreen = new AttributesScreen();
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
+		attributesScreen.enableButtonsAttack();
 	}
 
 	public void showAttributes(CardPOJO pojo) throws Exception {
@@ -200,11 +202,6 @@ public class AttributesScreen extends JPanel {
 		}
 	}
 
-	/**
-	 * 
-	 * @param pojo
-	 * @throws Exception 
-	 */
 	public void showOptionCardAttributes(CardPOJO pojo) throws Exception {
 		String phase = pojo.getPhase();
 		name.setText(pojo.getName());

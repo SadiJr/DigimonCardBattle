@@ -1,5 +1,5 @@
 package controll;
-import java.util.Collection;
+import java.util.ArrayList;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
@@ -218,13 +218,29 @@ public class TableController {
 		int size = player.getDeck().getCards().size();
 		int cemiterySize = table.getLocalPlayer().equals(player) ? table.getCemiteryLocalPlayer().getDeadCards().size() 
 				: table.getCemiteryRemotePlayer().getDeadCards().size();
-		Collection<Card> hand = player.getHand();
-		DigimonCard digimonCard = player.getDigimonCard();
-		Card supportCard = player.getSupportCard();
+		ArrayList<Card> hand = (ArrayList<Card>) player.getHand();
+		ArrayList<CardPOJO> hand2 = new ArrayList<>();
+		for(int i = 0; i < hand.size(); i++) {
+			Card card = hand.get(i);
+			if(card == null) {
+				hand2.add(null);
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(card);
+				hand2.add(createCardPOJO);
+			}
+		}
+		CardPOJO digimonCard = null;
+		CardPOJO supportCard = null;
+		if(player.getDigimonCard() != null) {
+			digimonCard = createCardPOJO(player.getDigimonCard());
+		}
+		if(player.getSupportCard() != null) {
+			supportCard = createCardPOJO(player.getSupportCard());
+		}
 		int dp = player.getDp();
 		int victories = player.getVictories();
 		
-		return new PlayerMovePOJO(name, cemiterySize, size, hand, digimonCard, supportCard, dp, victories);
+		return new PlayerMovePOJO(name, cemiterySize, size, hand2, digimonCard, supportCard, dp, victories);
 	}
 
 	public void updateInterface() {
