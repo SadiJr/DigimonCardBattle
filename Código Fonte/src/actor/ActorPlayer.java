@@ -14,8 +14,8 @@ public class ActorPlayer {
 
 	public ActorPlayer(TableController tableController) {
 		this.tableController = tableController;
-		screen = new DigimonScreen();
-		attributesScreen = new AttributesScreen();
+		screen = new DigimonScreen(this);
+		attributesScreen = new AttributesScreen(this);
 	}
 
 	public void connect() {
@@ -74,8 +74,7 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsDrawPhase() {
-		// TODO - implement ActorPlayer.enableButtonsDrawPhase
-		throw new UnsupportedOperationException();
+		attributesScreen.enableButtonsDrawPhase();
 	}
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
@@ -84,11 +83,11 @@ public class ActorPlayer {
 	}
 
 	public void dissableButtonsDrawPhase() {
-		// TODO - implement ActorPlayer.dissableButtonsDrawPhase
-		throw new UnsupportedOperationException();
+		attributesScreen.dissableButtonsDrawPhase();
 	}
 
 	public void enableButtonsDigivolvePhase() {
+		attributesScreen.enableButtonSacrificeCard();
 		// TODO - implement ActorPlayer.enableButtonsDigivolvePhase
 		throw new UnsupportedOperationException();
 	}
@@ -99,8 +98,7 @@ public class ActorPlayer {
 	}
 
 	public void dissableButtonSacrificeCard() {
-		// TODO - implement ActorPlayer.dissableButtonSacrificeCard
-		throw new UnsupportedOperationException();
+		attributesScreen.dissableButtonSacrificeCard();
 	}
 
 	public void sacrificeCard(String name) {
@@ -116,6 +114,7 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsBattlePhase() {
+		attributesScreen.enableButtonsAttack();
 		// TODO - implement ActorPlayer.enableButtonsBattlePhase
 		throw new UnsupportedOperationException();
 	}
@@ -125,8 +124,7 @@ public class ActorPlayer {
 	}
 
 	public void dissableButtonsAttack() {
-		// TODO - implement ActorPlayer.dissableButtonsAttack
-		throw new UnsupportedOperationException();
+		attributesScreen.dissableButtonsAttack();
 	}
 
 	public void downSupportCard(String supportName) {
@@ -134,6 +132,7 @@ public class ActorPlayer {
 	}
 
 	public void dissableAllButtons() {
+		attributesScreen.dissableAllButtons();
 		// TODO - implement ActorPlayer.dissableAllButtons
 		throw new UnsupportedOperationException();
 	}
@@ -151,8 +150,11 @@ public class ActorPlayer {
 	}
 
 	public void viewAttributes(CardPOJO pojo) {
-		// TODO - implement ActorPlayer.viewAttributes
-		throw new UnsupportedOperationException();
+		try {
+			attributesScreen.showAttributes(pojo);
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
 	}
 
 	public void notifyWinnerTurn(String name) {
@@ -165,5 +167,37 @@ public class ActorPlayer {
 
 	public void init() {
 		screen.setVisible(true);
+	}
+	
+	public void viewAttributesDigimonCard(boolean opponent) {
+		tableController.viewAttributesDigimonCard(opponent);
+	}
+
+	public void viewAttributesDigimonCard(CardPOJO pojo, boolean opponent) {
+		try {
+			if(opponent) {
+				attributesScreen.showDigimonCardAttributesOpponent(pojo);
+			}else {
+				attributesScreen.showDigimonCardAttributes(pojo);
+			}
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
+	}
+	
+	public void viewAttributesOptionCard(boolean opponent) {
+		tableController.viewAttributesOptionCard(opponent);
+	}
+
+	public void viewAttributesOptionCard(CardPOJO pojo, boolean opponent) {
+		try {
+			if (opponent) {
+				attributesScreen.showOptionCardAttributesOpponent(pojo);
+			} else {
+				attributesScreen.showOptionCardAttributes(pojo);
+			}
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}		
 	}
 }

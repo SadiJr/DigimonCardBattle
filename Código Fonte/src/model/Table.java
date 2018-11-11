@@ -90,13 +90,20 @@ public class Table implements Jogada {
 		JsonStreamParser g = new JsonStreamParser(grass);
 		JsonStreamParser o = new JsonStreamParser(option);
 
-		while (f.hasNext() && g.hasNext()) {
+		while (f.hasNext()) {
 			JsonElement fi = f.next();
-			JsonElement gr = g.next();
-			if (fi.isJsonObject() && gr.isJsonObject()) {
+			if (fi.isJsonObject()) {
 				DigimonCard digimonFireCard = gson.fromJson(fi, DigimonCard.class);
-				DigimonCard digimonGrassCard = gson.fromJson(gr, DigimonCard.class);
 				deck.getCards().add(digimonFireCard);
+			} else {
+				throw new MalformedJsonException("Possível erro no json");
+			}
+		}
+		
+		while(g.hasNext()) {
+			JsonElement gr = g.next();
+			if(gr.isJsonObject()) {
+				DigimonCard digimonGrassCard = gson.fromJson(gr, DigimonCard.class);
 				deck.getCards().add(digimonGrassCard);
 			} else {
 				throw new MalformedJsonException("Possível erro no json");
@@ -139,14 +146,18 @@ public class Table implements Jogada {
 		int result = (int) (Math.random() * 2);
 		Player player1 = listPlayers.get(result);
 		Player player2 = listPlayers.get(result == 0 ? 1 : 0);
-		for(int i=0; i < 28; i+=2) {
-			Card card = cards.get(i);
-			Card card2 = cards.get(i+1);
+		for(int i=0; i < 22; i++) {
+			int z = (int) (Math.random() * 14);
+			Card card = cards.get(z);
 			player1.getDeck().getCards().add(card);
-			player2.getDeck().getCards().add(card2);
+		}
+		for(int i=0; i < 22; i++) {
+			int z = 14 + (int) (Math.random() * 14);
+			Card card = cards.get(z);
+			player2.getDeck().getCards().add(card);
 		}
 		
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < 8; i++) {
 			int optionResultP1 = 28 + (int) (Math.random() * 12);
 			int optionResultP2 = 28 + (int) (Math.random() * 12);
 			Card card = cards.get(optionResultP1);
@@ -155,23 +166,23 @@ public class Table implements Jogada {
 			player2.getDeck().getCards().add(card2);
 		}
 		
-//		for(Player p : getListPlayers()) {
-//			System.err.println("\n\nCartas no deck do usuário: " + p.getName() + "\n\n");
-//			for(Card c : p.getDeck().getCards()) {
-//				if(c instanceof DigimonCard) {
-//					DigimonCard d = (DigimonCard) c;
-//					System.out.println("Name: " + c.getName() + "\nEffect: "
-//							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
-//							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
-//							+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
-//							+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
-//							+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
-//				} else {
-//					System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
-//							c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
-//				}
-//			}
-//		}
+		for(Player p : getListPlayers()) {
+			System.err.println("\n\nCartas no deck do usuário: " + p.getName() + "\n\n");
+			for(Card c : p.getDeck().getCards()) {
+				if(c instanceof DigimonCard) {
+					DigimonCard d = (DigimonCard) c;
+					System.out.println("Name: " + c.getName() + "\nEffect: "
+							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+							+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+							+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+							+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+				} else {
+					System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+							c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+				}
+			}
+		}
 	}
 
 	public Phase getPhase() {

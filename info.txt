@@ -1,0 +1,3 @@
+ImageIcon iconLogo = new ImageIcon("Images/YourCompanyLogo.png");
+// In init() method write this code
+jLabelYourCompanyLogo.setIcon(iconLogo);

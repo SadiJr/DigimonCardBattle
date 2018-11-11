@@ -366,9 +366,8 @@ public class TableController {
 		CardPOJO pojo = null;
 		
 		String name = card.getName();
-		String effect = card.getCardEffect().name();
-		String description = card.getDescriptionEffect();
-		
+		String path = card.getPathToImage();
+		String phase = table.getPhase().name();
 		if(table.isDigimonCard(card)) {
 			DigimonCard digimon = (DigimonCard) card;
 			int attack1 = digimon.getAttack1();
@@ -380,9 +379,11 @@ public class TableController {
 			int p = digimon.getP();
 			String specialty = digimon.getSpecialty().name();
 			pojo = new CardPOJO(hp, attack1, attack2, attack3, dp, p, specialty, level, name, 
-					effect, description);
+					"Não há", "Não Há", path, phase);
 		} else {
-			pojo = new CardPOJO(name, effect, description);
+			String effect = card.getCardEffect().name();
+			String description = card.getDescriptionEffect();
+			pojo = new CardPOJO(name, effect, description, path, phase);
 		}		
 		return pojo;
 	}
@@ -408,5 +409,41 @@ public class TableController {
 
 	public String getNameLocalPlayer() {
 		return table.getLocalPlayer().getName();
+	}
+
+	public void viewAttributesDigimonCard(boolean opponent) {
+		if(opponent) {
+			DigimonCard digimonCard = table.getRemotePlayer().getDigimonCard();
+			if(digimonCard == null) {
+				player.informError("O adversário não possuí nenhuma DigimonCard em campo de batalha!");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+				player.viewAttributesDigimonCard(createCardPOJO, opponent);
+			}
+		} else {
+			DigimonCard digimonCard = table.getLocalPlayer().getDigimonCard();
+			if(digimonCard == null) {
+				player.informError("Você não possuí nenhuma DigimonCard em campo de batalha!");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+				player.viewAttributesDigimonCard(createCardPOJO, opponent);
+			}
+		}
+	}
+
+	public void viewAttributesOptionCard(boolean opponent) {
+		if(opponent) {
+			Card supportCard = table.getRemotePlayer().getSupportCard();
+			if(supportCard == null) {
+				player.informError("O adversário não possuí nenhuma carta de suporte no campo de batalha");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(supportCard);
+				player.viewAttributesOptionCard(createCardPOJO, opponent);
+			}
+		} else {
+			
+		}
+		// TODO Auto-generated method stub
+		
 	}
 }
