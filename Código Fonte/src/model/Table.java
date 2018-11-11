@@ -112,21 +112,20 @@ public class Table implements Jogada {
 				throw new MalformedJsonException("Possível erro no json");
 			}
 		}
-		for(Card c : deck.getCards()) {
-			if(c instanceof DigimonCard) {
-				DigimonCard d = (DigimonCard) c;
-				System.out.println("Name: " + c.getName() + "\nEffect: "
-						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
-						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
-						+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
-						+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
-						+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
-			} else {
-				System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
-						c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
-			}
-		}
-		// TODO - implement Table.createDeck
+//		for(Card c : deck.getCards()) {
+//			if(c instanceof DigimonCard) {
+//				DigimonCard d = (DigimonCard) c;
+//				System.out.println("Name: " + c.getName() + "\nEffect: "
+//						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+//						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+//						+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+//						+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+//						+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+//			} else {
+//				System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+//						c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+//			}
+//		}
 	}
 
 	public void createLocalPlayer(String name, int id) {
@@ -156,24 +155,23 @@ public class Table implements Jogada {
 			player2.getDeck().getCards().add(card2);
 		}
 		
-		for(Player p : getListPlayers()) {
-			System.err.println("\n\nCartas no deck do usuário: " + p.getName() + "\n\n");
-			for(Card c : p.getDeck().getCards()) {
-				if(c instanceof DigimonCard) {
-					DigimonCard d = (DigimonCard) c;
-					System.out.println("Name: " + c.getName() + "\nEffect: "
-							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
-							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
-							+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
-							+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
-							+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
-				} else {
-					System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
-							c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
-				}
-			}
-		}
-		// TODO - implement Table.distributeCards
+//		for(Player p : getListPlayers()) {
+//			System.err.println("\n\nCartas no deck do usuário: " + p.getName() + "\n\n");
+//			for(Card c : p.getDeck().getCards()) {
+//				if(c instanceof DigimonCard) {
+//					DigimonCard d = (DigimonCard) c;
+//					System.out.println("Name: " + c.getName() + "\nEffect: "
+//							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+//							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+//							+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+//							+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+//							+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+//				} else {
+//					System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+//							c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+//				}
+//			}
+//		}
 	}
 
 	public Phase getPhase() {
