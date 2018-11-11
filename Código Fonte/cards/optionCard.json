@@ -1,0 +1,60 @@
+{
+	"name" : "CHIP DE ATAQUE",
+	"effect" : "ATK300",
+	"path" : "/pictures/option/chipDeAtaque.jpg"
+}
+{
+	"name" : "MEGA CHIP DE ATAQUE",
+	"effect" : "ATK500",
+	"path" : "/pictures/option/megaChipDeAtaque.jpg"
+}
+{
+	"name" : "DISQUETE DE RECUPERAÇÃO",
+	"effect" : "HP300",
+	"path" : "/pictures/option/disqueteDeRecuperacao.jpg"
+}
+{
+	"name" : "MEGA DISQUETE DE RECUPERAÇÃO",
+	"effect" : "HP500",
+	"path" : "/pictures/option/megaDisqueteDeRecuperacao.jpg"
+}
+{
+	"name" : "BESOURO DIAMANTE",
+	"effect" : "ATK1_100",
+	"path" : "/pictures/option/besouroDiamante.jpg"
+}
+{
+	"name" : "GERENCIADOR DE NÍVEL",
+	"effect" : "C_ATK400",
+	"path" : "/pictures/option/gerenciadorDeNivel.png"
+}
+{
+	"name" : "AUGUMENTADOR DE NÍVEL",
+	"effect" : "U_ATK400",
+	"path" : "/pictures/option/augumentadorDeNivel.png"
+}
+{
+	"name" : "RUBI MILAGROSO",
+	"effect" : "HP1000",
+	"path" : "/pictures/option/rubiMilagroso.jpg"
+}
+{
+	"name" : "FILÉ",
+	"effect" : "HP1_500_HP2_200",
+	"path" : "/pictures/option/file.jpg"
+}
+{
+	"name" : "ATK1 DUPLO",
+	"effect" : "ATK1_X2",
+	"path" : "/pictures/option/atk1x2.png"
+}
+{
+	"name" : "ATK2 DUPLO",
+	"effect" : "ATK2_X2",
+	"path" : "/pictures/option/atk2x2.png"
+}
+{
+	"name" : "ATK3 DUPLO",
+	"effect" : "ATK3_X2",
+	"path" : "/pictures/option/atk3x2.png"
+}

@@ -1,7 +1,16 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonStreamParser;
+import com.google.gson.stream.MalformedJsonException;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Effect;
@@ -67,9 +76,57 @@ public class Table implements Jogada {
 		this.connected = connected;
 	}
 
-	public void createDeck() {
+	public void createDeck() throws FileNotFoundException, MalformedJsonException {
+		FileReader digimonFire = new FileReader(System.getProperty("user.dir") + "/cards/digimonFire.json");
+		FileReader digimonGrass = new FileReader(System.getProperty("user.dir") + "/cards/digimonGrass.json");
+		FileReader optionCard = new FileReader(System.getProperty("user.dir") + "/cards/optionCard.json");
+		
+		Gson gson = new GsonBuilder().create();
+		BufferedReader fire = new BufferedReader(digimonFire);
+		BufferedReader grass = new BufferedReader(digimonGrass);
+		BufferedReader option = new BufferedReader(optionCard);
+		
+		JsonStreamParser f = new JsonStreamParser(fire);
+		JsonStreamParser g = new JsonStreamParser(grass);
+		JsonStreamParser o = new JsonStreamParser(option);
+
+		while (f.hasNext() && g.hasNext()) {
+			JsonElement fi = f.next();
+			JsonElement gr = g.next();
+			if (fi.isJsonObject() && gr.isJsonObject()) {
+				DigimonCard digimonFireCard = gson.fromJson(fi, DigimonCard.class);
+				DigimonCard digimonGrassCard = gson.fromJson(gr, DigimonCard.class);
+				deck.getCards().add(digimonFireCard);
+				deck.getCards().add(digimonGrassCard);
+			} else {
+				throw new MalformedJsonException("Possível erro no json");
+			}
+		}
+		
+		while (o.hasNext()) {
+			JsonElement opt = o.next();
+			if(opt.isJsonObject()) {
+				OptionCard op = gson.fromJson(opt, OptionCard.class);
+				deck.getCards().add(op);
+			} else {
+				throw new MalformedJsonException("Possível erro no json");
+			}
+		}
+		for(Card c : deck.getCards()) {
+			if(c instanceof DigimonCard) {
+				DigimonCard d = (DigimonCard) c;
+				System.out.println("Name: " + c.getName() + "\nEffect: "
+						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+						+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+						+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+						+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+			} else {
+				System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+						c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+			}
+		}
 		// TODO - implement Table.createDeck
-		throw new UnsupportedOperationException();
 	}
 
 	public void createLocalPlayer(String name, int id) {
@@ -77,8 +134,46 @@ public class Table implements Jogada {
 	}
 
 	public void distributeCards() {
+		System.err.println("\n\nCartas no deck do usuário");
+		ArrayList<Card> cards = (ArrayList<Card>) deck.getCards();
+		ArrayList<Player> listPlayers = (ArrayList<Player>) getListPlayers();
+		int result = (int) (Math.random() * 2);
+		Player player1 = listPlayers.get(result);
+		Player player2 = listPlayers.get(result == 0 ? 1 : 0);
+		for(int i=0; i < 28; i+=2) {
+			Card card = cards.get(i);
+			Card card2 = cards.get(i+1);
+			player1.getDeck().getCards().add(card);
+			player2.getDeck().getCards().add(card2);
+		}
+		
+		for(int i = 0; i < 6; i++) {
+			int optionResultP1 = 28 + (int) (Math.random() * 12);
+			int optionResultP2 = 28 + (int) (Math.random() * 12);
+			Card card = cards.get(optionResultP1);
+			Card card2 = cards.get(optionResultP2);
+			player1.getDeck().getCards().add(card);
+			player2.getDeck().getCards().add(card2);
+		}
+		
+		for(Player p : getListPlayers()) {
+			System.err.println("\n\nCartas no deck do usuário: " + p.getName() + "\n\n");
+			for(Card c : p.getDeck().getCards()) {
+				if(c instanceof DigimonCard) {
+					DigimonCard d = (DigimonCard) c;
+					System.out.println("Name: " + c.getName() + "\nEffect: "
+							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+							+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+							+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+							+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+							+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+				} else {
+					System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+							c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+				}
+			}
+		}
 		// TODO - implement Table.distributeCards
-		throw new UnsupportedOperationException();
 	}
 
 	public Phase getPhase() {

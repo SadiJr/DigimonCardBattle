@@ -15,8 +15,9 @@ public class Player {
 	private int attackChoice;
 		
 	public Player(String name, int id) {
-		this.setId(id);
+		this.id = id;
 		this.name = name;
+		deck = new Deck();
 		hand = new ArrayList<>();
 	}
 

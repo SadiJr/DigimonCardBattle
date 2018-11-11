@@ -59,22 +59,22 @@ public class TableController {
 	}
 
 	public void startNewGame(Integer posicao) {
-		String nameRemotePlayer = network.getNameRemotePlayer();
-		player.informRemotePlayerName(nameRemotePlayer);
-		table.getLocalPlayer().setId(posicao);
-		table.setRemotePlayer(new Player(nameRemotePlayer, posicao == 1 ? 2 : 1));
-		createDeck();
-		table.distributeCards();
-		table.setPhase(Phase.START_GAME);
-		table.setGameInProggress(true);
-		table.setFirstPlayer(table.getRemotePlayer());
-		network.sendMove(table);
-		player.informWaitMoveRemotePlayer(nameRemotePlayer);
-	}
-
-	private void createDeck() {
-		// TODO Auto-generated method stub
-		
+		try {
+			String nameRemotePlayer = network.getNameRemotePlayer();
+			player.informRemotePlayerName(nameRemotePlayer);
+			table.getLocalPlayer().setId(posicao);
+			table.setRemotePlayer(new Player(nameRemotePlayer, posicao == 1 ? 2 : 1));
+			table.createDeck();
+			table.distributeCards();
+			table.setPhase(Phase.START_GAME);
+			table.setGameInProggress(true);
+			table.setFirstPlayer(table.getRemotePlayer());
+			network.sendMove(table);
+			player.informWaitMoveRemotePlayer(nameRemotePlayer);
+		} catch (Exception e) {
+			player.informError(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	public String getNameRemotePlayer() {
