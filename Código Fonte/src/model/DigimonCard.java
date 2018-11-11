@@ -5,7 +5,6 @@ import enums.Level;
 import enums.Specialty;
 
 public class DigimonCard extends Card {
-
 	private int hp;
 	private int attack1;
 	private int attack2;
@@ -15,9 +14,9 @@ public class DigimonCard extends Card {
 	private Specialty specialty;
 	private Level level;
 	
-	public DigimonCard(String name, Effect effect, int hp, int attack1, int attack2, int attack3,
+	public DigimonCard(String name, Effect effect, String path, int hp, int attack1, int attack2, int attack3,
 			int dp, int p, Specialty specialty, Level level) {
-		super(name, effect);
+		super(name, effect, path);
 		this.hp = hp;
 		this.attack1 = attack1;
 		this.attack2 = attack2;
@@ -90,6 +89,21 @@ public class DigimonCard extends Card {
 
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	
+	public static DigimonCard copy(DigimonCard digimon) {
+		int attack1 = digimon.getAttack1();
+		int attack2 = digimon.getAttack2();
+		int attack3 = digimon.getAttack3();
+		Effect effect = digimon.getCardEffect();
+		int dp2 = digimon.getDp();
+		int hp2 = digimon.getHp();
+		Level level2 = digimon.getLevel();
+		String name2 = digimon.getName();
+		int p2 = digimon.getP();
+		Specialty specialty2 = digimon.getSpecialty();
+		String path = digimon.getPathToImage();
+		return new DigimonCard(name2, effect, path, hp2, attack1, attack2, attack3, dp2, p2, specialty2, level2);
 	}
 
 }

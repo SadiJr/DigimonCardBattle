@@ -1,0 +1,182 @@
+{
+	"name" : "KUNEMON",
+	"effect" : null,
+	"path" : "/pictures/grass/kunemon.jpg",
+	"hp" : 680,
+	"attack1" : 350,
+	"attack2" : 220,
+	"attack3" : 190,
+	"dp" : 0,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "GOTSUMON",
+	"effect" : null,
+	"path" : "/pictures/grass/gotsumon.jpg",
+	"hp" : 700,
+	"attack1" : 290,
+	"attack2" : 180,
+	"attack3" : 130,
+	"dp" : 0,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "SALAMON",
+	"effect" : null,
+	"path" : "/pictures/grass/salamon.jpg",
+	"hp" : 600,
+	"attack1" : 300,
+	"attack2" : 230,
+	"attack3" : 0,
+	"dp" : 0,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "PALMON",
+	"effect" : null,
+	"path" : "/pictures/grass/palmon.jpg",
+	"hp" : 500,
+	"attack1" : 370,
+	"attack2" : 240,
+	"attack3" : 160,
+	"dp" : 0,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "TENTOMON",
+	"effect" : null,
+	"path" : "/pictures/grass/tentomon.jpg",
+	"hp" : 670,
+	"attack1" : 380,
+	"attack2" : 220,
+	"attack3" : 160,
+	"dp" : 0,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "ELECMON",
+	"effect" : null,
+	"path" : "/pictures/grass/elecmon.jpg",
+	"hp" : 650,
+	"attack1" : 310,
+	"attack2" : 310,
+	"attack3" : 310,
+	"dp" : 0,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "R"
+}
+{
+	"name" : "KOKATORIMON",
+	"effect" : null,
+	"path" : "/pictures/grass/kokatorimon.jpg",
+	"hp" : 910,
+	"attack1" : 350,
+	"attack2" : 260,
+	"attack3" : 150,
+	"dp" : 30,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "C"
+}
+{
+	"name" : "VEGIEMON",
+	"effect" : null,
+	"path" : "/pictures/grass/vegiemon.jpg",
+	"hp" : 810,
+	"attack1" : 390,
+	"attack2" : 270,
+	"attack3" : 100,
+	"dp" : 30,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "C"
+}
+{
+	"name" : "DRIMOGEMON",
+	"effect" : null,
+	"path" : "/pictures/grass/drimogemon.jpg",
+	"hp" : 850,
+	"attack1" : 450,
+	"attack2" : 310,
+	"attack3" : 280,
+	"dp" : 30,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "C"
+}
+{
+	"name" : "NINJAMON",
+	"effect" : null,
+	"path" : "/pictures/grass/ninjamon.jpg",
+	"hp" : 650,
+	"attack1" : 440,
+	"attack2" : 350,
+	"attack3" : 250,
+	"dp" : 30,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "C"
+}
+{
+	"name" : "KABUTERIMON",
+	"effect" : null,
+	"path" : "/pictures/grass/kabuterimon.jpg",
+	"hp" : 950,
+	"attack1" : 550,
+	"attack2" : 360,
+	"attack3" : 0,
+	"dp" : 40,
+	"p" : 30,
+	"specialty" : "GRASS",
+	"level" : "C"
+}
+{
+	"name" : "MEGA KABUTERIMON",
+	"effect" : null,
+	"path" : "/pictures/grass/megaKabuterimon.jpg",
+	"hp" : 1480,
+	"attack1" : 700,
+	"attack2" : 400,
+	"attack3" : 0,
+	"dp" : 30,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "U"
+}
+{
+	"name" : "MAGMA ANGEMON",
+	"effect" : null,
+	"path" : "/pictures/grass/magnaAngemon.jpg",
+	"hp" : 1320,
+	"attack1" : 770,
+	"attack2" : 570,
+	"attack3" : 370,
+	"dp" : 40,
+	"p" : 20,
+	"specialty" : "GRASS",
+	"level" : "U"
+}
+{
+	"name" : "SERAPHIMON",
+	"effect" : null,
+	"path" : "/pictures/grass/seraphimon.jpg",
+	"hp" : 1650,
+	"attack1" : 900,
+	"attack2" : 510,
+	"attack3" : 420,
+	"dp" : 50,
+	"p" : 50,
+	"specialty" : "GRASS",
+	"level" : "U"
+}

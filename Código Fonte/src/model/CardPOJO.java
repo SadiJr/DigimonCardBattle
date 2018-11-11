@@ -13,9 +13,33 @@ public class CardPOJO {
 	private String effect;
 	private String description;
 	private boolean optionCard;
+	
+	public CardPOJO(int hp, int attack1, int attack2, int attack3, int dp, int p, String specialty,
+			char level, String name, String effect, String description) {
+		this.hp = hp;
+		this.attack1 = attack1;
+		this.attack2 = attack2;
+		this.attack3 = attack3;
+		this.dp = dp;
+		this.p = p;
+		this.specialty = specialty;
+		this.level = level;
+		this.name = name;
+		this.effect = effect;
+		this.description = description;
+		this.optionCard = false;
+		
+	}
 
 	public int getHp() {
 		return this.hp;
+	}
+	
+	public CardPOJO(String name, String effect, String description) {
+		this.name = name;
+		this.effect = effect;
+		this.description = description;
+		this.optionCard = true;
 	}
 
 	/**

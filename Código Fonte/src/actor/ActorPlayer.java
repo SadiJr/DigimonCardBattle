@@ -12,134 +12,65 @@ public class ActorPlayer {
 	private DigimonScreen screen;
 	private AttributesScreen attributesScreen;
 
+	public ActorPlayer(TableController tableController) {
+		this.tableController = tableController;
+		screen = new DigimonScreen();
+		attributesScreen = new AttributesScreen();
+	}
+
 	public void connect() {
-		// TODO - implement ActorPlayer.connect
-		throw new UnsupportedOperationException();
-	}
-
-	public String getNamePlayer() {
-		// TODO - implement ActorPlayer.getNamePlayer
-		throw new UnsupportedOperationException();
-	}
-
-	public String getNameServer() {
-		// TODO - implement ActorPlayer.getNameServer
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param result
-	 */
-	public void informResultConection(int result) {
-		// TODO - implement ActorPlayer.informResultConection
-		throw new UnsupportedOperationException();
+		String nameServer = screen.getNameServer();
+		String namePlayer = screen.getNamePlayer();
+		tableController.connect(namePlayer, nameServer);
 	}
 
 	public void disconnect() {
-		// TODO - implement ActorPlayer.disconnect
-		throw new UnsupportedOperationException();
+		tableController.disconnect();
 	}
 
-	/**
-	 * 
-	 * @param result
-	 */
-	public void informResultDesconection(int result) {
-		// TODO - implement ActorPlayer.informResultDesconection
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param remotePlayerName
-	 */
 	public void informRemotePlayerName(String remotePlayerName) {
-		// TODO - implement ActorPlayer.informRemotePlayerName
-		throw new UnsupportedOperationException();
+		screen.sendMessage("Iniciando partida com o adversário " + remotePlayerName);
 	}
 
 	public void start() {
-		// TODO - implement ActorPlayer.start
-		throw new UnsupportedOperationException();
+		tableController.start();
 	}
 
-	/**
-	 * 
-	 * @param error
-	 */
 	public void informError(String error) {
-		// TODO - implement ActorPlayer.informError
-		throw new UnsupportedOperationException();
+		screen.informError(error);
 	}
 
-	/**
-	 * 
-	 * @param result
-	 */
-	public String informResultStart(int result) {
-		// TODO - implement ActorPlayer.informResultStart
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param winner
-	 */
 	public void informWinner(String winner) {
-		// TODO - implement ActorPlayer.informWinner
-		throw new UnsupportedOperationException();
+		screen.sendMessage("O vencedor do jogo é " + winner);
 	}
 
-	/**
-	 * 
-	 * @param phase
-	 */
 	public void notifyPhase(String phase) {
 		// TODO - implement ActorPlayer.notifyPhase
 		throw new UnsupportedOperationException();
 	}
 
 	public void informTurn() {
-		// TODO - implement ActorPlayer.informTurn
-		throw new UnsupportedOperationException();
+		screen.sendMessage("É a sua vez!");
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void informQuit(String name) {
-		// TODO - implement ActorPlayer.informQuit
-		throw new UnsupportedOperationException();
+		screen.sendMessage("O adversário " + name + " é um covarde desistente que não conseguiu confrontá-lo.");
 	}
 
 	public void quit() {
-		// TODO - implement ActorPlayer.quit
-		throw new UnsupportedOperationException();
+		tableController.quit();
 	}
 
 	public void discardHand() {
-		// TODO - implement ActorPlayer.discardHand
-		throw new UnsupportedOperationException();
+		tableController.discardHand();
 	}
 
-	/**
-	 * 
-	 * @param nameCard
-	 */
 	public void downDigimonCard(String nameCard) {
-		// TODO - implement ActorPlayer.downDigimonCard
-		throw new UnsupportedOperationException();
+		tableController.downDigimonCard(nameCard);
 	}
 
-	/**
-	 * 
-	 * @param namePlayer
-	 */
 	public void informWaitMoveRemotePlayer(String namePlayer) {
-		// TODO - implement ActorPlayer.informWaitMoveRemotePlayer
-		throw new UnsupportedOperationException();
+		screen.sendMessage("Aguardando a jogada do adversário " + namePlayer);
 	}
 
 	public void enableButtonsDrawPhase() {
@@ -147,11 +78,6 @@ public class ActorPlayer {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param remotePlayer
-	 * @param localPlayer
-	 */
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		// TODO - implement ActorPlayer.updateInterface
 		throw new UnsupportedOperationException();
@@ -177,47 +103,25 @@ public class ActorPlayer {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void sacrificeCard(String name) {
-		// TODO - implement ActorPlayer.sacrificeCard
-		throw new UnsupportedOperationException();
+		tableController.sacrificeCard(name);
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void updateCard(String name) {
-		// TODO - implement ActorPlayer.updateCard
-		throw new UnsupportedOperationException();
+		tableController.updateCard(name);
 	}
 
 	public void jumpPhase() {
-		// TODO - implement ActorPlayer.jumpPhase
-		throw new UnsupportedOperationException();
+		tableController.jumpPhase();
 	}
 
 	public void enableButtonsBattlePhase() {
 		// TODO - implement ActorPlayer.enableButtonsBattlePhase
 		throw new UnsupportedOperationException();
 	}
-
-	public void attack1() {
-		// TODO - implement ActorPlayer.attack1
-		throw new UnsupportedOperationException();
-	}
-
-	public void attack2() {
-		// TODO - implement ActorPlayer.attack2
-		throw new UnsupportedOperationException();
-	}
-
-	public void attack3() {
-		// TODO - implement ActorPlayer.attack3
-		throw new UnsupportedOperationException();
+	
+	public void attackChoice(int choice) {
+		tableController.choiceAttack(choice);
 	}
 
 	public void dissableButtonsAttack() {
@@ -225,13 +129,8 @@ public class ActorPlayer {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param supportName
-	 */
 	public void downSupportCard(String supportName) {
-		// TODO - implement ActorPlayer.downSupportCard
-		throw new UnsupportedOperationException();
+		tableController.downSupportCard(supportName);
 	}
 
 	public void dissableAllButtons() {
@@ -239,47 +138,32 @@ public class ActorPlayer {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void viewAttributes(String name) {
-		// TODO - implement ActorPlayer.viewAttributes
-		throw new UnsupportedOperationException();
+		tableController.viewAttributes(name);
 	}
 
 	public AttributesScreen getAttributesScreen() {
 		return this.attributesScreen;
 	}
 
-	/**
-	 * 
-	 * @param attributesScreen
-	 */
 	public void setAttributesScreen(AttributesScreen attributesScreen) {
 		this.attributesScreen = attributesScreen;
 	}
 
-	/**
-	 * 
-	 * @param pojo
-	 */
 	public void viewAttributes(CardPOJO pojo) {
 		// TODO - implement ActorPlayer.viewAttributes
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void notifyWinnerTurn(String name) {
-		// TODO - implement ActorPlayer.notifyWinnerTurn
-		throw new UnsupportedOperationException();
+		screen.sendMessage("O vencedor dessa rodada é " + name);
 	}
 
 	public void informMessage(String message) {
 		screen.sendMessage(message);
 	}
 
+	public void init() {
+		screen.setVisible(true);
+	}
 }

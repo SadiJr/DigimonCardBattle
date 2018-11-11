@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Player {
-
+	private Integer id;
 	private String name;
 	private Deck deck;
 	private Collection<Card> hand;
@@ -14,8 +14,10 @@ public class Player {
 	private Card supportCard;
 	private int attackChoice;
 		
-	public Player(String name) {
+	public Player(String name, int id) {
+		this.id = id;
 		this.name = name;
+		deck = new Deck();
 		hand = new ArrayList<>();
 	}
 
@@ -101,4 +103,11 @@ public class Player {
 		this.attackChoice = attackChoice;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

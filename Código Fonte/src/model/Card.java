@@ -5,11 +5,13 @@ import enums.Effect;
 public abstract class Card {
 
 	private String name;
-	private Effect cardEffect;
+	private Effect effect;
+	private String path;
 	
-	public Card(String name, Effect cardEffect) {
+	public Card(String name, Effect effect, String path) {
 		this.name = name;
-		this.cardEffect = cardEffect;
+		this.effect = effect;
+		this.path = path;
 	}
 
 	public String getName() {
@@ -21,15 +23,23 @@ public abstract class Card {
 	}
 
 	public Effect getCardEffect() {
-		return this.cardEffect;
+		return this.effect;
 	}
 
-	public void setCardEffect(Effect cardEffect) {
-		this.cardEffect = cardEffect;
+	public void setCardEffect(Effect effect) {
+		this.effect = effect;
 	}
 	
 	public String getDescriptionEffect() {
-		return cardEffect.getDescription();
+		return effect.getDescription();
+	}
+
+	public String getPathToImage() {
+		return path;
+	}
+
+	public void setPathToImage(String path) {
+		this.path = path;
 	}
 
 }
