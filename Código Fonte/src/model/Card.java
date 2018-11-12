@@ -1,8 +1,9 @@
 package model;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Effect;
 
-public abstract class Card {
+public abstract class Card implements Jogada {
 
 	private String name;
 	private Effect effect;

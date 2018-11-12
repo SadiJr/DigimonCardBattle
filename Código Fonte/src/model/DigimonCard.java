@@ -5,7 +5,7 @@ import enums.Effect;
 import enums.Level;
 import enums.Specialty;
 
-public class DigimonCard extends Card implements Jogada{
+public class DigimonCard extends Card {
 	private int hp;
 	private int attack1;
 	private int attack2;

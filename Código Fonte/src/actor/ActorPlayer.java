@@ -165,6 +165,7 @@ public class ActorPlayer {
 	}
 
 	public void init() {
+		screen.pack();
 		screen.setVisible(true);
 	}
 	

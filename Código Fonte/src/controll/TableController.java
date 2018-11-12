@@ -87,7 +87,7 @@ public class TableController {
 	}
 
 	public void start() {
-		network.sendRequestMove();
+		network.iniciarNovaPartida(new Integer(2));
 	}
 	
 	public void init() {
@@ -106,6 +106,9 @@ public class TableController {
 			if(table.getPhase().equals(Phase.QUIT)) {
 				player.informMessage("O jogador " + getNameRemotePlayer() + " é um covarde desistente!");
 				exit();
+				
+			} else if(table.getPhase().equals(Phase.START_GAME)) {
+				startNewGame(new Integer(2));			
 			} else {
 				int turns = table.getTurns();
 				if(turns < 2) {

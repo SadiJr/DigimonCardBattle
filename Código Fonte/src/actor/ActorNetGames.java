@@ -54,13 +54,13 @@ public class ActorNetGames implements OuvidorProxy {
 		throw new Exception("Um erro ocorreu");
 	}
 	
-	public void sendRequestMove() {
-		try {
-			proxy.iniciarNovaPartida(new Integer(2));
-		} catch (Exception e) {
-			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
-		}
-	}
+//	public void sendRequestMove() {
+//		try {
+//			proxy.iniciarNovaPartida(new Integer(2));
+//		} catch (Exception e) {
+//			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
+//		}
+//	}
 
 	public boolean startGame() {
 		try {
@@ -76,6 +76,7 @@ public class ActorNetGames implements OuvidorProxy {
 			proxy.enviaJogada(table);
 		} catch (NaoJogandoException e) {
 			tableController.informError("Você deve estar logado para realizar essa ação!");
+			e.printStackTrace();
 		}
 	}
 

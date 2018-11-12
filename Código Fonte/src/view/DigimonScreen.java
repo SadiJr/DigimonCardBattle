@@ -123,13 +123,6 @@ public class DigimonScreen extends JFrame {
 		
 	}
 
-	public static void main(String[] args) {
-		DigimonScreen digimonScreen = new DigimonScreen(null);
-		digimonScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		digimonScreen.pack();
-		digimonScreen.setVisible(true);
-	}
-
 	public DigimonScreen(ActorPlayer actorPlayer) {
 		this.player = actorPlayer;
 		config();
