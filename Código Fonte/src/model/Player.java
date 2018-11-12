@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Player {
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Player implements Jogada {
 	private Integer id;
 	private String name;
 	private Deck deck;

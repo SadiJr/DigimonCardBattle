@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Deck {
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Deck implements Jogada {
 	private Collection<Card> cards;
 
 	public Deck() {

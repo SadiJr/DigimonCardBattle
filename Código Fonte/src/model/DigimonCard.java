@@ -1,10 +1,11 @@
 package model;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Effect;
 import enums.Level;
 import enums.Specialty;
 
-public class DigimonCard extends Card {
+public class DigimonCard extends Card implements Jogada{
 	private int hp;
 	private int attack1;
 	private int attack2;

@@ -45,13 +45,13 @@ public class ActorNetGames implements OuvidorProxy {
 		return true;
 	}
 
-	public String getNameRemotePlayer() {
+	public String getNameRemotePlayer() throws Exception {
 		String nameLocalPlayer = tableController.getNameLocalPlayer();
 		for(String name : proxy.obterNomeAdversarios()) {
 			if(!name.equals(nameLocalPlayer))
 				return name;
 		}
-		return "Anônimo";
+		throw new Exception("Um erro ocorreu");
 	}
 	
 	public void sendRequestMove() {
