@@ -13,6 +13,12 @@ public class Player {
 	private DigimonCard digimonCard;
 	private Card supportCard;
 	private int attackChoice;
+	
+	public Player(String name) {
+		this.name = name;
+		deck = new Deck();
+		hand = new ArrayList<>();
+	}
 		
 	public Player(String name, int id) {
 		this.id = id;

@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Cemitery {
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Cemitery implements Jogada {
 	
 	public Cemitery() {
 		this.deadCards = new ArrayList<>();

@@ -50,6 +50,7 @@ public class TableController {
 	
 	public void connect(String player, String server) {
 		boolean connect = network.connect(player, server);
+		table.setLocalPlayer(new Player(player));
 		if(connect)
 			this.player.informMessage("Conexão estabelecida com sucesso");
 	}

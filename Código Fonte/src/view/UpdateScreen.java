@@ -1,9 +1,12 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,6 +103,23 @@ public class UpdateScreen extends JFrame {
     private JLabel jcomp84;
     private JLabel jcomp85;
     private JLabel jcomp86;
+    
+    private ActionListener l = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == card1) {
+				player.updateCard(jcomp45.getText());
+			} else if(e.getSource() == card2) {
+				player.updateCard(jcomp57.getText());
+			} else if(e.getSource() == card3) {
+				player.updateCard(jcomp77.getText());
+			} else if(e.getSource() == card4) {
+				player.updateCard(jcomp67.getText());
+			}
+			
+		}
+	};
 	
 	public UpdateScreen(ActorPlayer actorPlayer) {
 		this.player = actorPlayer;
@@ -153,48 +173,48 @@ public class UpdateScreen extends JFrame {
 		jcomp42 = new JLabel("P");
 		jcomp43 = new JLabel("Especialidade");
 		jcomp44 = new JLabel("Level");
-		jcomp45 = new JLabel("newLabel");
-		jcomp46 = new JLabel("newLabel");
-		jcomp47 = new JLabel("newLabel");
-		jcomp48 = new JLabel("newLabel");
-		jcomp49 = new JLabel("newLabel");
-		jcomp50 = new JLabel("newLabel");
-		jcomp51 = new JLabel("newLabel");
-		jcomp52 = new JLabel("newLabel");
-		jcomp53 = new JLabel("newLabel");
-		jcomp54 = new JLabel("newLabel");
-		jcomp55 = new JLabel("newLabel");
-		jcomp56 = new JLabel("newLabel");
-		jcomp57 = new JLabel("newLabel");
-		jcomp58 = new JLabel("newLabel");
-		jcomp59 = new JLabel("newLabel");
-		jcomp60 = new JLabel("newLabel");
-		jcomp61 = new JLabel("newLabel");
-		jcomp62 = new JLabel("newLabel");
-		jcomp63 = new JLabel("newLabel");
-		jcomp64 = new JLabel("newLabel");
-		jcomp65 = new JLabel("newLabel");
-		jcomp66 = new JLabel("newLabel");
-		jcomp67 = new JLabel("newLabel");
-		jcomp68 = new JLabel("newLabel");
-		jcomp69 = new JLabel("newLabel");
-		jcomp70 = new JLabel("newLabel");
-		jcomp71 = new JLabel("newLabel");
-		jcomp72 = new JLabel("newLabel");
-		jcomp73 = new JLabel("newLabel");
-		jcomp74 = new JLabel("newLabel");
-		jcomp75 = new JLabel("newLabel");
-		jcomp76 = new JLabel("newLabel");
-		jcomp77 = new JLabel("newLabel");
-		jcomp78 = new JLabel("newLabel");
-		jcomp79 = new JLabel("newLabel");
-		jcomp80 = new JLabel("newLabel");
-		jcomp81 = new JLabel("newLabel");
-		jcomp82 = new JLabel("newLabel");
-		jcomp83 = new JLabel("newLabel");
-		jcomp84 = new JLabel("newLabel");
-		jcomp85 = new JLabel("newLabel");
-		jcomp86 = new JLabel("newLabel");
+		jcomp45 = new JLabel("jcomp45");
+		jcomp46 = new JLabel("jcomp46");
+		jcomp47 = new JLabel("jcomp47");
+		jcomp48 = new JLabel("jcomp48");
+		jcomp49 = new JLabel("jcomp49");
+		jcomp50 = new JLabel("jcomp50");
+		jcomp51 = new JLabel("jcomp51");
+		jcomp52 = new JLabel("jcomp52");
+		jcomp53 = new JLabel("jcomp53");
+		jcomp54 = new JLabel("jcomp54");
+		jcomp55 = new JLabel("jcomp55");
+		jcomp56 = new JLabel("jcomp56");
+		jcomp57 = new JLabel("jcomp57");
+		jcomp58 = new JLabel("jcomp58");
+		jcomp59 = new JLabel("jcomp59");
+		jcomp60 = new JLabel("jcomp60");
+		jcomp61 = new JLabel("jcomp61");
+		jcomp62 = new JLabel("jcomp62");
+		jcomp63 = new JLabel("jcomp63");
+		jcomp64 = new JLabel("jcomp64");
+		jcomp65 = new JLabel("jcomp65");
+		jcomp66 = new JLabel("jcomp66");
+		jcomp67 = new JLabel("jcomp67");
+		jcomp68 = new JLabel("jcomp68");
+		jcomp69 = new JLabel("jcomp69");
+		jcomp70 = new JLabel("jcomp70");
+		jcomp71 = new JLabel("jcomp71");
+		jcomp72 = new JLabel("jcomp72");
+		jcomp73 = new JLabel("jcomp73");
+		jcomp74 = new JLabel("jcomp74");
+		jcomp75 = new JLabel("jcomp75");
+		jcomp76 = new JLabel("jcomp76");
+		jcomp77 = new JLabel("jcomp77");
+		jcomp78 = new JLabel("jcomp78");
+		jcomp79 = new JLabel("jcomp79");
+		jcomp80 = new JLabel("jcomp80");
+		jcomp81 = new JLabel("jcomp81");
+		jcomp82 = new JLabel("jcomp82");
+		jcomp83 = new JLabel("jcomp83");
+		jcomp84 = new JLabel("jcomp84");
+		jcomp85 = new JLabel("jcomp85");
+		jcomp86 = new JLabel("jcomp86");
 
 		// adjust size and set layout
 		setPreferredSize(new Dimension(1088, 664));
@@ -375,18 +395,43 @@ public class UpdateScreen extends JFrame {
 		jcomp84.setBounds(685, 550, 100, 25);
 		jcomp85.setBounds(685, 580, 100, 25);
 		jcomp86.setBounds(685, 610, 100, 25);
+		card1.addActionListener(l);
+		card2.addActionListener(l);
+		card3.addActionListener(l);
+		card4.addActionListener(l);
 
 	}
 
 	public void viewOptions(Collection<CardPOJO> hand) {
 		ArrayList<JButton> buttons = (ArrayList<JButton>) getButtons();
 		ArrayList<CardPOJO> hand2 = (ArrayList<CardPOJO>) hand;
+		ArrayList<ArrayList<JLabel>> labels = getLabels();
 		for(int i =0; i < hand2.size(); i++) {
 			CardPOJO pojo = hand2.get(i);
 			if(pojo.isOptionCard()) {
-				
+				ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/backCard.jpg");//.getImage()
+//						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+//				ImageIcon imageIcon = new ImageIcon(iconLogo);
+				buttons.get(i).setIcon(iconLogo);
+				buttons.get(i).setEnabled(false);
+				ArrayList<JLabel> arrayList = labels.get(i);
+				for (JLabel jLabel : arrayList) {
+					jLabel.setVisible(false);
+				}
 			} else {
-				
+				ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath());
+				buttons.get(i).setIcon(iconLogo);
+				ArrayList<JLabel> arrayList = labels.get(i);
+				arrayList.get(0).setText(pojo.getName());
+				arrayList.get(1).setText("Não há");
+				arrayList.get(2).setText(String.valueOf(pojo.getHp()));
+				arrayList.get(3).setText(String.valueOf(pojo.getAttack1()));
+				arrayList.get(4).setText(String.valueOf(pojo.getAttack2()));
+				arrayList.get(5).setText(String.valueOf(pojo.getAttack3()));
+				arrayList.get(6).setText(String.valueOf(pojo.getDp()));
+				arrayList.get(7).setText(String.valueOf(pojo.getP()));
+				arrayList.get(8).setText(pojo.getSpecialty());
+				arrayList.get(9).setText(String.valueOf(pojo.getLevel()));
 			}
 		}
 
@@ -400,11 +445,37 @@ public class UpdateScreen extends JFrame {
 		buttons.add(card4);
 		return buttons;
 	}
-
-	public static void main(String[] args) {
-		UpdateScreen updateScreen = new UpdateScreen(null);
-		updateScreen.pack();
-		updateScreen.setVisible(true);
+	
+	private ArrayList<ArrayList<JLabel>> getLabels() {
+		ArrayList<ArrayList<JLabel>> labels = new ArrayList<>();
+		ArrayList<JLabel> labelsCard1 = new ArrayList<>();
+		ArrayList<JLabel> labelsCard2 = new ArrayList<>();
+		ArrayList<JLabel> labelsCard3 = new ArrayList<>();
+		ArrayList<JLabel> labelsCard4 = new ArrayList<>();
+		
+		labelsCard1.add(jcomp45);labelsCard1.add(jcomp46);labelsCard1.add(jcomp53);
+		labelsCard1.add(jcomp54);labelsCard1.add(jcomp55);labelsCard1.add(jcomp56);
+		labelsCard1.add(jcomp49);labelsCard1.add(jcomp50);labelsCard1.add(jcomp51);
+		labelsCard1.add(jcomp52);
+		
+		labelsCard2.add(jcomp57);labelsCard2.add(jcomp58);labelsCard2.add(jcomp59);
+		labelsCard2.add(jcomp60);labelsCard2.add(jcomp61);labelsCard2.add(jcomp62);
+		labelsCard2.add(jcomp63);labelsCard2.add(jcomp64);labelsCard2.add(jcomp65);
+		labelsCard2.add(jcomp66);
+		
+		labelsCard3.add(jcomp77);labelsCard3.add(jcomp78);labelsCard3.add(jcomp79);
+		labelsCard3.add(jcomp80);labelsCard3.add(jcomp81);labelsCard3.add(jcomp82);
+		labelsCard3.add(jcomp83);labelsCard3.add(jcomp84);labelsCard3.add(jcomp85);
+		labelsCard3.add(jcomp86);
+		
+		labelsCard4.add(jcomp67);labelsCard4.add(jcomp68);labelsCard4.add(jcomp79);
+		labelsCard4.add(jcomp70);labelsCard4.add(jcomp71);labelsCard4.add(jcomp72);
+		labelsCard4.add(jcomp73);labelsCard4.add(jcomp74);labelsCard4.add(jcomp75);
+		labelsCard4.add(jcomp76);
+		labels.add(labelsCard1);
+		labels.add(labelsCard2);
+		labels.add(labelsCard3);
+		labels.add(labelsCard4);
+		return labels;
 	}
-
 }

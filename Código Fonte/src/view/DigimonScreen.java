@@ -137,11 +137,14 @@ public class DigimonScreen extends JFrame {
 	
 	private void config() {
 		// construct preComponents
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenu menuMenu = new JMenu("Menu");
 		JMenuItem conectarItem = new JMenuItem("Conectar");
 		menuMenu.add(conectarItem);
 		JMenuItem desconectarItem = new JMenuItem("Desconectar");
 		menuMenu.add(desconectarItem);
+		JMenuItem iniciarItem = new JMenuItem("Iniciar Partida");
+		menuMenu.add(iniciarItem);
 		JMenuItem sairItem = new JMenuItem("Sair");
 		menuMenu.add(sairItem);
 		
@@ -326,6 +329,13 @@ public class DigimonScreen extends JFrame {
 				player.quit();
 			}
 		});
+		iniciarItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				player.start();
+			}
+		});
 	}
 	
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
@@ -405,6 +415,16 @@ public class DigimonScreen extends JFrame {
 		return buttons;
 	}
 	
+	public void notifyPhase(String phase) {
+		phaseName.setText(phase);
+		repaint();
+	}
+	
+	public void enableButtonsDrawPhase() {
+		jump.setEnabled(true);
+		discardHand.setEnabled(true);
+	}
+	
 	public void updatePhaseName(String phase) {
 		phaseName.setText(phase);
 	}
@@ -423,6 +443,29 @@ public class DigimonScreen extends JFrame {
 
 	public void informError(String error) {
 		JOptionPane.showMessageDialog(null, error, "Erro", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void enableButtonsDigivolvePhase(boolean b) {
+		if(b) {
+			updateCard.setEnabled(true);
+		} else {
+			updateCard.setEnabled(false);
+		}
+		repaint();
+	}
+
+	public void dissableAllButtons() {
+		Collection<JButton> buttonsCardsAdv = buttonsCardsAdv();
+		Collection<JButton> buttonsCardsPlayer = buttonsCardsPlayer();
+		for (JButton jButton : buttonsCardsAdv) {
+			jButton.setEnabled(false);
+		}
+		for (JButton jButton : buttonsCardsPlayer) {
+			jButton.setEnabled(false);
+		}
+		jump.setEnabled(false);
+		updateCard.setEnabled(false);
+		discardHand.setEnabled(false);
 	}
 
 }

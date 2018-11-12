@@ -47,8 +47,7 @@ public class ActorPlayer {
 	}
 
 	public void notifyPhase(String phase) {
-		// TODO - implement ActorPlayer.notifyPhase
-		throw new UnsupportedOperationException();
+		screen.notifyPhase(phase);
 	}
 
 	public void informTurn() {
@@ -77,12 +76,11 @@ public class ActorPlayer {
 
 	public void enableButtonsDrawPhase() {
 		attributesScreen.enableButtonsDrawPhase();
-		//TODO habilitar botões da tela principal
+		screen.enableButtonsDrawPhase();
 	}
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
-		// TODO - implement ActorPlayer.updateInterface
-		throw new UnsupportedOperationException();
+		screen.updateInterface(remotePlayer, localPlayer);
 	}
 
 	public void dissableButtonsDrawPhase() {
@@ -91,13 +89,12 @@ public class ActorPlayer {
 
 	public void enableButtonsDigivolvePhase() {
 		attributesScreen.enableButtonSacrificeCard();
-		// TODO - implement ActorPlayer.enableButtonsDigivolvePhase
-		throw new UnsupportedOperationException();
+		screen.enableButtonsDigivolvePhase(true);
 	}
 
 	public void dissableButtonsDigivolvePhase() {
-		// TODO - implement ActorPlayer.dissableButtonsDigivolvePhase
-		throw new UnsupportedOperationException();
+		screen.enableButtonsDigivolvePhase(false);
+		attributesScreen.dissableButtonSacrificeCard();
 	}
 
 	public void dissableButtonSacrificeCard() {
@@ -119,7 +116,6 @@ public class ActorPlayer {
 	public void enableButtonsBattlePhase() {
 		attributesScreen.enableButtonsAttack();
 		// TODO - implement ActorPlayer.enableButtonsBattlePhase
-		throw new UnsupportedOperationException();
 	}
 	
 	public void attackChoice(int choice) {
@@ -136,8 +132,7 @@ public class ActorPlayer {
 
 	public void dissableAllButtons() {
 		attributesScreen.dissableAllButtons();
-		// TODO - implement ActorPlayer.dissableAllButtons
-		throw new UnsupportedOperationException();
+		screen.dissableAllButtons();
 	}
 
 	public void viewAttributes(String name) {
