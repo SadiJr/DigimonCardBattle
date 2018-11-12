@@ -152,6 +152,7 @@ public class ActorPlayer {
 	public void viewAttributes(CardPOJO pojo) {
 		try {
 			attributesScreen.showAttributes(pojo);
+			attributesScreen.setVisible(true);
 		} catch (Exception e) {
 			informError(e.getMessage());
 		}

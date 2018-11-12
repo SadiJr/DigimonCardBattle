@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -76,6 +77,8 @@ public class DigimonScreen extends JFrame {
 			
 			if(e.getSource() == card1) {
 				System.out.println(card1.getName());
+				String name = card1.getName();
+				player.viewAttributes(name);
 			}
 			
 		}
@@ -152,11 +155,7 @@ public class DigimonScreen extends JFrame {
 		deckSize = new JLabel("newLabel");
 		cemiterySize = new JLabel("newLabel");
 		name = new JLabel("newLabel");
-		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/backCard.jpg");
-		card1.setName("asdasd");
-		card1.setText("asdasdasd");
-		card1.setIcon(iconLogo);
-		card2.setName("asdasdasdasdasd");
+		
 		// adjust size and set layout
 		setPreferredSize(new Dimension(922, 589));
 		setLayout(null);
@@ -239,6 +238,11 @@ public class DigimonScreen extends JFrame {
 		cemiterySize.setBounds(720, 505, 100, 25);
 		name.setBounds(40, 535, 100, 25);
 		card1.addActionListener(l);
+		Image iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/fire/agumon.jpg").getImage()
+				.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		card1.setName("AGUMON");
+		card1.setIcon(imageIcon);
 	}
 	
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {

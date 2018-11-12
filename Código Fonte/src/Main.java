@@ -9,12 +9,13 @@ import model.Table;
 public class Main {
 
 	public static void main(String[] args) {
-		Table t = new Table();
-		t.setLocalPlayer(new Player("Sadi", new Integer(1)));
-		t.setRemotePlayer(new Player("Sado", new Integer(0)));
+		TableController tr = new TableController();
+		tr.getTable().setLocalPlayer(new Player("Sadi", new Integer(1)));
+		tr.getTable().setRemotePlayer(new Player("Sado", new Integer(0)));
 		try {
-			t.createDeck();
-			t.distributeCards();
+			tr.getTable().createDeck();
+			tr.getTable().distributeCards();
+			tr.getPlayer().init();
 		} catch (FileNotFoundException | MalformedJsonException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
