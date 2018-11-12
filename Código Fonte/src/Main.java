@@ -4,7 +4,6 @@ import com.google.gson.stream.MalformedJsonException;
 
 import controll.TableController;
 import model.Player;
-import model.Table;
 
 public class Main {
 

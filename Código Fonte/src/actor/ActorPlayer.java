@@ -5,12 +5,13 @@ import model.CardPOJO;
 import model.PlayerMovePOJO;
 import view.AttributesScreen;
 import view.DigimonScreen;
+import view.UpdateScreen;
 
 public class ActorPlayer {
-
 	private TableController tableController;
 	private DigimonScreen screen;
 	private AttributesScreen attributesScreen;
+	private UpdateScreen update;
 
 	public ActorPlayer(TableController tableController) {
 		this.tableController = tableController;
@@ -75,6 +76,7 @@ public class ActorPlayer {
 
 	public void enableButtonsDrawPhase() {
 		attributesScreen.enableButtonsDrawPhase();
+		//TODO habilitar botões da tela principal
 	}
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
@@ -200,5 +202,10 @@ public class ActorPlayer {
 		} catch (Exception e) {
 			informError(e.getMessage());
 		}		
+	}
+
+	public void viewOptionsUpdate() {
+		PlayerMovePOJO createPOJOPlayer = tableController.createPOJOPlayer(tableController.getTable().getLocalPlayer());
+		update.viewOptions(createPOJOPlayer.getHand());
 	}
 }

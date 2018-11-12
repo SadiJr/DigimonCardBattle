@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import actor.ActorPlayer;
 import model.CardPOJO;
 
+@SuppressWarnings("serial")
 public class AttributesScreen extends JFrame {
 	private ActorPlayer player;
 	private JLabel cardImage;
@@ -185,6 +186,12 @@ public class AttributesScreen extends JFrame {
 		attack1.setBounds (175, 470, 95, 30);
 		attack2.setBounds(340, 470, 95, 30);
         attack3.setBounds (500, 470, 95, 30);
+        
+        downDigimon.addActionListener(l);
+        sacrificeCard.addActionListener(l);
+        attack1.addActionListener(l);
+        attack2.addActionListener(l);
+        attack3.addActionListener(l);
 	}
 
 	public static void main(String[] args) {

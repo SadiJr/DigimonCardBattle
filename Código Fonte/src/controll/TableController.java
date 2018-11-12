@@ -457,9 +457,13 @@ public class TableController {
 				player.viewAttributesOptionCard(createCardPOJO, opponent);
 			}
 		} else {
-			
+			Card supportCard = table.getRemotePlayer().getSupportCard();
+			if(supportCard == null) {
+				player.informError("O adversário não possuí nenhuma carta de suporte no campo de batalha");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(supportCard);
+				player.viewAttributesDigimonCard(createCardPOJO, opponent);
+			}
 		}
-		// TODO Auto-generated method stub
-		
 	}
 }
