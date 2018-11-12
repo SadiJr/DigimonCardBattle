@@ -1,16 +1,410 @@
 package view;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+import actor.ActorPlayer;
 import model.CardPOJO;
 
 public class UpdateScreen extends JFrame {
+	private ActorPlayer player;
+	
+	private JButton card1;
+    private JButton card2;
+    private JButton card3;
+    private JButton card4;
+    private JLabel jcomp5;
+    private JLabel jcomp6;
+    private JLabel jcomp7;
+    private JLabel jcomp8;
+    private JLabel jcomp9;
+    private JLabel jcomp10;
+    private JLabel jcomp11;
+    private JLabel jcomp12;
+    private JLabel jcomp13;
+    private JLabel jcomp14;
+    private JLabel jcomp15;
+    private JLabel jcomp16;
+    private JLabel jcomp17;
+    private JLabel jcomp18;
+    private JLabel jcomp19;
+    private JLabel jcomp20;
+    private JLabel jcomp21;
+    private JLabel jcomp22;
+    private JLabel jcomp23;
+    private JLabel jcomp24;
+    private JLabel jcomp25;
+    private JLabel jcomp26;
+    private JLabel jcomp27;
+    private JLabel jcomp28;
+    private JLabel jcomp29;
+    private JLabel jcomp30;
+    private JLabel jcomp31;
+    private JLabel jcomp32;
+    private JLabel jcomp33;
+    private JLabel jcomp34;
+    private JLabel jcomp35;
+    private JLabel jcomp36;
+    private JLabel jcomp37;
+    private JLabel jcomp38;
+    private JLabel jcomp39;
+    private JLabel jcomp40;
+    private JLabel jcomp41;
+    private JLabel jcomp42;
+    private JLabel jcomp43;
+    private JLabel jcomp44;
+    private JLabel jcomp45;
+    private JLabel jcomp46;
+    private JLabel jcomp47;
+    private JLabel jcomp48;
+    private JLabel jcomp49;
+    private JLabel jcomp50;
+    private JLabel jcomp51;
+    private JLabel jcomp52;
+    private JLabel jcomp53;
+    private JLabel jcomp54;
+    private JLabel jcomp55;
+    private JLabel jcomp56;
+    private JLabel jcomp57;
+    private JLabel jcomp58;
+    private JLabel jcomp59;
+    private JLabel jcomp60;
+    private JLabel jcomp61;
+    private JLabel jcomp62;
+    private JLabel jcomp63;
+    private JLabel jcomp64;
+    private JLabel jcomp65;
+    private JLabel jcomp66;
+    private JLabel jcomp67;
+    private JLabel jcomp68;
+    private JLabel jcomp69;
+    private JLabel jcomp70;
+    private JLabel jcomp71;
+    private JLabel jcomp72;
+    private JLabel jcomp73;
+    private JLabel jcomp74;
+    private JLabel jcomp75;
+    private JLabel jcomp76;
+    private JLabel jcomp77;
+    private JLabel jcomp78;
+    private JLabel jcomp79;
+    private JLabel jcomp80;
+    private JLabel jcomp81;
+    private JLabel jcomp82;
+    private JLabel jcomp83;
+    private JLabel jcomp84;
+    private JLabel jcomp85;
+    private JLabel jcomp86;
+	
+	public UpdateScreen(ActorPlayer actorPlayer) {
+		this.player = actorPlayer;
+		config();
+	}
+
+	private void config() {
+
+		// construct components
+		card1 = new JButton("Button 1");
+		card2 = new JButton("Button 2");
+		card3 = new JButton("Button 3");
+		card4 = new JButton("Button 4");
+		jcomp5 = new JLabel("Nome");
+		jcomp6 = new JLabel("Efeito");
+		jcomp7 = new JLabel("HP");
+		jcomp8 = new JLabel("Ataque 1");
+		jcomp9 = new JLabel("Ataque 2");
+		jcomp10 = new JLabel("Ataque 3");
+		jcomp11 = new JLabel("DP");
+		jcomp12 = new JLabel("P");
+		jcomp13 = new JLabel("Especialidade");
+		jcomp14 = new JLabel("Level");
+		jcomp15 = new JLabel("Nome");
+		jcomp16 = new JLabel("Efeito");
+		jcomp17 = new JLabel("HP");
+		jcomp18 = new JLabel("Ataque 1");
+		jcomp19 = new JLabel("Ataque 2");
+		jcomp20 = new JLabel("Ataque 3");
+		jcomp21 = new JLabel("DP");
+		jcomp22 = new JLabel("P");
+		jcomp23 = new JLabel("Especialidade");
+		jcomp24 = new JLabel("Level");
+		jcomp25 = new JLabel("Nome");
+		jcomp26 = new JLabel("Efeito");
+		jcomp27 = new JLabel("HP");
+		jcomp28 = new JLabel("Ataque 1");
+		jcomp29 = new JLabel("Ataque 2");
+		jcomp30 = new JLabel("Ataque 3");
+		jcomp31 = new JLabel("DP");
+		jcomp32 = new JLabel("P");
+		jcomp33 = new JLabel("Especialidade");
+		jcomp34 = new JLabel("Level");
+		jcomp35 = new JLabel("Nome");
+		jcomp36 = new JLabel("Efeito");
+		jcomp37 = new JLabel("HP");
+		jcomp38 = new JLabel("Ataque 1");
+		jcomp39 = new JLabel("Ataque 2");
+		jcomp40 = new JLabel("Ataque 3");
+		jcomp41 = new JLabel("DP");
+		jcomp42 = new JLabel("P");
+		jcomp43 = new JLabel("Especialidade");
+		jcomp44 = new JLabel("Level");
+		jcomp45 = new JLabel("newLabel");
+		jcomp46 = new JLabel("newLabel");
+		jcomp47 = new JLabel("newLabel");
+		jcomp48 = new JLabel("newLabel");
+		jcomp49 = new JLabel("newLabel");
+		jcomp50 = new JLabel("newLabel");
+		jcomp51 = new JLabel("newLabel");
+		jcomp52 = new JLabel("newLabel");
+		jcomp53 = new JLabel("newLabel");
+		jcomp54 = new JLabel("newLabel");
+		jcomp55 = new JLabel("newLabel");
+		jcomp56 = new JLabel("newLabel");
+		jcomp57 = new JLabel("newLabel");
+		jcomp58 = new JLabel("newLabel");
+		jcomp59 = new JLabel("newLabel");
+		jcomp60 = new JLabel("newLabel");
+		jcomp61 = new JLabel("newLabel");
+		jcomp62 = new JLabel("newLabel");
+		jcomp63 = new JLabel("newLabel");
+		jcomp64 = new JLabel("newLabel");
+		jcomp65 = new JLabel("newLabel");
+		jcomp66 = new JLabel("newLabel");
+		jcomp67 = new JLabel("newLabel");
+		jcomp68 = new JLabel("newLabel");
+		jcomp69 = new JLabel("newLabel");
+		jcomp70 = new JLabel("newLabel");
+		jcomp71 = new JLabel("newLabel");
+		jcomp72 = new JLabel("newLabel");
+		jcomp73 = new JLabel("newLabel");
+		jcomp74 = new JLabel("newLabel");
+		jcomp75 = new JLabel("newLabel");
+		jcomp76 = new JLabel("newLabel");
+		jcomp77 = new JLabel("newLabel");
+		jcomp78 = new JLabel("newLabel");
+		jcomp79 = new JLabel("newLabel");
+		jcomp80 = new JLabel("newLabel");
+		jcomp81 = new JLabel("newLabel");
+		jcomp82 = new JLabel("newLabel");
+		jcomp83 = new JLabel("newLabel");
+		jcomp84 = new JLabel("newLabel");
+		jcomp85 = new JLabel("newLabel");
+		jcomp86 = new JLabel("newLabel");
+
+		// adjust size and set layout
+		setPreferredSize(new Dimension(1088, 664));
+		setLayout(null);
+
+		// add components
+		add(card1);
+		add(card2);
+		add(card3);
+		add(card4);
+		add(jcomp5);
+		add(jcomp6);
+		add(jcomp7);
+		add(jcomp8);
+		add(jcomp9);
+		add(jcomp10);
+		add(jcomp11);
+		add(jcomp12);
+		add(jcomp13);
+		add(jcomp14);
+		add(jcomp15);
+		add(jcomp16);
+		add(jcomp17);
+		add(jcomp18);
+		add(jcomp19);
+		add(jcomp20);
+		add(jcomp21);
+		add(jcomp22);
+		add(jcomp23);
+		add(jcomp24);
+		add(jcomp25);
+		add(jcomp26);
+		add(jcomp27);
+		add(jcomp28);
+		add(jcomp29);
+		add(jcomp30);
+		add(jcomp31);
+		add(jcomp32);
+		add(jcomp33);
+		add(jcomp34);
+		add(jcomp35);
+		add(jcomp36);
+		add(jcomp37);
+		add(jcomp38);
+		add(jcomp39);
+		add(jcomp40);
+		add(jcomp41);
+		add(jcomp42);
+		add(jcomp43);
+		add(jcomp44);
+		add(jcomp45);
+		add(jcomp46);
+		add(jcomp47);
+		add(jcomp48);
+		add(jcomp49);
+		add(jcomp50);
+		add(jcomp51);
+		add(jcomp52);
+		add(jcomp53);
+		add(jcomp54);
+		add(jcomp55);
+		add(jcomp56);
+		add(jcomp57);
+		add(jcomp58);
+		add(jcomp59);
+		add(jcomp60);
+		add(jcomp61);
+		add(jcomp62);
+		add(jcomp63);
+		add(jcomp64);
+		add(jcomp65);
+		add(jcomp66);
+		add(jcomp67);
+		add(jcomp68);
+		add(jcomp69);
+		add(jcomp70);
+		add(jcomp71);
+		add(jcomp72);
+		add(jcomp73);
+		add(jcomp74);
+		add(jcomp75);
+		add(jcomp76);
+		add(jcomp77);
+		add(jcomp78);
+		add(jcomp79);
+		add(jcomp80);
+		add(jcomp81);
+		add(jcomp82);
+		add(jcomp83);
+		add(jcomp84);
+		add(jcomp85);
+		add(jcomp86);
+
+		// set component bounds (only needed by Absolute Positioning)
+		card1.setBounds(5, 10, 240, 320);
+		card2.setBounds(280, 10, 240, 320);
+		card3.setBounds(550, 10, 235, 320);
+		card4.setBounds(815, 10, 235, 320);
+		jcomp5.setBounds(5, 340, 100, 25);
+		jcomp6.setBounds(5, 370, 100, 25);
+		jcomp7.setBounds(5, 400, 100, 25);
+		jcomp8.setBounds(5, 430, 100, 25);
+		jcomp9.setBounds(5, 460, 100, 25);
+		jcomp10.setBounds(5, 490, 100, 25);
+		jcomp11.setBounds(5, 520, 100, 25);
+		jcomp12.setBounds(5, 550, 100, 25);
+		jcomp13.setBounds(5, 580, 100, 25);
+		jcomp14.setBounds(5, 610, 100, 25);
+		jcomp15.setBounds(280, 340, 100, 25);
+		jcomp16.setBounds(280, 370, 100, 25);
+		jcomp17.setBounds(280, 400, 100, 25);
+		jcomp18.setBounds(280, 430, 100, 25);
+		jcomp19.setBounds(280, 460, 100, 25);
+		jcomp20.setBounds(280, 490, 100, 25);
+		jcomp21.setBounds(280, 520, 100, 25);
+		jcomp22.setBounds(280, 550, 100, 25);
+		jcomp23.setBounds(280, 580, 100, 25);
+		jcomp24.setBounds(280, 610, 100, 25);
+		jcomp25.setBounds(550, 340, 100, 25);
+		jcomp26.setBounds(550, 370, 100, 25);
+		jcomp27.setBounds(550, 400, 100, 25);
+		jcomp28.setBounds(550, 430, 100, 25);
+		jcomp29.setBounds(550, 460, 100, 25);
+		jcomp30.setBounds(550, 490, 100, 25);
+		jcomp31.setBounds(550, 520, 100, 25);
+		jcomp32.setBounds(550, 550, 100, 25);
+		jcomp33.setBounds(550, 580, 100, 25);
+		jcomp34.setBounds(550, 610, 100, 25);
+		jcomp35.setBounds(815, 340, 100, 25);
+		jcomp36.setBounds(815, 370, 100, 25);
+		jcomp37.setBounds(815, 400, 100, 25);
+		jcomp38.setBounds(815, 430, 100, 25);
+		jcomp39.setBounds(815, 460, 100, 25);
+		jcomp40.setBounds(815, 490, 100, 25);
+		jcomp41.setBounds(815, 520, 100, 25);
+		jcomp42.setBounds(815, 550, 100, 25);
+		jcomp43.setBounds(815, 580, 100, 25);
+		jcomp44.setBounds(815, 610, 100, 25);
+		jcomp45.setBounds(145, 340, 100, 25);
+		jcomp46.setBounds(145, 370, 100, 25);
+		jcomp47.setBounds(140, 145, 100, 25);
+		jcomp48.setBounds(140, 145, 100, 25);
+		jcomp49.setBounds(145, 520, 100, 25);
+		jcomp50.setBounds(145, 550, 100, 25);
+		jcomp51.setBounds(145, 580, 100, 25);
+		jcomp52.setBounds(145, 610, 100, 25);
+		jcomp53.setBounds(145, 400, 100, 25);
+		jcomp54.setBounds(145, 430, 100, 25);
+		jcomp55.setBounds(145, 460, 100, 25);
+		jcomp56.setBounds(145, 490, 100, 25);
+		jcomp57.setBounds(420, 340, 100, 25);
+		jcomp58.setBounds(420, 370, 100, 25);
+		jcomp59.setBounds(420, 400, 100, 25);
+		jcomp60.setBounds(420, 430, 100, 25);
+		jcomp61.setBounds(420, 460, 100, 25);
+		jcomp62.setBounds(420, 490, 100, 25);
+		jcomp63.setBounds(420, 520, 100, 25);
+		jcomp64.setBounds(420, 550, 100, 25);
+		jcomp65.setBounds(420, 580, 100, 25);
+		jcomp66.setBounds(420, 610, 100, 25);
+		jcomp67.setBounds(950, 340, 100, 25);
+		jcomp68.setBounds(950, 370, 100, 25);
+		jcomp69.setBounds(950, 400, 100, 25);
+		jcomp70.setBounds(950, 430, 100, 25);
+		jcomp71.setBounds(950, 460, 100, 25);
+		jcomp72.setBounds(950, 490, 100, 25);
+		jcomp73.setBounds(950, 520, 100, 25);
+		jcomp74.setBounds(950, 550, 100, 25);
+		jcomp75.setBounds(950, 580, 100, 25);
+		jcomp76.setBounds(950, 610, 100, 25);
+		jcomp77.setBounds(685, 340, 100, 25);
+		jcomp78.setBounds(685, 370, 100, 25);
+		jcomp79.setBounds(685, 400, 100, 25);
+		jcomp80.setBounds(685, 430, 100, 25);
+		jcomp81.setBounds(685, 460, 100, 25);
+		jcomp82.setBounds(685, 490, 100, 25);
+		jcomp83.setBounds(685, 520, 100, 25);
+		jcomp84.setBounds(685, 550, 100, 25);
+		jcomp85.setBounds(685, 580, 100, 25);
+		jcomp86.setBounds(685, 610, 100, 25);
+
+	}
 
 	public void viewOptions(Collection<CardPOJO> hand) {
-		
+		ArrayList<JButton> buttons = (ArrayList<JButton>) getButtons();
+		ArrayList<CardPOJO> hand2 = (ArrayList<CardPOJO>) hand;
+		for(int i =0; i < hand2.size(); i++) {
+			CardPOJO pojo = hand2.get(i);
+			if(pojo.isOptionCard()) {
+				
+			} else {
+				
+			}
+		}
+
 	}
 	
+	private Collection<JButton> getButtons() {
+		Collection<JButton> buttons = new ArrayList<>();
+		buttons.add(card1);
+		buttons.add(card2);
+		buttons.add(card3);
+		buttons.add(card4);
+		return buttons;
+	}
+
+	public static void main(String[] args) {
+		UpdateScreen updateScreen = new UpdateScreen(null);
+		updateScreen.pack();
+		updateScreen.setVisible(true);
+	}
 
 }

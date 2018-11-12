@@ -17,6 +17,7 @@ public class ActorPlayer {
 		this.tableController = tableController;
 		screen = new DigimonScreen(this);
 		attributesScreen = new AttributesScreen(this);
+		update = new UpdateScreen(this);
 	}
 
 	public void connect() {
