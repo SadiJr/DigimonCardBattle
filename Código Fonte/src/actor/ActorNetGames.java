@@ -12,7 +12,7 @@ import controll.TableController;
 import model.Table;
 
 public class ActorNetGames implements OuvidorProxy {
-
+	private static final long serialVersionUID = 1L;
 	private TableController tableController;
 	private Proxy proxy;
 
@@ -64,16 +64,18 @@ public class ActorNetGames implements OuvidorProxy {
 
 	public boolean startGame() {
 		try {
-			proxy.iniciarNovaPartida(new Integer(2));
+			proxy.iniciarNovaPartida(2);
+			return true;
 		} catch (Exception e) {
 			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
+			return false;
 		}
-		return true;
 	}
 
 	public void sendMove(Table table) {
 		try {
-			proxy.enviaJogada(table);
+			Jogada move = (Jogada) table;
+			proxy.enviaJogada(move);
 		} catch (NaoJogandoException e) {
 			tableController.informError("Você deve estar logado para realizar essa ação!");
 			e.printStackTrace();

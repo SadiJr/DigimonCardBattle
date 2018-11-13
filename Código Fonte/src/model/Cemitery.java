@@ -6,15 +6,15 @@ import java.util.Collection;
 import br.ufsc.inf.leobr.cliente.Jogada;
 
 public class Cemitery implements Jogada {
+	private static final long serialVersionUID = 1L;
+	private Collection<Card> deadCards;
+	private int quantity;
 	
 	public Cemitery() {
 		this.deadCards = new ArrayList<>();
 		this.quantity = 0;
 	}
-
-	private Collection<Card> deadCards;
-	private int quantity;
-
+	
 	public Collection<Card> getDeadCards() {
 		return this.deadCards;
 	}

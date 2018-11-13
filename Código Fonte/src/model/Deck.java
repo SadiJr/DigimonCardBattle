@@ -6,6 +6,7 @@ import java.util.Collection;
 import br.ufsc.inf.leobr.cliente.Jogada;
 
 public class Deck implements Jogada {
+	private static final long serialVersionUID = 1L;
 	private Collection<Card> cards;
 
 	public Deck() {

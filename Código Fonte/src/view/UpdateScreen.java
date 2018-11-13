@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import actor.ActorPlayer;
 import model.CardPOJO;
 
+@SuppressWarnings("serial")
 public class UpdateScreen extends JFrame {
 	private ActorPlayer player;
 	

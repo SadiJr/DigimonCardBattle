@@ -63,15 +63,20 @@ public class TableController {
 		try {
 			String nameRemotePlayer = network.getNameRemotePlayer();
 			player.informRemotePlayerName(nameRemotePlayer);
-			table.getLocalPlayer().setId(posicao);
-			table.setRemotePlayer(new Player(nameRemotePlayer, posicao == 1 ? 2 : 1));
+			table.getLocalPlayer().setId(posicao == 1 ? 2 : 1);
+			table.setRemotePlayer(new Player(nameRemotePlayer, posicao));
 			table.createDeck();
 			table.distributeCards();
 			table.setPhase(Phase.START_GAME);
 			table.setGameInProggress(true);
-			table.setFirstPlayer(table.getRemotePlayer());
-			network.sendMove(table);
-			player.informWaitMoveRemotePlayer(nameRemotePlayer);
+			table.setFirstPlayer(table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer());
+			if(!table.getLocalPlayer().isFirst()) {
+				drawPhase();
+			} else {
+//				network.sendMove(this.table);
+				player.informWaitMoveRemotePlayer(nameRemotePlayer);
+				updateInterface();
+			}
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 			e.printStackTrace();
@@ -145,6 +150,7 @@ public class TableController {
 					+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
 			player.enableButtonsDrawPhase();
 		}
+		updateInterface();
 	}
 
 	public void quit() {

@@ -24,341 +24,337 @@ import model.PlayerMovePOJO;
 @SuppressWarnings("serial")
 public class DigimonScreen extends JFrame {
 	private final ActorPlayer player;
-	private JButton updateCard;
-	private JButton discardHand;
-	private JButton jump;
+	private JButton card4;
+	private JButton oppDigimonCard;
+	private JButton oppCard4;
+	private JButton oppCard3;
+	private JButton oppCard2;
+	private JButton oppCard1;
+	private JMenuBar jcomp7;
 	private JLabel phaseName;
-	private JMenuBar jcomp5;
 	private JLabel opponentName;
-	private JLabel advCemiterySize;
-	private JLabel advDeckSIze;
-	private JButton advCard1;
-	private JButton adCard2;
-	private JButton adCard3;
-	private JButton adCard4;
-	private JCheckBox advVict1;
-	private JCheckBox advVict2;
-	private JCheckBox advVict3;
-	private JLabel advDp;
+	private JCheckBox oppVict1;
+	private JCheckBox oppVict2;
+	private JCheckBox oppVict3;
+	private JLabel oppDP;
+	private JLabel oppDPIcon;
+	private JLabel oppAtk1;
+	private JLabel oppAtk2;
+	private JLabel oppAtk3;
+	private JLabel oppDeadCards;
+	private JLabel oppCemiteryIcon;
+	private JLabel oppDeckSize;
+	private JLabel oppDeckSizeIcon;
 	private JButton digimonCard;
 	private JButton supportCard;
-	private JButton advSupportCard;
-	private JButton advDigimonCard;
-	private JLabel atk1;
-	private JLabel atk2;
-	private JLabel atk3;
-	private JLabel advAtk2;
-	private JLabel advAtk3;
-	private JLabel advAtk1;
-	private JLabel dp;
-	private JCheckBox vict1;
-	private JCheckBox vict2;
-	private JCheckBox vict3;
+	private JButton oppSupportCard;
 	private JButton card1;
 	private JButton card2;
 	private JButton card3;
-	private JButton card4;
 	private JLabel deckSize;
-	private JLabel cemiterySize;
-	private JLabel name;
+	private JLabel deckSizeIcon;
+	private JLabel deadCards;
+	private JLabel deadCardsIcon;
+	private JLabel atk1;
+	private JLabel atk2;
+	private JLabel atk3;
+	private JCheckBox vict1;
+	private JCheckBox vict2;
+	private JCheckBox vict3;
+	private JLabel dp;
+	private JLabel dpIcon;
+	private JButton evolute;
+	private JButton discardHand;
+	private JButton jump;
+	private JLabel playerName;
 
 	private String pathDefault = "/pictures/backCard.jpg";
 
 	private ActionListener l = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == card1) {
+			if (e.getSource() == card1) {
 				System.out.println(card1.getName());
 				String name = card1.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == card2) {
+			} else if (e.getSource() == card2) {
 				System.out.println(card2.getName());
 				String name = card2.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == card3) {
+			} else if (e.getSource() == card3) {
 				System.out.println(card3.getName());
 				String name = card3.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == card4) {
+			} else if (e.getSource() == card4) {
 				System.out.println(card4.getName());
 				String name = card4.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == advCard1) {
-				System.out.println(advCard1.getName());
-				String name = advCard1.getName();
+			} else if (e.getSource() == oppCard1) {
+				System.out.println(oppCard1.getName());
+				String name = oppCard1.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == adCard2) {
-				System.out.println(adCard2.getName());
-				String name = adCard2.getName();
+			} else if (e.getSource() == oppCard2) {
+				System.out.println(oppCard2.getName());
+				String name = oppCard2.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == adCard3) {
-				System.out.println(adCard3.getName());
-				String name = adCard3.getName();
+			} else if (e.getSource() == oppCard3) {
+				System.out.println(oppCard3.getName());
+				String name = oppCard3.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == adCard4) {
-				System.out.println(adCard4.getName());
-				String name = adCard4.getName();
+			} else if (e.getSource() == oppCard4) {
+				System.out.println(oppCard4.getName());
+				String name = oppCard4.getName();
 				player.viewAttributes(name);
-			} else if(e.getSource() == digimonCard) {
+			} else if (e.getSource() == digimonCard) {
 				player.viewAttributesDigimonCard(false);
-			} else if(e.getSource() == supportCard) {
+			} else if (e.getSource() == supportCard) {
 				player.viewAttributesOptionCard(false);
-			} else if(e.getSource() == advDigimonCard) {
+			} else if (e.getSource() == oppDigimonCard) {
 				player.viewAttributesDigimonCard(true);
-			} else if(e.getSource() == advSupportCard) {
+			} else if (e.getSource() == oppSupportCard) {
 				player.viewAttributesOptionCard(true);
-			} else if(e.getSource() == jump) {
+			} else if (e.getSource() == jump) {
 				player.jumpPhase();
-			} else if(e.getSource() == discardHand) {
+			} else if (e.getSource() == discardHand) {
 				player.discardHand();
-			} else if(e.getSource() == updateCard) {
+			} else if (e.getSource() == evolute) {
 				player.viewOptionsUpdate();
 			}
-			
+
 		}
 	};
+
 	public DigimonScreen() {
 		this.player = null;
-		
+
 	}
 
 	public DigimonScreen(ActorPlayer actorPlayer) {
 		this.player = actorPlayer;
 		config();
 	}
-	
+
 	private void config() {
-		// construct preComponents
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenu menuMenu = new JMenu("Menu");
 		JMenuItem conectarItem = new JMenuItem("Conectar");
 		menuMenu.add(conectarItem);
 		JMenuItem desconectarItem = new JMenuItem("Desconectar");
 		menuMenu.add(desconectarItem);
-		JMenuItem iniciarItem = new JMenuItem("Iniciar Partida");
-		menuMenu.add(iniciarItem);
+		JMenuItem iniciar_partidaItem = new JMenuItem("Iniciar Partida");
+		menuMenu.add(iniciar_partidaItem);
 		JMenuItem sairItem = new JMenuItem("Sair");
 		menuMenu.add(sairItem);
-		
+
 		// construct components
-		updateCard = new JButton("Evoluir Carta");
-		discardHand = new JButton("Descartar Mão");
-		jump = new JButton("Próxima Fase");
-		phaseName = new JLabel("Aguardando");
-		jcomp5 = new JMenuBar();
-		jcomp5.add(menuMenu);
-		opponentName = new JLabel("newLabel");
-		advCemiterySize = new JLabel("newLabel");
-		advDeckSIze = new JLabel("newLabel");
-		advCard1 = new JButton("newButton");
-		adCard2 = new JButton("newButton");
-		adCard3 = new JButton("newButton");
-		adCard4 = new JButton("newButton");
-		advVict1 = new JCheckBox("Vitória 1");
-		advVict2 = new JCheckBox("Vitória 2");
-		advVict3 = new JCheckBox("Vitória 3");
+		card4 = new JButton("Card4");
+		oppDigimonCard = new JButton("Digimon");
+		oppCard4 = new JButton("Card 4");
+		oppCard3 = new JButton("card3");
+		oppCard2 = new JButton("card2");
+		oppCard1 = new JButton("card1");
+		jcomp7 = new JMenuBar();
+		jcomp7.add(menuMenu);
+		phaseName = new JLabel("Atualmente Aguardando");
+		opponentName = new JLabel("Seu Inimigo");
+		oppVict1 = new JCheckBox("Vitória 1");
+		oppVict2 = new JCheckBox("Vitória 2");
+		oppVict3 = new JCheckBox("Vitória 3");
+		oppDP = new JLabel("DP");
+		oppDPIcon = new JLabel("Poderzinho");
+		oppAtk1 = new JLabel("Atk1");
+		oppAtk2 = new JLabel("Atk2");
+		oppAtk3 = new JLabel("Atk3");
+		oppDeadCards = new JLabel("Cartas mortas");
+		oppCemiteryIcon = new JLabel("Caveirinha");
+		oppDeckSize = new JLabel("Deck size");
+		oppDeckSizeIcon = new JLabel("Deck Icon");
+		digimonCard = new JButton("Digimon");
+		supportCard = new JButton("Suporte");
+		oppSupportCard = new JButton("Suporte");
+		card1 = new JButton("Card1");
+		card2 = new JButton("Card2");
+		card3 = new JButton("Card3");
+		deckSize = new JLabel("Deck size");
+		deckSizeIcon = new JLabel("Deck size icon");
+		deadCards = new JLabel("Cartas Mortas");
+		deadCardsIcon = new JLabel("Caveirinha");
+		atk1 = new JLabel("Atk1");
+		atk2 = new JLabel("Atk2");
+		atk3 = new JLabel("Atk3");
 		vict1 = new JCheckBox("Vitória 1");
 		vict2 = new JCheckBox("Vitória 2");
 		vict3 = new JCheckBox("Vitória 3");
-		advDp = new JLabel("newLabel");
-		digimonCard = new JButton("newButton");
-		supportCard = new JButton("newButton");
-		advSupportCard = new JButton("newButton");
-		advDigimonCard = new JButton("newButton");
-		atk1 = new JLabel("newLabel");
-		atk2 = new JLabel("newLabel");
-		atk3 = new JLabel("newLabel");
-		advAtk2 = new JLabel("newLabel");
-		advAtk3 = new JLabel("newLabel");
-		advAtk1 = new JLabel("newLabel");
-		dp = new JLabel("newLabel");
-		card1 = new JButton("newButton");
-		card2 = new JButton("newButton");
-		card3 = new JButton("newButton");
-		card4 = new JButton("newButton");
-		deckSize = new JLabel("newLabel");
-		cemiterySize = new JLabel("newLabel");
-		name = new JLabel("newLabel");
-		
+		dp = new JLabel("DP");
+		dpIcon = new JLabel("Poderzinho");
+		evolute = new JButton("Evoluir Carta");
+		discardHand = new JButton("Descartar Mão");
+		jump = new JButton("Pular Fase");
+		playerName = new JLabel("Você");
+
+		// set components properties
+		oppVict1.setEnabled(false);
+		oppVict2.setEnabled(false);
+		oppVict3.setEnabled(false);
+		vict1.setEnabled(false);
+		vict2.setEnabled(false);
+		vict3.setEnabled(false);
+
 		// adjust size and set layout
-		setPreferredSize(new Dimension(922, 589));
+		setPreferredSize(new Dimension(1121, 583));
 		setLayout(null);
 
 		// add components
-		add(updateCard);
-		add(discardHand);
-		add(jump);
-		add(phaseName);
-		add(jcomp5);
-		add(opponentName);
-		add(advCemiterySize);
-		add(advDeckSIze);
-		add(advCard1);
-		add(adCard2);
-		add(adCard3);
-		add(adCard4);
-		add(advVict1);
-		add(advVict2);
-		add(advVict3);
-		add(advDp);
-		add(digimonCard);
-		add(supportCard);
-		add(advSupportCard);
-		add(advDigimonCard);
-		add(atk1);
-		add(atk2);
-		add(atk3);
-		add(advAtk2);
-		add(advAtk3);
-		add(advAtk1);
-		add(dp);
-		add(vict1);
-		add(vict2);
-		add(vict3);
-		add(card1);
-		add(card2);
-		add(card3);
-		add(card4);
-		add(deckSize);
-		add(cemiterySize);
-		add(name);
+		add(card4); add(oppDigimonCard);add(oppCard4);add(oppCard3);add(oppCard2);
+		add(oppCard1);add(jcomp7);add(phaseName);add(opponentName);add(oppVict1);
+		add(oppVict2);add(oppVict3);add(oppDP);add(oppDPIcon);add(oppAtk1);
+		add(oppAtk2);add(oppAtk3);add(oppDeadCards);add(oppCemiteryIcon);
+		add(oppDeckSize);add(oppDeckSizeIcon);add(digimonCard);add(supportCard);
+		add(oppSupportCard);add(card1);add(card2);add(card3);add(deckSize);
+		add(deckSizeIcon);add(deadCards);add(deadCardsIcon);add(atk1);
+		add(atk2);add(atk3);add(vict1);add(vict2);add(vict3);add(dp);add(dpIcon);
+		add(evolute);add(discardHand);add(jump);add(playerName);
 
 		// set component bounds (only needed by Absolute Positioning)
-		updateCard.setBounds(155, 565, 135, 20);
-		discardHand.setBounds(390, 565, 150, 20);
-		jump.setBounds(680, 565, 140, 20);
-		phaseName.setBounds(390, 20, 285, 25);
-		jcomp5.setBounds(0, 0, 1350, 25);
-		opponentName.setBounds(725, 45, 155, 25);
-		advCemiterySize.setBounds(15, 80, 65, 35);
-		advDeckSIze.setBounds(15, 120, 70, 30);
-		advCard1.setBounds(130, 70, 100, 125);
-		adCard2.setBounds(275, 70, 100, 125);
-		adCard3.setBounds(425, 70, 100, 125);
-		adCard4.setBounds(590, 65, 100, 125);
-		advVict1.setBounds(780, 90, 100, 25);
-		advVict2.setBounds(780, 125, 100, 25);
-		advVict3.setBounds(780, 155, 100, 25);
-		advDp.setBounds(780, 190, 95, 35);
-		digimonCard.setBounds(130, 250, 100, 125);
-		supportCard.setBounds(275, 250, 100, 125);
-		advSupportCard.setBounds(425, 250, 100, 125);
-		advDigimonCard.setBounds(590, 250, 100, 125);
-		atk1.setBounds(30, 250, 100, 25);
-		atk2.setBounds(30, 275, 100, 25);
-		atk3.setBounds(30, 295, 100, 25);
-		advAtk2.setBounds(695, 325, 100, 25);
-		advAtk3.setBounds(695, 345, 100, 25);
-		advAtk1.setBounds(695, 305, 100, 25);
-		dp.setBounds(15, 405, 100, 25);
-		vict1.setBounds(10, 435, 100, 25);
-		vict2.setBounds(10, 465, 100, 25);
-		vict3.setBounds(10, 500, 100, 25);
-		card1.setBounds(130, 405, 100, 125);
-		card2.setBounds(275, 405, 100, 125);
-		card3.setBounds(425, 410, 100, 125);
-		card4.setBounds(590, 410, 100, 125);
-		deckSize.setBounds(720, 470, 100, 25);
-		cemiterySize.setBounds(720, 505, 100, 25);
-		name.setBounds(40, 535, 100, 25);
-		advVict1.setEnabled(false);
-		advVict2.setEnabled(false);
-		advVict3.setEnabled(false);
-		
-		vict1.setEnabled(false);
-		vict2.setEnabled(false);
-		vict3.setEnabled(false);		
-		
+		card4.setBounds(895, 455, 105, 150);
+		oppDigimonCard.setBounds(895, 290, 105, 150);
+		oppCard4.setBounds(895, 125, 105, 150);
+		oppCard3.setBounds(725, 125, 105, 150);
+		oppCard2.setBounds(555, 125, 105, 150);
+		oppCard1.setBounds(385, 125, 105, 150);
+		jcomp7.setBounds(0, 0, 1365, 25);
+		phaseName.setBounds(600, 25, 260, 35);
+		opponentName.setBounds(900, 95, 100, 25);
+		oppVict1.setBounds(1070, 125, 100, 25);
+		oppVict2.setBounds(1070, 155, 100, 25);
+		oppVict3.setBounds(1070, 185, 100, 25);
+		oppDP.setBounds(1225, 120, 50, 25);
+		oppDPIcon.setBounds(1190, 145, 100, 90);
+		oppAtk1.setBounds(1010, 335, 100, 25);
+		oppAtk2.setBounds(1010, 355, 100, 25);
+		oppAtk3.setBounds(1010, 375, 100, 25);
+		oppDeadCards.setBounds(55, 125, 50, 25);
+		oppCemiteryIcon.setBounds(30, 145, 100, 125);
+		oppDeckSize.setBounds(195, 125, 50, 25);
+		oppDeckSizeIcon.setBounds(180, 145, 100, 125);
+		digimonCard.setBounds(385, 290, 105, 150);
+		supportCard.setBounds(555, 290, 105, 150);
+		oppSupportCard.setBounds(725, 290, 105, 150);
+		card1.setBounds(385, 455, 105, 150);
+		card2.setBounds(555, 455, 105, 150);
+		card3.setBounds(725, 455, 105, 150);
+		deckSize.setBounds(1055, 460, 50, 25);
+		deckSizeIcon.setBounds(1030, 480, 100, 126);
+		deadCards.setBounds(1185, 460, 50, 25);
+		deadCardsIcon.setBounds(1160, 480, 100, 125);
+		atk1.setBounds(320, 335, 65, 25);
+		atk2.setBounds(320, 355, 65, 25);
+		atk3.setBounds(320, 375, 65, 25);
+		vict1.setBounds(195, 495, 100, 25);
+		vict2.setBounds(195, 525, 100, 25);
+		vict3.setBounds(195, 555, 100, 25);
+		dp.setBounds(75, 455, 45, 25);
+		dpIcon.setBounds(35, 475, 100, 90);
+		evolute.setBounds(335, 660, 135, 25);
+		discardHand.setBounds(610, 660, 135, 25);
+		jump.setBounds(910, 660, 135, 25);
+		playerName.setBounds(385, 610, 100, 25);
+
 		Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
-				.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+				.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		card1.setIcon(imageIcon);
 		card2.setIcon(imageIcon);
 		card3.setIcon(imageIcon);
 		card4.setIcon(imageIcon);
-		advCard1.setIcon(imageIcon);
-		adCard2.setIcon(imageIcon);
-		adCard3.setIcon(imageIcon);
-		adCard4.setIcon(imageIcon);
-		advDigimonCard.setIcon(imageIcon);
-		advSupportCard.setIcon(imageIcon);
+		oppCard1.setIcon(imageIcon);
+		oppCard2.setIcon(imageIcon);
+		oppCard3.setIcon(imageIcon);
+		oppCard4.setIcon(imageIcon);
+		oppDigimonCard.setIcon(imageIcon);
+		oppSupportCard.setIcon(imageIcon);
 		digimonCard.setIcon(imageIcon);
 		supportCard.setIcon(imageIcon);
+		iconLogo.getScaledInstance(deckSize.getWidth()-5, deckSize.getHeight(), Image.SCALE_SMOOTH);
+		deckSizeIcon.setIcon(new ImageIcon(iconLogo));
+		oppDeckSizeIcon.setIcon(new ImageIcon(iconLogo));
 		card1.addActionListener(l);
 		card2.addActionListener(l);
 		card3.addActionListener(l);
 		card4.addActionListener(l);
 		digimonCard.addActionListener(l);
 		supportCard.addActionListener(l);
-		advCard1.addActionListener(l);
-		adCard2.addActionListener(l);
-		adCard3.addActionListener(l);
-		adCard4.addActionListener(l);
-		advDigimonCard.addActionListener(l);
-		advSupportCard.addActionListener(l);
+		oppCard1.addActionListener(l);
+		oppCard2.addActionListener(l);
+		oppCard3.addActionListener(l);
+		oppCard4.addActionListener(l);
+		oppDigimonCard.addActionListener(l);
+		oppSupportCard.addActionListener(l);
 		jump.addActionListener(l);
-		updateCard.addActionListener(l);
+		evolute.addActionListener(l);
 		discardHand.addActionListener(l);
-		
+
+		setPreferredSize(new Dimension(1368, 768));
+		setLayout(null);
 		conectarItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player.connect();
 			}
 		});
 		desconectarItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player.disconnect();
 			}
 		});
 		sairItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player.quit();
 			}
 		});
-		iniciarItem.addActionListener(new ActionListener() {
-			
+		iniciar_partidaItem.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player.start();
 			}
 		});
 	}
-	
+
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
-		if(remotePlayer != null) {
+		if (remotePlayer != null) {
 			updateRemotePlayer(remotePlayer);
 		}
-		
-		if(localPlayer != null) {
+
+		if (localPlayer != null) {
 			updateLocalPlayer(localPlayer);
 		}
 	}
-	
+
 	private void updateLocalPlayer(PlayerMovePOJO localPlayer) {
-		name.setText(localPlayer.getName());
-		cemiterySize.setText(String.valueOf(localPlayer.getDeadCards()));
+		playerName.setText(localPlayer.getName());
+		deadCards.setText(String.valueOf(localPlayer.getDeadCards()));
 		deckSize.setText(String.valueOf(localPlayer.getDeckSize()));
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) localPlayer.getHand();
 		ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
-		for(int i = 0; i < hand.size(); i++) {
+		for (int i = 0; i < hand.size(); i++) {
 			CardPOJO pojo = hand.get(i);
 			JButton jButton = buttonsCardsPlayer.get(i);
-			if(pojo != null) {
+			if (pojo != null) {
 				jButton.setName(pojo.getName());
 				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath()).getImage()
-						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			} else {
 				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
-						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
@@ -368,37 +364,37 @@ public class DigimonScreen extends JFrame {
 
 	public void updateRemotePlayer(PlayerMovePOJO remotePlayer) {
 		opponentName.setText(remotePlayer.getName());
-		advCemiterySize.setText(String.valueOf(remotePlayer.getDeadCards()));
-		advDeckSIze.setText(String.valueOf(remotePlayer.getDeckSize()));
+		oppDeadCards.setText(String.valueOf(remotePlayer.getDeadCards()));
+		oppDeckSize.setText(String.valueOf(remotePlayer.getDeckSize()));
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) remotePlayer.getHand();
 		ArrayList<JButton> buttonsCardsAdv = (ArrayList<JButton>) buttonsCardsAdv();
-		for(int i = 0; i < hand.size(); i++) {
+		for (int i = 0; i < hand.size(); i++) {
 			CardPOJO pojo = hand.get(i);
 			JButton jButton = buttonsCardsAdv.get(i);
-			if(pojo != null) {
+			if (pojo != null) {
 				jButton.setName(pojo.getName());
 				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath()).getImage()
-						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			} else {
 				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
-						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
+						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
 		}
 	}
-	
+
 	private Collection<JButton> buttonsCardsAdv() {
 		Collection<JButton> buttons = new ArrayList<>();
-		buttons.add(advCard1);
-		buttons.add(adCard2);
-		buttons.add(adCard3);
-		buttons.add(adCard4);
+		buttons.add(oppCard1);
+		buttons.add(oppCard2);
+		buttons.add(oppCard3);
+		buttons.add(oppCard4);
 		return buttons;
 	}
-	
+
 	private Collection<JButton> buttonsCardsPlayer() {
 		Collection<JButton> buttons = new ArrayList<>();
 		buttons.add(card1);
@@ -407,17 +403,19 @@ public class DigimonScreen extends JFrame {
 		buttons.add(card4);
 		return buttons;
 	}
-	
+
 	public void notifyPhase(String phase) {
 		phaseName.setText(phase);
 		repaint();
+		pack();
+
 	}
-	
+
 	public void enableButtonsDrawPhase() {
 		jump.setEnabled(true);
 		discardHand.setEnabled(true);
 	}
-	
+
 	public void updatePhaseName(String phase) {
 		phaseName.setText(phase);
 	}
@@ -439,10 +437,10 @@ public class DigimonScreen extends JFrame {
 	}
 
 	public void enableButtonsDigivolvePhase(boolean b) {
-		if(b) {
-			updateCard.setEnabled(true);
+		if (b) {
+			evolute.setEnabled(true);
 		} else {
-			updateCard.setEnabled(false);
+			evolute.setEnabled(false);
 		}
 		repaint();
 	}
@@ -457,7 +455,7 @@ public class DigimonScreen extends JFrame {
 			jButton.setEnabled(false);
 		}
 		jump.setEnabled(false);
-		updateCard.setEnabled(false);
+		evolute.setEnabled(false);
 		discardHand.setEnabled(false);
 	}
 

@@ -1,13 +1,11 @@
 package control;
 
-import java.util.*;
-
 import br.ufsc.inf.leobr.cliente.Jogada;
 import model.Jogador;
 import view.AtorJogador;
 
 public class Tabuleiro implements Jogada {
-
+	private static final long serialVersionUID = 1L;
 	protected Jogador jogador1;
 	protected Jogador jogador2;
 	protected boolean partidaEmAndamento;
@@ -48,19 +46,19 @@ public class Tabuleiro implements Jogada {
 	
 	public void verificaMovimentoPosicao(int tipoMovimento, int posicaoClicada)throws Exception{
 		if(tipoMovimento == 0){
-			throw new Exception("Você não selecionou nenhum tipo de movimento");
+			throw new Exception("Vocï¿½ nï¿½o selecionou nenhum tipo de movimento");
 		}
 
 		int [] posicoes = jogador1.getPosicoes();
 		for (int i= 0; i < posicoes.length; i++){
 			if(posicaoClicada == posicoes[i] && tipoMovimento == 1){
-				throw new Exception("Você nâo pode atacar uma posição do seu lado");				
+				throw new Exception("Vocï¿½ nï¿½o pode atacar uma posiï¿½ï¿½o do seu lado");				
 			}	
 		}
 		int [] posicoes2 = jogador2.getPosicoes();
 		for(int i=0; i < posicoes2.length; i ++){
 			if(posicaoClicada == posicoes2[i] && tipoMovimento == 2){
-				throw new Exception("Você nâo pode se mover para o lado do seu adversario");				
+				throw new Exception("Vocï¿½ nï¿½o pode se mover para o lado do seu adversario");				
 			}
 		}
 	}
@@ -70,12 +68,12 @@ public class Tabuleiro implements Jogada {
 		
 		if(tipoMovimento == 1){
 			if(Math.abs(posicaoClicada-posicaoAtual) == 1 || Math.abs(posicaoClicada-posicaoAtual) == 5){
-				throw new Exception("Não pode selecionar essa casa ,está muito longe.");
+				throw new Exception("Nï¿½o pode selecionar essa casa ,estï¿½ muito longe.");
 			}
 		}
 		if(tipoMovimento == 2){
 			if(Math.abs(posicaoClicada-posicaoAtual) != 1){
-				throw new Exception("Você não pode pular posições. Escolha uma posição mais próxima.");
+				throw new Exception("Vocï¿½ nï¿½o pode pular posiï¿½ï¿½es. Escolha uma posiï¿½ï¿½o mais prï¿½xima.");
 			}
 		}
 		this.ultimaPosClicJogador1 = posicaoClicada;

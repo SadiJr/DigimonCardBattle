@@ -1,11 +1,11 @@
 package model;
 
-import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Effect;
 import enums.Level;
 import enums.Specialty;
 
 public class DigimonCard extends Card {
+	private static final long serialVersionUID = 1L;
 	private int hp;
 	private int attack1;
 	private int attack2;

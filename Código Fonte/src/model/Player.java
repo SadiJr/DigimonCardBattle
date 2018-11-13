@@ -6,6 +6,7 @@ import java.util.Collection;
 import br.ufsc.inf.leobr.cliente.Jogada;
 
 public class Player implements Jogada {
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private Deck deck;
@@ -15,6 +16,7 @@ public class Player implements Jogada {
 	private DigimonCard digimonCard;
 	private Card supportCard;
 	private int attackChoice;
+	private boolean first;
 	
 	public Player(String name) {
 		this.name = name;
@@ -27,6 +29,11 @@ public class Player implements Jogada {
 		this.name = name;
 		deck = new Deck();
 		hand = new ArrayList<>();
+		if(id == 1) {
+			first = true;
+		} else {
+			first = false;
+		}
 	}
 
 	public String getName() {
@@ -117,5 +124,13 @@ public class Player implements Jogada {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public boolean isFirst() {
+		return first;
+	}
+
+	public void setFirst(boolean isFirst) {
+		this.first = isFirst;
 	}
 }

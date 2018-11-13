@@ -18,6 +18,7 @@ import enums.Level;
 import enums.Phase;
 
 public class Table implements Jogada {
+	private static final long serialVersionUID = 1L;
 	private Deck deck;
 	private Player localPlayer;
 	private Player remotePlayer;
@@ -140,12 +141,10 @@ public class Table implements Jogada {
 	}
 
 	public void distributeCards() {
-		System.err.println("\n\nCartas no deck do usuário");
 		ArrayList<Card> cards = (ArrayList<Card>) deck.getCards();
 		ArrayList<Player> listPlayers = (ArrayList<Player>) getListPlayers();
-		int result = (int) (Math.random() * 2);
-		Player player1 = listPlayers.get(result);
-		Player player2 = listPlayers.get(result == 0 ? 1 : 0);
+		Player player1 = listPlayers.get(0);
+		Player player2 = listPlayers.get(1);
 		for(int i=0; i < 22; i++) {
 			int z = (int) (Math.random() * 14);
 			Card card = cards.get(z);
@@ -410,8 +409,13 @@ public class Table implements Jogada {
 	
 	public Collection<Player> getListPlayers() {
 		Collection<Player> players = new ArrayList<>();
-		players.add(localPlayer);
-		players.add(remotePlayer);
+		if(localPlayer.getId() == 1) {
+			players.add(localPlayer);
+			players.add(remotePlayer);
+		} else {
+			players.add(remotePlayer);
+			players.add(localPlayer);
+		}
 		return players;
 	}
 
