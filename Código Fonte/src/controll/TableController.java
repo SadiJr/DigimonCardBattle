@@ -111,9 +111,6 @@ public class TableController {
 			if(table.getPhase().equals(Phase.QUIT)) {
 				player.informMessage("O jogador " + getNameRemotePlayer() + " é um covarde desistente!");
 				exit();
-				
-			} else if(table.getPhase().equals(Phase.START_GAME)) {
-				startNewGame(new Integer(2));			
 			} else {
 				int turns = table.getTurns();
 				if(turns < 2) {
@@ -173,6 +170,7 @@ public class TableController {
 		
 		if(table.existsDigimonCardOnSlot() || table.existsDigimonCardInDeck()) {
 			table.addNewHand();
+			updateInterface();
 		} else {
 			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck!\nPelas regras do jogo, você perdeu!");
 			table.getRemotePlayer().setVictories(3);
@@ -307,7 +305,14 @@ public class TableController {
 
 	public void choiceAttack(int attack) {
 		table.getLocalPlayer().setAttackChoice(attack);
-		player.dissableButtonsAttack();
+//		player.dissableButtonsAttack();
+		player.dissableAllButtons();
+		network.sendMove(table);
+		if(table.getTurns() == 2) {
+			battle();
+		} else {
+			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
+		}
 	}
 
 	public void downSupportCard(String supportName) {
@@ -417,6 +422,7 @@ public class TableController {
 	public void exit() {
 		String name = table.getLocalPlayer().getName();
 		Integer id = table.getLocalPlayer().getId();
+		network.finalizarPartidaComErro("A partida acabou");
 		table = null;
 		table = new Table();
 		table.setLocalPlayer(new Player(name, id));

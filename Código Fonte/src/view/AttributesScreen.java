@@ -219,29 +219,25 @@ public class AttributesScreen extends JFrame {
 		cardImage.setIcon(iconLogo);
 
 		switch (phase) {
-		case "DRAW_PHASE":
+		case "Fase de Descarte e Compra":
 			downDigimon.setVisible(true);
 			if(!buttonsDissable) {
 				downDigimon.setEnabled(true);
 				dissableButtonsExcept(downDigimon, null, null);
 			}
 			break;
-		case "DIGIVOLVE_PHASE":
+		case "Fase de Evolução":
 			sacrificeCard.setVisible(true);
 			if(!buttonsDissable) {
 				sacrificeCard.setEnabled(true);
 				dissableButtonsExcept(sacrificeCard, null, null);
 			}		
 			break;
-		case "BATTLE_PHASE":
-			attack1.setVisible(true);
-			attack2.setVisible(true);
-			attack3.setVisible(true);
+		case "Fase de Pré Batalha":
+			downDigimon.setVisible(true);
 			if(!buttonsDissable) {
-				attack1.setEnabled(true);
-				attack1.setEnabled(true);
-				attack1.setEnabled(true);
-				dissableButtonsExcept(attack1, attack2, attack3);
+				downDigimon.setEnabled(true);
+				dissableButtonsExcept(downDigimon, null, null);
 			}
 			break;
 			
@@ -278,21 +274,21 @@ public class AttributesScreen extends JFrame {
 		level.setText(String.valueOf(pojo.getLevel()));
 		
 		switch (phase) {
-		case "DRAW_PHASE":
+		case "Fase de Descarte e Compra":
 			downDigimon.setVisible(true);
 			if(!buttonsDissable) {
 				downDigimon.setEnabled(true);
 				dissableButtonsExcept(downDigimon, null, null);
 			}
 			break;
-		case "DIGIVOLVE_PHASE":
+		case "Fase de Evolução":
 			sacrificeCard.setVisible(true);
 			if(!buttonsDissable) {
 				sacrificeCard.setEnabled(true);
 				dissableButtonsExcept(sacrificeCard, null, null);
 			}		
 			break;
-		case "BATTLE_PHASE":
+		case "Fase de Pré Batalha":
 			attack1.setVisible(true);
 			attack2.setVisible(true);
 			attack3.setVisible(true);
@@ -339,6 +335,7 @@ public class AttributesScreen extends JFrame {
 		buttons.remove(button3);
 		for (JButton jButton : buttons) {
 			jButton.setEnabled(false);
+			jButton.setVisible(false);
 		}
 	}
 	
@@ -347,6 +344,9 @@ public class AttributesScreen extends JFrame {
 		attack1.setEnabled(false);
 		attack2.setEnabled(false);
 		attack3.setEnabled(false);
+		attack1.setVisible(false);
+		attack2.setVisible(false);
+		attack3.setVisible(false);
 	}
 	
 	public void enableButtonsAttack() {
@@ -354,6 +354,9 @@ public class AttributesScreen extends JFrame {
 		attack1.setEnabled(true);
 		attack2.setEnabled(true);
 		attack3.setEnabled(true);
+		attack1.setVisible(true);
+		attack2.setVisible(true);
+		attack3.setVisible(true);
 	}
 	
 	public void dissableButtonSacrificeCard() {

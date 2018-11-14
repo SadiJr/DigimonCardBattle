@@ -403,6 +403,7 @@ public class Table implements Jogada {
 		if(size < 4) {
 			while(size < 4 && !localPlayer.getDeck().getCards().isEmpty()) {
 				addMissingCards();
+				size++;
 			}
 		}
 	}

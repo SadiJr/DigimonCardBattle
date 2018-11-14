@@ -105,7 +105,7 @@
 {
 	"name" : "TANKMON",
 	"effect" : null,
-	"path" : "/pictures/fire/tankon.jpg",
+	"path" : "/pictures/fire/tankmon.jpg",
 	"hp" : 1000,
 	"attack1" : 400,
 	"attack2" : 290,

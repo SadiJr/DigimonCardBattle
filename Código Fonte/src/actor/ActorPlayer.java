@@ -183,6 +183,8 @@ public class ActorPlayer {
 		} catch (Exception e) {
 			informError(e.getMessage());
 		}
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
 	}
 	
 	public void viewAttributesOptionCard(boolean opponent) {
@@ -198,11 +200,15 @@ public class ActorPlayer {
 			}
 		} catch (Exception e) {
 			informError(e.getMessage());
-		}		
+		}
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
 	}
 
 	public void viewOptionsUpdate() {
 		PlayerMovePOJO createPOJOPlayer = tableController.createPOJOPlayer(tableController.getTable().getLocalPlayer());
 		update.viewOptions(createPOJOPlayer.getHand());
+		update.pack();
+		update.setVisible(true);
 	}
 }

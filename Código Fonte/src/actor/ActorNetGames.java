@@ -54,14 +54,6 @@ public class ActorNetGames implements OuvidorProxy {
 		throw new Exception("Um erro ocorreu");
 	}
 	
-//	public void sendRequestMove() {
-//		try {
-//			proxy.iniciarNovaPartida(new Integer(2));
-//		} catch (Exception e) {
-//			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
-//		}
-//	}
-
 	public boolean startGame() {
 		try {
 			proxy.iniciarNovaPartida(2);
@@ -82,9 +74,6 @@ public class ActorNetGames implements OuvidorProxy {
 		}
 	}
 
-	/*
-	 * Por motivos que desconheco, esse é o método responsável por receber uma solicitação de início.
-	 */
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
 		tableController.startNewGame(posicao);
