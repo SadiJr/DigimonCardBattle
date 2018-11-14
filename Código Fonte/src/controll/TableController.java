@@ -61,6 +61,7 @@ public class TableController {
 
 	public void startNewGame(Integer posicao) {
 		try {
+			System.out.println(posicao);
 			String nameRemotePlayer = network.getNameRemotePlayer();
 			player.informRemotePlayerName(nameRemotePlayer);
 			table.getLocalPlayer().setId(posicao == 1 ? 2 : 1);
@@ -69,7 +70,7 @@ public class TableController {
 			table.distributeCards();
 			table.setPhase(Phase.START_GAME);
 			table.setGameInProggress(true);
-			table.setFirstPlayer(table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer());
+//			table.setFirstPlayer(table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer());
 			if(!table.getLocalPlayer().isFirst()) {
 				drawPhase();
 			} else {

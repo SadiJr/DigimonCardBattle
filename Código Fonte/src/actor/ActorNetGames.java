@@ -51,12 +51,12 @@ public class ActorNetGames implements OuvidorProxy {
 			if(!name.equals(nameLocalPlayer))
 				return name;
 		}
-		throw new Exception("Um erro ocorreu");
+		throw new Exception("Escolha um nome diferente, pois o adversário tem o mesmo nome que você");
 	}
 	
 	public boolean startGame() {
 		try {
-			proxy.iniciarNovaPartida(2);
+			proxy.iniciarPartida(2);
 			return true;
 		} catch (Exception e) {
 			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
@@ -76,6 +76,7 @@ public class ActorNetGames implements OuvidorProxy {
 
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
+		System.out.println(posicao);
 		tableController.startNewGame(posicao);
 	}
 

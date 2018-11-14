@@ -81,6 +81,7 @@ public class ActorPlayer {
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		screen.updateInterface(remotePlayer, localPlayer);
+		screen.pack();
 	}
 
 	public void dissableButtonsDrawPhase() {
@@ -150,6 +151,7 @@ public class ActorPlayer {
 	public void viewAttributes(CardPOJO pojo) {
 		try {
 			attributesScreen.showAttributes(pojo);
+			attributesScreen.pack();
 			attributesScreen.setVisible(true);
 		} catch (Exception e) {
 			informError(e.getMessage());

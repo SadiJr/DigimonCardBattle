@@ -19,6 +19,7 @@ public class Tabuleiro implements Jogada {
 	}
 	
 	public void criarJogadores(String idJogador, String adversario, int posicao) {
+		System.err.println(posicao);
 		jogador1 = new Jogador(idJogador, posicao);
 		jogador2 = new Jogador(adversario, posicao == 1 ? 2 : 1);
 

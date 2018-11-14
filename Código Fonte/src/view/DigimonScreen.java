@@ -260,6 +260,8 @@ public class DigimonScreen extends JFrame {
 		discardHand.setBounds(610, 660, 135, 25);
 		jump.setBounds(910, 660, 135, 25);
 		playerName.setBounds(385, 610, 100, 25);
+		
+		discardHand.setEnabled(true);
 
 		Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
 				.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
@@ -344,6 +346,7 @@ public class DigimonScreen extends JFrame {
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) localPlayer.getHand();
 		ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
 		for (int i = 0; i < hand.size(); i++) {
+			System.out.println(hand.size());
 			CardPOJO pojo = hand.get(i);
 			JButton jButton = buttonsCardsPlayer.get(i);
 			if (pojo != null) {
@@ -425,7 +428,7 @@ public class DigimonScreen extends JFrame {
 	}
 
 	public String getNameServer() {
-		return JOptionPane.showInputDialog("Digite o nome do servidor", "ufsc.algumacoisa-alterar-depois");
+		return JOptionPane.showInputDialog("Digite o nome do servidor", "localhost");
 	}
 
 	public void sendMessage(String message) {
