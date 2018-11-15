@@ -12,7 +12,6 @@ import controll.TableController;
 import model.Table;
 
 public class ActorNetGames implements OuvidorProxy {
-	private static final long serialVersionUID = 1L;
 	private TableController tableController;
 	private Proxy proxy;
 
@@ -28,39 +27,33 @@ public class ActorNetGames implements OuvidorProxy {
 			return true;
 		} catch (JahConectadoException e) {
 			tableController.informError("Você já está conectado!");
+			e.printStackTrace();
 			return false;
 		} catch(NaoPossivelConectarException | ArquivoMultiplayerException e) {
 			tableController.informError("Ocorreu um erro ao tentar estabelecer conexão com o servidor.");
+			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public boolean disconnect() {
+	public void disconnect() {
 		try {
 			proxy.desconectar();
-			tableController.disconnect();
 		} catch (NaoConectadoException e) {
 			tableController.informMessage("Você já está desconectado");
 		}
-		return true;
 	}
 
 	public String getNameRemotePlayer() throws Exception {
-		String nameLocalPlayer = tableController.getNameLocalPlayer();
-		for(String name : proxy.obterNomeAdversarios()) {
-			if(!name.equals(nameLocalPlayer))
-				return name;
-		}
-		throw new Exception("Escolha um nome diferente, pois o adversário tem o mesmo nome que você");
+		return proxy.obterNomeAdversarios().get(0);
 	}
 	
-	public boolean startGame() {
+	public void startGame() {
 		try {
 			proxy.iniciarPartida(2);
-			return true;
 		} catch (Exception e) {
 			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
-			return false;
+			e.printStackTrace();
 		}
 	}
 
@@ -76,14 +69,12 @@ public class ActorNetGames implements OuvidorProxy {
 
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
-		System.out.println(posicao);
 		tableController.startNewGame(posicao);
 	}
 
 	@Override
 	public void finalizarPartidaComErro(String message) {
 		tableController.informError(message);
-		tableController.exit();
 	}
 
 	@Override

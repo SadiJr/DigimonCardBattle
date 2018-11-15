@@ -21,8 +21,8 @@ import actor.ActorPlayer;
 import model.CardPOJO;
 import model.PlayerMovePOJO;
 
-@SuppressWarnings("serial")
 public class DigimonScreen extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private final ActorPlayer player;
 	private JButton card4;
 	private JButton oppDigimonCard;
@@ -68,7 +68,7 @@ public class DigimonScreen extends JFrame {
 	private JButton jump;
 	private JLabel playerName;
 
-	private String pathDefault = "/pictures/backCard.jpg";
+	private String pathDefault = "pictures/backCard.jpg";
 
 	private ActionListener l = new ActionListener() {
 
@@ -77,35 +77,35 @@ public class DigimonScreen extends JFrame {
 			if (e.getSource() == card1) {
 				System.out.println(card1.getName());
 				String name = card1.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, false);
 			} else if (e.getSource() == card2) {
 				System.out.println(card2.getName());
 				String name = card2.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, false);
 			} else if (e.getSource() == card3) {
 				System.out.println(card3.getName());
 				String name = card3.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, false);
 			} else if (e.getSource() == card4) {
 				System.out.println(card4.getName());
 				String name = card4.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, false);
 			} else if (e.getSource() == oppCard1) {
 				System.out.println(oppCard1.getName());
 				String name = oppCard1.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, true);
 			} else if (e.getSource() == oppCard2) {
 				System.out.println(oppCard2.getName());
 				String name = oppCard2.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, true);
 			} else if (e.getSource() == oppCard3) {
 				System.out.println(oppCard3.getName());
 				String name = oppCard3.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, true);
 			} else if (e.getSource() == oppCard4) {
 				System.out.println(oppCard4.getName());
 				String name = oppCard4.getName();
-				player.viewAttributes(name);
+				player.viewAttributes(name, true);
 			} else if (e.getSource() == digimonCard) {
 				player.viewAttributesDigimonCard(false);
 			} else if (e.getSource() == supportCard) {
@@ -263,7 +263,7 @@ public class DigimonScreen extends JFrame {
 		
 		discardHand.setEnabled(true);
 
-		Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
+		Image iconLogo = new ImageIcon(pathDefault).getImage()
 				.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		card1.setIcon(imageIcon);
@@ -351,16 +351,30 @@ public class DigimonScreen extends JFrame {
 			JButton jButton = buttonsCardsPlayer.get(i);
 			if (pojo != null) {
 				jButton.setName(pojo.getName());
-				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath()).getImage()
+				Image iconLogo = new ImageIcon(pojo.getPath()).getImage()
 						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			} else {
-				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
+				Image iconLogo = new ImageIcon(pathDefault).getImage()
 						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
+		}
+		if(localPlayer.getDigimonCard() != null) {
+			Image iconLogo = new ImageIcon(localPlayer.getDigimonCard().getPath())
+					.getImage().getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			digimonCard.setIcon(imageIcon);
+			digimonCard.setName(localPlayer.getDigimonCard().getName());
+		}
+		if(localPlayer.getSupportCard() != null) {
+			Image iconLogo = new ImageIcon(localPlayer.getSupportCard().getPath())
+					.getImage().getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			supportCard.setIcon(imageIcon);
+			supportCard.setName(localPlayer.getSupportCard().getName());
 		}
 
 	}
@@ -376,16 +390,30 @@ public class DigimonScreen extends JFrame {
 			JButton jButton = buttonsCardsAdv.get(i);
 			if (pojo != null) {
 				jButton.setName(pojo.getName());
-				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath()).getImage()
+				Image iconLogo = new ImageIcon(pojo.getPath()).getImage()
 						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			} else {
-				Image iconLogo = new ImageIcon(System.getProperty("user.dir") + pathDefault).getImage()
+				Image iconLogo = new ImageIcon(pathDefault).getImage()
 						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
+		}
+		if(remotePlayer.getDigimonCard() != null) {
+			oppDigimonCard.setName(remotePlayer.getDigimonCard().getName());
+			Image iconLogo = new ImageIcon(remotePlayer.getDigimonCard().getPath()).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			oppDigimonCard.setIcon(imageIcon);
+		}
+		if(remotePlayer.getSupportCard() != null) {
+			oppSupportCard.setName(remotePlayer.getSupportCard().getName());
+			Image iconLogo = new ImageIcon(remotePlayer.getSupportCard().getPath()).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			oppSupportCard.setIcon(imageIcon);
 		}
 	}
 
@@ -428,7 +456,7 @@ public class DigimonScreen extends JFrame {
 	}
 
 	public String getNameServer() {
-		return JOptionPane.showInputDialog("Digite o nome do servidor", "localhost");
+		return JOptionPane.showInputDialog("Digite o nome do servidor", "netgames.labsoft.ufsc.br");
 	}
 
 	public void sendMessage(String message) {
@@ -459,6 +487,10 @@ public class DigimonScreen extends JFrame {
 		}
 		jump.setEnabled(false);
 		evolute.setEnabled(false);
+		discardHand.setEnabled(false);
+	}
+
+	public void dissableButtonsDrawPhase() {
 		discardHand.setEnabled(false);
 	}
 

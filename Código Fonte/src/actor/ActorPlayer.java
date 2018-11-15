@@ -82,10 +82,12 @@ public class ActorPlayer {
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		screen.updateInterface(remotePlayer, localPlayer);
 		screen.pack();
+		screen.repaint();
 	}
 
 	public void dissableButtonsDrawPhase() {
 		attributesScreen.dissableButtonsDrawPhase();
+		screen.dissableButtonsDrawPhase();
 	}
 
 	public void enableButtonsDigivolvePhase() {
@@ -136,8 +138,8 @@ public class ActorPlayer {
 		screen.dissableAllButtons();
 	}
 
-	public void viewAttributes(String name) {
-		tableController.viewAttributes(name);
+	public void viewAttributes(String name, boolean opponent) {
+		tableController.viewAttributes(name, opponent);
 	}
 
 	public AttributesScreen getAttributesScreen() {
@@ -148,9 +150,9 @@ public class ActorPlayer {
 		this.attributesScreen = attributesScreen;
 	}
 
-	public void viewAttributes(CardPOJO pojo) {
+	public void viewAttributes(CardPOJO pojo, boolean opponent) {
 		try {
-			attributesScreen.showAttributes(pojo);
+			attributesScreen.showAttributes(pojo, opponent);
 			attributesScreen.pack();
 			attributesScreen.setVisible(true);
 		} catch (Exception e) {

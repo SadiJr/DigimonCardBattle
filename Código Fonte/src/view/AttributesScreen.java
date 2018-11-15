@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import actor.ActorPlayer;
 import model.CardPOJO;
 
-@SuppressWarnings("serial")
 public class AttributesScreen extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private ActorPlayer player;
 	private JLabel cardImage;
 	private JLabel jcomp2;
@@ -194,18 +194,19 @@ public class AttributesScreen extends JFrame {
         attack3.addActionListener(l);
 	}
 
-	public static void main(String[] args) {
-		AttributesScreen attributesScreen = new AttributesScreen();
-		attributesScreen.pack();
-		attributesScreen.setVisible(true);
-		attributesScreen.enableButtonsAttack();
-	}
-
-	public void showAttributes(CardPOJO pojo) throws Exception {
+	public void showAttributes(CardPOJO pojo, boolean opponent) throws Exception {
 		if(pojo.isOptionCard()) {
-			showOptionCardAttributes(pojo);
+			if(opponent) {
+				showOptionCardAttributesOpponent(pojo);
+			} else {
+				showOptionCardAttributes(pojo);
+			}
 		} else { 
-			showDigimonCardAttributes(pojo);
+			if(opponent) {
+				showDigimonCardAttributesOpponent(pojo);
+			} else {
+				showDigimonCardAttributes(pojo);
+			}
 		}
 	}
 
@@ -215,7 +216,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + path);
+		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
 
 		switch (phase) {
@@ -252,7 +253,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + path);
+		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
 	}
 
@@ -262,7 +263,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + path);
+		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
 		hp.setText(String.valueOf(pojo.getHp()));
 		dp.setText(String.valueOf(pojo.getDp()));
@@ -276,28 +277,22 @@ public class AttributesScreen extends JFrame {
 		switch (phase) {
 		case "Fase de Descarte e Compra":
 			downDigimon.setVisible(true);
-			if(!buttonsDissable) {
-				downDigimon.setEnabled(true);
-				dissableButtonsExcept(downDigimon, null, null);
-			}
+			downDigimon.setEnabled(true);
+			dissableButtonsExcept(downDigimon, null, null);
 			break;
 		case "Fase de Evolução":
 			sacrificeCard.setVisible(true);
-			if(!buttonsDissable) {
-				sacrificeCard.setEnabled(true);
-				dissableButtonsExcept(sacrificeCard, null, null);
-			}		
+			sacrificeCard.setEnabled(true);
+			dissableButtonsExcept(sacrificeCard, null, null);
 			break;
 		case "Fase de Pré Batalha":
 			attack1.setVisible(true);
 			attack2.setVisible(true);
 			attack3.setVisible(true);
-			if(!buttonsDissable) {
-				attack1.setEnabled(true);
-				attack1.setEnabled(true);
-				attack1.setEnabled(true);
-				dissableButtonsExcept(attack1, attack2, attack3);
-			}
+			attack1.setEnabled(true);
+			attack1.setEnabled(true);
+			attack1.setEnabled(true);
+			dissableButtonsExcept(attack1, attack2, attack3);
 			break;
 			
 		default:
@@ -311,7 +306,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + path);
+		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
 		hp.setText(String.valueOf(pojo.getHp()));
 		dp.setText(String.valueOf(pojo.getDp()));

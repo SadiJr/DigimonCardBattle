@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,7 +25,6 @@ public class Table implements Jogada {
 	private Player remotePlayer;
 	private boolean gameInProggress;
 	private boolean connected;
-	private Player firstPlayer;
 	private Phase phase;
 	private int turns;
 	private Cemitery cemiteryLocalPlayer;
@@ -78,9 +78,9 @@ public class Table implements Jogada {
 	}
 
 	public void createDeck() throws FileNotFoundException, MalformedJsonException {
-		FileReader digimonFire = new FileReader(System.getProperty("user.dir") + "/cards/digimonFire.json");
-		FileReader digimonGrass = new FileReader(System.getProperty("user.dir") + "/cards/digimonGrass.json");
-		FileReader optionCard = new FileReader(System.getProperty("user.dir") + "/cards/optionCard.json");
+		FileReader digimonFire = new FileReader("cards/digimonFire.json");
+		FileReader digimonGrass = new FileReader("cards/digimonGrass.json");
+		FileReader optionCard = new FileReader("cards/optionCard.json");
 		
 		Gson gson = new GsonBuilder().create();
 		BufferedReader fire = new BufferedReader(digimonFire);
@@ -120,20 +120,20 @@ public class Table implements Jogada {
 				throw new MalformedJsonException("Possível erro no json");
 			}
 		}
-//		for(Card c : deck.getCards()) {
-//			if(c instanceof DigimonCard) {
-//				DigimonCard d = (DigimonCard) c;
-//				System.out.println("Name: " + c.getName() + "\nEffect: "
-//						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
-//						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
-//						+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
-//						+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
-//						+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
-//			} else {
-//				System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
-//						c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
-//			}
-//		}
+		for(Card c : deck.getCards()) {
+			if(c instanceof DigimonCard) {
+				DigimonCard d = (DigimonCard) c;
+				System.out.println("Name: " + c.getName() + "\nEffect: "
+						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().name()) + "\nDescription: "
+						+ (c.getCardEffect() == null ? "Não há" : c.getCardEffect().getDescription()) + "\nPath: "
+						+ c.getPathToImage() + "\nHP: " + d.getHp() + "\n" + "ATK1: " + d.getAttack1() + "\nATK2: "
+						+ d.getAttack2() + "\nATK3: " + d.getAttack3() + "\nDP: " + d.getDp() + "\nP:" + d.getP()
+						+ "\nSpecialty: " + d.getSpecialty().name() + "\nLevel: " + d.getLevel().name() + "\n\n\n");
+			} else {
+				System.out.println("Name: " + c.getName() +"\nEffect: " + c.getCardEffect().name() + "\nDescription: " +
+						c.getDescriptionEffect() + "\nPath: " + c.getPathToImage() + "\n\n\n");
+			}
+		}
 	}
 
 	public void createLocalPlayer(String name, int id) {
@@ -244,6 +244,9 @@ public class Table implements Jogada {
 						localPlayer.getHand().remove(digimon);						
 						break;
 					}
+					ArrayList<Card> c = (ArrayList<Card>) localPlayer.getHand();
+					int indexOf = c.indexOf(digimon);
+					c.add(indexOf, null); 
 					return;
 				} else {
 					throw new Exception("A carta selecionada não é uma DigimonCard!");
@@ -293,27 +296,22 @@ public class Table implements Jogada {
 		this.cemiteryRemotePlayer = cemiteryRemotePlayer;
 	}
 
-	public Player getFirstPlayer() {
-		return this.firstPlayer;
-	}
-
-	public void setFirstPlayer(Player firstPlayer) {
-		this.firstPlayer = firstPlayer;
-	}
-
 	public void addNewHand() {
 		createHandLocalPlayer();
 	}
 
-	public Card getCardByName(String name) {
-		for(Card card : localPlayer.getHand()) {
-			if(card.getName().equals(name)) {
-				return card;
+	public Card getCardByName(String name, boolean opponent) {
+		if(opponent) {
+			for(Card card : remotePlayer.getHand()) {
+				if(card.getName().equals(name)) {
+					return card;
+				}
 			}
-		}
-		for(Card card : remotePlayer.getHand()) {
-			if(card.getName().equals(name)) {
-				return card;
+		} else {
+			for(Card card : localPlayer.getHand()) {
+				if(card.getName().equals(name)) {
+					return card;
+				}
 			}
 		}
 		return null;
@@ -327,7 +325,7 @@ public class Table implements Jogada {
 
 	public void updateCard(String name) throws Exception {
 		if(localPlayer.getDigimonCard() != null) {
-			Card card = getCardByName(name);
+			Card card = getCardByName(name, false);
 			if(card != null) {
 				for(Card c : localPlayer.getHand()) {
 					if(c.equals(card)) {
@@ -402,7 +400,17 @@ public class Table implements Jogada {
 		int size = localPlayer.getHand().size();
 		if(size < 4) {
 			while(size < 4 && !localPlayer.getDeck().getCards().isEmpty()) {
-				addMissingCards();
+				addMissingCards(localPlayer);
+				size++;
+			}
+		}
+	}
+	
+	public void createHandRemotePlayer() {
+		int size = remotePlayer.getHand().size();
+		if(size < 4) {
+			while(size < 4 && !remotePlayer.getDeck().getCards().isEmpty()) {
+				addMissingCards(remotePlayer);
 				size++;
 			}
 		}
@@ -424,11 +432,11 @@ public class Table implements Jogada {
 		return localPlayer.getHand().size();
 	}
 
-	public void addMissingCards() {
-		ArrayList<Card> cards = (ArrayList<Card>) localPlayer.getDeck().getCards();
+	public void addMissingCards(Player player) {
+		ArrayList<Card> cards = (ArrayList<Card>) player.getDeck().getCards();
 		Card card = cards.get(0);
-		localPlayer.getDeck().getCards().remove(card);
-		localPlayer.getHand().add(card);
+		player.getDeck().getCards().remove(card);
+		player.getHand().add(card);
 	}
 
 	public boolean existsDigimonCardInHand() {
@@ -533,7 +541,7 @@ public class Table implements Jogada {
 	}
 
 	public void battleTurn() throws Exception {
-		Player first = getFirstPlayer();
+		Player first = localPlayer.getId() == 1 ? localPlayer : remotePlayer;
 		int attackChoice = first.getAttackChoice();
 		int damage = 0;
 		switch (attackChoice) {
