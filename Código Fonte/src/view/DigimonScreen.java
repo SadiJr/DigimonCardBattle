@@ -107,9 +107,9 @@ public class DigimonScreen extends JFrame {
 				String name = oppCard4.getName();
 				player.viewAttributes(name, true);
 			} else if (e.getSource() == digimonCard) {
-				player.viewAttributesCardInBattleField(digimonCard.getName());
+				player.viewAttributesDigimonCardInBattleField(digimonCard.getName());
 			} else if (e.getSource() == supportCard) {
-				player.viewAttributesCardInBattleField(supportCard.getName());
+				player.viewAttributesSupportCardInBattleField(supportCard.getName());
 			} else if (e.getSource() == oppDigimonCard) {
 				player.viewAttributesDigimonCard(true);
 			} else if (e.getSource() == oppSupportCard) {
@@ -343,6 +343,9 @@ public class DigimonScreen extends JFrame {
 			oppDP.setText("0");
 			oppDeckSize.setText("0");
 			opponentName.setText("Seu inimigo");
+			oppVict1.setSelected(false);
+			oppVict2.setSelected(false);
+			oppVict3.setSelected(false);
 		}
 
 		if (localPlayer != null) {
@@ -404,6 +407,27 @@ public class DigimonScreen extends JFrame {
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			supportCard.setIcon(imageIcon);
 		}
+		
+		int victories = localPlayer.getVictories();
+		switch (victories) {
+		case 1:
+			vict1.setSelected(true);
+			break;
+		case 2 :
+			vict1.setSelected(true);
+			vict2.setSelected(true);
+			break;
+		case 3:
+			vict1.setSelected(true);
+			vict2.setSelected(true);
+			vict3.setSelected(true);
+			break;
+		default:
+			vict1.setSelected(false);
+			vict2.setSelected(false);
+			vict3.setSelected(false);
+			break;
+		}
 
 	}
 
@@ -446,6 +470,26 @@ public class DigimonScreen extends JFrame {
 					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			oppSupportCard.setIcon(imageIcon);
+		}
+		int victories = remotePlayer.getVictories();
+		switch (victories) {
+		case 1:
+			oppVict1.setSelected(true);
+			break;
+		case 2 :
+			oppVict1.setSelected(true);
+			oppVict2.setSelected(true);
+			break;
+		case 3:
+			oppVict1.setSelected(true);
+			oppVict2.setSelected(true);
+			oppVict3.setSelected(true);
+			break;
+		default:
+			oppVict1.setSelected(false);
+			oppVict2.setSelected(false);
+			oppVict3.setSelected(false);
+			break;
 		}
 	}
 
@@ -512,6 +556,7 @@ public class DigimonScreen extends JFrame {
 		jump.setEnabled(false);
 		evolute.setEnabled(false);
 		discardHand.setEnabled(false);
+		pack();
 	}
 
 	public void dissableButtonsDrawPhase() {

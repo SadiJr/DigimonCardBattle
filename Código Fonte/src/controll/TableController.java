@@ -501,20 +501,27 @@ public class TableController {
 		}
 	}
 
-	public void viewAttributesCardInBattleField(String name) {
+	public void viewAttributesDigimonCardInBattleField(String name) {
 		if(table.getLocalPlayer() == null) {
 			player.informError("Você não possuí nenhuma carta em campo de batalha");
 		}
 		DigimonCard digimonCard = table.getLocalPlayer().getDigimonCard();
+		if(digimonCard != null) {
+			CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+			player.viewAttributesDigimonCardInBattleField(createCardPOJO);
+		} else {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
+	}
+	
+	public void viewAttributesSupportCardInBattleField(String name) {
+		if(table.getLocalPlayer() == null) {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
 		Card supportCard = table.getLocalPlayer().getSupportCard();
-		if(digimonCard != null || supportCard != null) {
-			Card c = digimonCard.getName().equals(name) ? digimonCard : supportCard;
-			if(c != null) {
-				CardPOJO createCardPOJO = createCardPOJO(c);
-				player.viewAttributesCardInBattleField(createCardPOJO);
-			} else {
-				player.informError("Você não possuí nenhuma carta em campo de batalha");
-			}
+		if(supportCard != null) {
+			CardPOJO createCardPOJO = createCardPOJO(supportCard);
+			player.viewAttributesSupportCardInBattleField(createCardPOJO);
 		} else {
 			player.informError("Você não possuí nenhuma carta em campo de batalha");
 		}

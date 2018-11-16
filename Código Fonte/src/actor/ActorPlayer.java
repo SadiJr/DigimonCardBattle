@@ -69,6 +69,7 @@ public class ActorPlayer {
 
 	public void downDigimonCard(String nameCard) {
 		attributesScreen.enableButtonDownDigimon(false);
+		attributesScreen.setVisible(false);
 		tableController.downDigimonCard(nameCard);
 	}
 
@@ -79,6 +80,7 @@ public class ActorPlayer {
 	public void enableButtonsDrawPhase() {
 		attributesScreen.enableButtonDownDigimon(true);
 		screen.enableButtonsDrawPhase();
+		attributesScreen.pack();
 	}
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
@@ -90,26 +92,35 @@ public class ActorPlayer {
 	public void dissableButtonsDrawPhase() {
 		attributesScreen.enableButtonDownDigimon(false);
 		screen.dissableButtonsDrawPhase();
+		attributesScreen.pack();
+		screen.pack();
 	}
 
 	public void enableButtonsDigivolvePhase() {
 		attributesScreen.enableButtonSacrificeCard(true);
 		screen.enableButtonsDigivolvePhase(true);
 		update.enableUpdate(true);
+//		attributesScreen.pack();
+//		screen.pack();
+//		update.pack();
 	}
 
 	public void dissableButtonsDigivolvePhase() {
 		screen.enableButtonsDigivolvePhase(false);
+		screen.pack();
 		attributesScreen.enableButtonSacrificeCard(false);
+		attributesScreen.pack();
 	}
 
 	public void sacrificeCard(String name) {
 		attributesScreen.enableButtonSacrificeCard(false);
+		attributesScreen.pack();
 		tableController.sacrificeCard(name);
 	}
 
 	public void updateCard(String name) {
 		update.enableUpdate(false);
+		update.pack();
 		tableController.updateCard(name);
 	}
 
@@ -143,8 +154,12 @@ public class ActorPlayer {
 		tableController.viewAttributes(name, opponent);
 	}
 	
-	public void viewAttributesCardInBattleField(String name) {
-		tableController.viewAttributesCardInBattleField(name);
+	public void viewAttributesDigimonCardInBattleField(String name) {
+		tableController.viewAttributesDigimonCardInBattleField(name);
+	}
+	
+	public void viewAttributesSupportCardInBattleField(String name) {
+		tableController.viewAttributesSupportCardInBattleField(name);
 	}
 
 	public AttributesScreen getAttributesScreen() {
@@ -178,6 +193,7 @@ public class ActorPlayer {
 			}
 			attributesScreen.showAttributes(pojo, opponent);
 			attributesScreen.pack();
+			attributesScreen.repaint();
 			attributesScreen.setVisible(true);
 		} catch (Exception e) {
 			informError(e.getMessage());
@@ -212,6 +228,7 @@ public class ActorPlayer {
 			informError(e.getMessage());
 		}
 		attributesScreen.pack();
+		attributesScreen.repaint();
 		attributesScreen.setVisible(true);
 	}
 	
@@ -240,7 +257,9 @@ public class ActorPlayer {
 		update.setVisible(true);
 	}
 
-	public void viewAttributesCardInBattleField(CardPOJO createCardPOJO) {
+	public void viewAttributesDigimonCardInBattleField(CardPOJO createCardPOJO) {
+		attributesScreen.dissableAllButtons();
+		attributesScreen.enableButtonsAttack(true);
 		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
 		attributesScreen.pack();
 		attributesScreen.setVisible(true);
@@ -248,5 +267,13 @@ public class ActorPlayer {
 
 	public void dissableButtonSacrifice() {
 		attributesScreen.enableButtonSacrificeCard(false);
+		attributesScreen.pack();
+	}
+
+	public void viewAttributesSupportCardInBattleField(CardPOJO createCardPOJO) {
+		attributesScreen.dissableAllButtons();
+		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
 	}
 }

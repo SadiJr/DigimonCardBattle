@@ -187,6 +187,7 @@ public class AttributesScreen extends JFrame {
 		String path = pojo.getPath();
 		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
+		repaint();
 	}
 	
 	public void showOptionCardAttributesOpponent(CardPOJO pojo) {
@@ -197,6 +198,7 @@ public class AttributesScreen extends JFrame {
 		String path = pojo.getPath();
 		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
+		repaint();
 	}
 
 	public void showDigimonCardAttributes(CardPOJO pojo) throws Exception {
@@ -214,6 +216,7 @@ public class AttributesScreen extends JFrame {
 		atk3.setText(String.valueOf(pojo.getAttack3()));
 		specialty.setText(pojo.getSpecialty());
 		level.setText(String.valueOf(pojo.getLevel()));
+		repaint();
 	}
 	
 	public void showDigimonCardAttributesOpponent(CardPOJO pojo) {
@@ -232,6 +235,7 @@ public class AttributesScreen extends JFrame {
 		atk3.setText(String.valueOf(pojo.getAttack3()));
 		specialty.setText(pojo.getSpecialty());
 		level.setText(String.valueOf(pojo.getLevel()));
+		repaint();
 	}
 	
 	public void showAttributesCardInBattleField(CardPOJO pojo) {
@@ -250,14 +254,15 @@ public class AttributesScreen extends JFrame {
 			atk3.setText(String.valueOf(pojo.getAttack3()));
 			specialty.setText(pojo.getSpecialty());
 			level.setText(String.valueOf(pojo.getLevel()));
-			enableButtonsAttack(true);
 		}
+		repaint();
 	}
 	
 	public void dissableAllButtons() {
 		enableButtonDownDigimon(false);
 		enableButtonSacrificeCard(false);
 		enableButtonsAttack(false);
+		pack();
 	}
 	
 	public void enableButtonDownDigimon(boolean enable) {
