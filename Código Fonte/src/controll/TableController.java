@@ -167,19 +167,16 @@ public class TableController {
 	}
 
 	public void discardHand() {
-		if(table.getLocalPlayer().getHand().isEmpty()) {
-			player.informError("Você não possuí cartas na mão para descartar!");
-			return;
-		}
-		if(table.existsDigimonCardOnSlot() || table.existsDigimonCardInDeck()) {
-			table.addNewHand();
-			updateInterface();
-		} else {
-			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck!\nPelas regras do jogo, você perdeu!");
+		if(table.getLocalPlayer().getHand().isEmpty() && !table.existsDigimonCardInDeck() && !table.existsDigimonCardOnSlot()) {
+			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck, no campo ou em sua mão!"
+					+ "\nPelas regras do jogo, você perdeu!");
 			table.getRemotePlayer().setVictories(3);
 			player.informWinner(getNameRemotePlayer());
 			network.sendMove(this.table);
 			exit();
+		} else  {
+			table.addNewHand();
+			updateInterface();
 		}
 	}
 
@@ -332,16 +329,7 @@ public class TableController {
 	public void downSupportCard(String supportName) {
 		try {
 			table.downSupportCard(supportName);
-			player.dissableAllButtons();
-			network.sendMove(table);
-			int turns = table.getTurns();
-			if(turns < 2) {
-				player.informWaitMoveRemotePlayer(getNameRemotePlayer());
-			} else if(turns == 2) {
-				battle();
-			} else {
-				throw new Exception("Erro de programação na linha 208 na classe TabbeController! Possível erro de lógica ou de implementação");
-			}
+			updateInterface();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}

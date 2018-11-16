@@ -259,7 +259,7 @@ public class Table implements Jogada {
 
 	public void sacrificeCard(String cardName) throws Exception {
 		for (Card card : localPlayer.getHand()) {
-			if (card.getName().equals(cardName)) {
+			if (card != null && card.getName().equals(cardName)) {
 				if (isDigimonCard(card)) {
 					DigimonCard digimon = (DigimonCard) card;
 					int p = digimon.getP();
@@ -302,7 +302,8 @@ public class Table implements Jogada {
 
 	public void addNewHand() {
 		for (Card c : localPlayer.getHand()) {
-			cemiteryLocalPlayer.addCard(c);
+			if(c != null)
+				cemiteryLocalPlayer.addCard(c);
 		}
 		localPlayer.setHand(new ArrayList<>());
 		createHandLocalPlayer();
@@ -339,28 +340,29 @@ public class Table implements Jogada {
 		if (localPlayer.getDigimonCard() != null) {
 			Card card = getCardByName(name, false);
 			if (card != null) {
-				for (Card c : localPlayer.getHand()) {
-					if (c.equals(card)) {
-						if (isDigimonCard(card)) {
-							if (levelNecessary(((DigimonCard) card).getLevel())) {
-								if (isDpEnough(((DigimonCard) card).getDp())) {
-									cemiteryLocalPlayer.addCard(localPlayer.getDigimonCard());
-									localPlayer.setDigimonCard((DigimonCard) card);
-									localPlayer.setDp(0);
-								} else {
-									throw new Exception("Você não possuí DP suficiente para realizar essa evolução");
-								}
-							} else {
-								throw new Exception("Essa carta não pode ser evoluída para esse nível!");
-							}
+				if (isDigimonCard(card)) {
+					if (levelNecessary(((DigimonCard) card).getLevel())) {
+						if (isDpEnough(((DigimonCard) card).getDp())) {
+							cemiteryLocalPlayer.addCard(localPlayer.getDigimonCard());
+							localPlayer.setDigimonCard((DigimonCard) card);
+							localPlayer.setDp(0);
+							ArrayList<Card> hand = (ArrayList<Card>) localPlayer.getHand();
+							int indexOf = hand.indexOf(card);
+							hand.set(indexOf, null);
+							localPlayer.setHand(hand);
 						} else {
-							throw new Exception("Tantativa inválida de evoluir uma carta que não é DigimonCard!");
+							throw new Exception("Você não possuí DP suficiente para realizar essa evolução");
 						}
+					} else {
+						throw new Exception("Essa carta não pode ser evoluída para esse nível!");
 					}
+				} else {
+					throw new Exception("Tantativa inválida de evoluir uma carta que não é DigimonCard!");
 				}
 			} else {
 				throw new Exception("A carta selecionada para evolução não existe em sua mão!");
 			}
+	
 		} else {
 			throw new Exception("Erro! Não existe nenhuma digimonCard no campo de batalha");
 		}
@@ -399,10 +401,15 @@ public class Table implements Jogada {
 	}
 
 	public void downSupportCard(String supportName) throws Exception {
+		System.out.println("Tentando baixar a carta " + supportName + " como suporte");
 		for (Card card : localPlayer.getHand()) {
-			if (card.getName().equals(supportName)) {
+			if (card != null && card.getName().equals(supportName)) {
 				localPlayer.setSupportCard(card);
-				localPlayer.getHand().remove(card);
+				ArrayList<Card> hand = (ArrayList<Card>) localPlayer.getHand();
+				int indexOf = hand.indexOf(card);
+				hand.set(indexOf, null);
+				localPlayer.setHand(hand);
+				return;
 			}
 		}
 		throw new Exception("A carta selecionada não existe na mão do jogador. Possível erro!");
@@ -452,8 +459,10 @@ public class Table implements Jogada {
 	}
 
 	public boolean existsDigimonCardInDeck() {
+		if(localPlayer.getDeck() == null || localPlayer.getDeck().getCards() == null)
+			return false;
 		for (Card card : localPlayer.getDeck().getCards()) {
-			if (card instanceof DigimonCard)
+			if (card != null && card instanceof DigimonCard)
 				return true;
 		}
 		return false;

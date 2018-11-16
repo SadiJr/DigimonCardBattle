@@ -196,6 +196,14 @@ public class AttributesScreen extends JFrame {
 		String path = pojo.getPath();
 		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
+		hp.setVisible(false);
+		atk1.setVisible(false);
+		atk2.setVisible(false);
+		atk3.setVisible(false);
+		dp.setVisible(false);
+		p.setVisible(false);
+		specialty.setVisible(false);
+		level.setVisible(false);
 		repaint();
 	}
 	
@@ -207,6 +215,14 @@ public class AttributesScreen extends JFrame {
 		String path = pojo.getPath();
 		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
+		hp.setVisible(false);
+		atk1.setVisible(false);
+		atk2.setVisible(false);
+		atk3.setVisible(false);
+		dp.setVisible(false);
+		p.setVisible(false);
+		specialty.setVisible(false);
+		level.setVisible(false);
 		repaint();
 	}
 
