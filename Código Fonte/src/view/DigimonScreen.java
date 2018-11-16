@@ -275,7 +275,7 @@ public class DigimonScreen extends JFrame {
 		oppSupportCard.setIcon(imageIcon);
 		digimonCard.setIcon(imageIcon);
 		supportCard.setIcon(imageIcon);
-		iconLogo.getScaledInstance(deckSize.getWidth()-5, deckSize.getHeight(), Image.SCALE_SMOOTH);
+		iconLogo.getScaledInstance(deckSizeIcon.getWidth(), deckSizeIcon.getHeight(), Image.SCALE_SMOOTH);
 		deckSizeIcon.setIcon(new ImageIcon(iconLogo));
 		oppDeckSizeIcon.setIcon(new ImageIcon(iconLogo));
 		card1.addActionListener(l);
