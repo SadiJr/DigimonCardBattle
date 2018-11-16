@@ -20,6 +20,8 @@ public class Player implements Jogada {
 		this.name = name;
 		deck = new Deck();
 		hand = new ArrayList<>();
+		digimonCard = null;
+		supportCard = null;
 	}
 		
 	public Player(String name, int id) {
@@ -27,6 +29,8 @@ public class Player implements Jogada {
 		this.name = name;
 		deck = new Deck();
 		hand = new ArrayList<>();
+		digimonCard = null;
+		supportCard = null;
 	}
 
 	public String getName() {
@@ -91,15 +95,15 @@ public class Player implements Jogada {
 
 	public void setDigimonCardIrregularLevelC(DigimonCard digimonCard) {
 		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.50));
-		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.50));
-		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.50));
+		digimonCard.setAttack2((int) (digimonCard.getAttack2() * 0.50));
+		digimonCard.setAttack3((int) (digimonCard.getAttack3() * 0.50));
 		setDigimonCard(digimonCard);
 	}
 
 	public void setDigimonCardIrregularLevelU(DigimonCard digimonCard) {
 		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.25));
-		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.25));
-		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.25));
+		digimonCard.setAttack2((int) (digimonCard.getAttack2() * 0.25));
+		digimonCard.setAttack3((int) (digimonCard.getAttack3() * 0.25));
 		setDigimonCard(digimonCard);
 	}
 

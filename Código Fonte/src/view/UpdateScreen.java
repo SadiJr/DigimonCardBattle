@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import model.CardPOJO;
 
 public class UpdateScreen extends JFrame {
 	private static final long serialVersionUID = 1L;
-
+	private String pathDefault = "pictures/backCard.jpg";
 	private ActorPlayer player;
 	
 	private JButton card1;
@@ -111,12 +112,16 @@ public class UpdateScreen extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == card1) {
+				System.out.println(jcomp45.getText());
 				player.updateCard(jcomp45.getText());
 			} else if(e.getSource() == card2) {
+				System.err.println(jcomp57.getText());
 				player.updateCard(jcomp57.getText());
 			} else if(e.getSource() == card3) {
+				System.out.println(jcomp77.getText());
 				player.updateCard(jcomp77.getText());
 			} else if(e.getSource() == card4) {
+				System.out.println(jcomp67.getText());
 				player.updateCard(jcomp67.getText());
 			}
 			
@@ -131,8 +136,8 @@ public class UpdateScreen extends JFrame {
 	private void config() {
 
 		// construct components
-		card1 = new JButton("Button 1");
-		card2 = new JButton("Button 2");
+		card1 = new JButton("Card 1");
+		card2 = new JButton("Card 2");
 		card3 = new JButton("Button 3");
 		card4 = new JButton("Button 4");
 		jcomp5 = new JLabel("Nome");
@@ -175,48 +180,48 @@ public class UpdateScreen extends JFrame {
 		jcomp42 = new JLabel("P");
 		jcomp43 = new JLabel("Especialidade");
 		jcomp44 = new JLabel("Level");
-		jcomp45 = new JLabel("jcomp45");
-		jcomp46 = new JLabel("jcomp46");
-		jcomp47 = new JLabel("jcomp47");
-		jcomp48 = new JLabel("jcomp48");
-		jcomp49 = new JLabel("jcomp49");
-		jcomp50 = new JLabel("jcomp50");
-		jcomp51 = new JLabel("jcomp51");
-		jcomp52 = new JLabel("jcomp52");
-		jcomp53 = new JLabel("jcomp53");
-		jcomp54 = new JLabel("jcomp54");
-		jcomp55 = new JLabel("jcomp55");
-		jcomp56 = new JLabel("jcomp56");
-		jcomp57 = new JLabel("jcomp57");
-		jcomp58 = new JLabel("jcomp58");
-		jcomp59 = new JLabel("jcomp59");
-		jcomp60 = new JLabel("jcomp60");
-		jcomp61 = new JLabel("jcomp61");
-		jcomp62 = new JLabel("jcomp62");
-		jcomp63 = new JLabel("jcomp63");
-		jcomp64 = new JLabel("jcomp64");
-		jcomp65 = new JLabel("jcomp65");
-		jcomp66 = new JLabel("jcomp66");
-		jcomp67 = new JLabel("jcomp67");
-		jcomp68 = new JLabel("jcomp68");
-		jcomp69 = new JLabel("jcomp69");
-		jcomp70 = new JLabel("jcomp70");
-		jcomp71 = new JLabel("jcomp71");
-		jcomp72 = new JLabel("jcomp72");
-		jcomp73 = new JLabel("jcomp73");
-		jcomp74 = new JLabel("jcomp74");
-		jcomp75 = new JLabel("jcomp75");
-		jcomp76 = new JLabel("jcomp76");
-		jcomp77 = new JLabel("jcomp77");
-		jcomp78 = new JLabel("jcomp78");
-		jcomp79 = new JLabel("jcomp79");
-		jcomp80 = new JLabel("jcomp80");
-		jcomp81 = new JLabel("jcomp81");
-		jcomp82 = new JLabel("jcomp82");
-		jcomp83 = new JLabel("jcomp83");
-		jcomp84 = new JLabel("jcomp84");
-		jcomp85 = new JLabel("jcomp85");
-		jcomp86 = new JLabel("jcomp86");
+		jcomp45 = new JLabel();
+		jcomp46 = new JLabel();
+		jcomp47 = new JLabel();
+		jcomp48 = new JLabel();
+		jcomp49 = new JLabel();
+		jcomp50 = new JLabel();
+		jcomp51 = new JLabel();
+		jcomp52 = new JLabel();
+		jcomp53 = new JLabel();
+		jcomp54 = new JLabel();
+		jcomp55 = new JLabel();
+		jcomp56 = new JLabel();
+		jcomp57 = new JLabel();
+		jcomp58 = new JLabel();
+		jcomp59 = new JLabel();
+		jcomp60 = new JLabel();
+		jcomp61 = new JLabel();
+		jcomp62 = new JLabel();
+		jcomp63 = new JLabel();
+		jcomp64 = new JLabel();
+		jcomp65 = new JLabel();
+		jcomp66 = new JLabel();
+		jcomp67 = new JLabel();
+		jcomp68 = new JLabel();
+		jcomp69 = new JLabel();
+		jcomp70 = new JLabel();
+		jcomp71 = new JLabel();
+		jcomp72 = new JLabel();
+		jcomp73 = new JLabel();
+		jcomp74 = new JLabel();
+		jcomp75 = new JLabel();
+		jcomp76 = new JLabel();
+		jcomp77 = new JLabel();
+		jcomp78 = new JLabel();
+		jcomp79 = new JLabel();
+		jcomp80 = new JLabel();
+		jcomp81 = new JLabel();
+		jcomp82 = new JLabel();
+		jcomp83 = new JLabel();
+		jcomp84 = new JLabel();
+		jcomp85 = new JLabel();
+		jcomp86 = new JLabel();
 
 		// adjust size and set layout
 		setPreferredSize(new Dimension(1088, 664));
@@ -328,6 +333,14 @@ public class UpdateScreen extends JFrame {
 		jcomp84.setBounds(685, 550, 100, 25);
 		jcomp85.setBounds(685, 580, 100, 25);
 		jcomp86.setBounds(685, 610, 100, 25);
+		
+		Image iconLogo = new ImageIcon(pathDefault).getImage()
+				.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		card1.setIcon(imageIcon);
+		card2.setIcon(imageIcon);
+		card3.setIcon(imageIcon);
+		card4.setIcon(imageIcon);
 		card1.addActionListener(l);
 		card2.addActionListener(l);
 		card3.addActionListener(l);
@@ -341,18 +354,16 @@ public class UpdateScreen extends JFrame {
 		ArrayList<ArrayList<JLabel>> labels = getLabels();
 		for(int i =0; i < hand2.size(); i++) {
 			CardPOJO pojo = hand2.get(i);
-			if(pojo.isOptionCard()) {
-				ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/backCard.jpg");//.getImage()
-//						.getScaledInstance(card1.getWidth() +20, card1.getHeight(), Image.SCALE_SMOOTH);
-//				ImageIcon imageIcon = new ImageIcon(iconLogo);
+			if(pojo != null && pojo.isOptionCard()) {
+				ImageIcon iconLogo = new ImageIcon("pictures/backCard.jpg");
 				buttons.get(i).setIcon(iconLogo);
 				buttons.get(i).setEnabled(false);
 				ArrayList<JLabel> arrayList = labels.get(i);
 				for (JLabel jLabel : arrayList) {
 					jLabel.setVisible(false);
 				}
-			} else {
-				ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + pojo.getPath());
+			} else if(pojo != null){
+				ImageIcon iconLogo = new ImageIcon(pojo.getPath());
 				buttons.get(i).setIcon(iconLogo);
 				ArrayList<JLabel> arrayList = labels.get(i);
 				arrayList.get(0).setText(pojo.getName());
@@ -410,5 +421,17 @@ public class UpdateScreen extends JFrame {
 		labels.add(labelsCard3);
 		labels.add(labelsCard4);
 		return labels;
+	}
+	
+	public void enableUpdate(boolean enable) {
+		if(enable) {
+			for (JButton jButton : getButtons()) {
+				jButton.setEnabled(true);
+			}
+		} else {
+			for (JButton jButton : getButtons()) {
+				jButton.setEnabled(false);
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package actor;
 
 import controll.TableController;
+import enums.Phase;
 import model.CardPOJO;
 import model.PlayerMovePOJO;
 import view.AttributesScreen;
@@ -67,6 +68,7 @@ public class ActorPlayer {
 	}
 
 	public void downDigimonCard(String nameCard) {
+		attributesScreen.enableButtonDownDigimon(false);
 		tableController.downDigimonCard(nameCard);
 	}
 
@@ -75,7 +77,7 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsDrawPhase() {
-		attributesScreen.enableButtonsDrawPhase();
+		attributesScreen.enableButtonDownDigimon(true);
 		screen.enableButtonsDrawPhase();
 	}
 
@@ -86,29 +88,28 @@ public class ActorPlayer {
 	}
 
 	public void dissableButtonsDrawPhase() {
-		attributesScreen.dissableButtonsDrawPhase();
+		attributesScreen.enableButtonDownDigimon(false);
 		screen.dissableButtonsDrawPhase();
 	}
 
 	public void enableButtonsDigivolvePhase() {
-		attributesScreen.enableButtonSacrificeCard();
+		attributesScreen.enableButtonSacrificeCard(true);
 		screen.enableButtonsDigivolvePhase(true);
+		update.enableUpdate(true);
 	}
 
 	public void dissableButtonsDigivolvePhase() {
 		screen.enableButtonsDigivolvePhase(false);
-		attributesScreen.dissableButtonSacrificeCard();
-	}
-
-	public void dissableButtonSacrificeCard() {
-		attributesScreen.dissableButtonSacrificeCard();
+		attributesScreen.enableButtonSacrificeCard(false);
 	}
 
 	public void sacrificeCard(String name) {
+		attributesScreen.enableButtonSacrificeCard(false);
 		tableController.sacrificeCard(name);
 	}
 
 	public void updateCard(String name) {
+		update.enableUpdate(false);
 		tableController.updateCard(name);
 	}
 
@@ -117,16 +118,16 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsBattlePhase() {
-		attributesScreen.enableButtonsAttack();
-		// TODO - implement ActorPlayer.enableButtonsBattlePhase
+		attributesScreen.enableButtonDownDigimon(true);
 	}
 	
 	public void attackChoice(int choice) {
+		attributesScreen.enableButtonsAttack(false);
 		tableController.choiceAttack(choice);
 	}
 
 	public void dissableButtonsAttack() {
-		attributesScreen.dissableButtonsAttack();
+		attributesScreen.enableButtonsAttack(false);
 	}
 
 	public void downSupportCard(String supportName) {
@@ -141,6 +142,10 @@ public class ActorPlayer {
 	public void viewAttributes(String name, boolean opponent) {
 		tableController.viewAttributes(name, opponent);
 	}
+	
+	public void viewAttributesCardInBattleField(String name) {
+		tableController.viewAttributesCardInBattleField(name);
+	}
 
 	public AttributesScreen getAttributesScreen() {
 		return this.attributesScreen;
@@ -152,6 +157,25 @@ public class ActorPlayer {
 
 	public void viewAttributes(CardPOJO pojo, boolean opponent) {
 		try {
+			Phase phase = tableController.getTable().getPhase();
+			switch (phase) {
+			case DRAW_PHASE:
+				attributesScreen.enableButtonDownDigimon(true);
+				break;
+			
+			case DIGIVOLVE_PHASE:
+				attributesScreen.enableButtonSacrificeCard(true);
+				break;
+			
+			case BATTLE_PHASE:
+				if(!opponent) 
+					attributesScreen.enableButtonDownDigimon(true);
+				break;
+
+			default:
+				attributesScreen.dissableAllButtons();
+				break;
+			}
 			attributesScreen.showAttributes(pojo, opponent);
 			attributesScreen.pack();
 			attributesScreen.setVisible(true);
@@ -214,5 +238,15 @@ public class ActorPlayer {
 		update.viewOptions(createPOJOPlayer.getHand());
 		update.pack();
 		update.setVisible(true);
+	}
+
+	public void viewAttributesCardInBattleField(CardPOJO createCardPOJO) {
+		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
+	}
+
+	public void dissableButtonSacrifice() {
+		attributesScreen.enableButtonSacrificeCard(false);
 	}
 }

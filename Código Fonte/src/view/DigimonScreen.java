@@ -107,9 +107,9 @@ public class DigimonScreen extends JFrame {
 				String name = oppCard4.getName();
 				player.viewAttributes(name, true);
 			} else if (e.getSource() == digimonCard) {
-				player.viewAttributesDigimonCard(false);
+				player.viewAttributesCardInBattleField(digimonCard.getName());
 			} else if (e.getSource() == supportCard) {
-				player.viewAttributesOptionCard(false);
+				player.viewAttributesCardInBattleField(supportCard.getName());
 			} else if (e.getSource() == oppDigimonCard) {
 				player.viewAttributesDigimonCard(true);
 			} else if (e.getSource() == oppSupportCard) {
@@ -260,9 +260,6 @@ public class DigimonScreen extends JFrame {
 		discardHand.setBounds(610, 660, 135, 25);
 		jump.setBounds(910, 660, 135, 25);
 		playerName.setBounds(385, 610, 100, 25);
-		
-		discardHand.setEnabled(true);
-
 		Image iconLogo = new ImageIcon(pathDefault).getImage()
 				.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
@@ -332,6 +329,20 @@ public class DigimonScreen extends JFrame {
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		if (remotePlayer != null) {
 			updateRemotePlayer(remotePlayer);
+		} else {
+			Image iconLogo = new ImageIcon(pathDefault).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			
+			oppCard1.setIcon(imageIcon);
+			oppCard2.setIcon(imageIcon);
+			oppCard3.setIcon(imageIcon);
+			oppCard4.setIcon(imageIcon);
+			oppDigimonCard.setIcon(imageIcon);
+			oppSupportCard.setIcon(imageIcon);
+			oppDP.setText("0");
+			oppDeckSize.setText("0");
+			opponentName.setText("Seu inimigo");
 		}
 
 		if (localPlayer != null) {
@@ -343,6 +354,7 @@ public class DigimonScreen extends JFrame {
 		playerName.setText(localPlayer.getName());
 		deadCards.setText(String.valueOf(localPlayer.getDeadCards()));
 		deckSize.setText(String.valueOf(localPlayer.getDeckSize()));
+		dp.setText(String.valueOf(localPlayer.getDp()));
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) localPlayer.getHand();
 		ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
 		for (int i = 0; i < hand.size(); i++) {
@@ -368,6 +380,17 @@ public class DigimonScreen extends JFrame {
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			digimonCard.setIcon(imageIcon);
 			digimonCard.setName(localPlayer.getDigimonCard().getName());
+			atk1.setText(String.valueOf(localPlayer.getDigimonCard().getAttack1()));
+			atk2.setText(String.valueOf(localPlayer.getDigimonCard().getAttack2()));
+			atk3.setText(String.valueOf(localPlayer.getDigimonCard().getAttack3()));
+		} else {
+			Image iconLogo = new ImageIcon(pathDefault)
+					.getImage().getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			digimonCard.setIcon(imageIcon);
+			atk1.setText("Atk1");
+			atk2.setText("Atk2");
+			atk3.setText("Atk3");
 		}
 		if(localPlayer.getSupportCard() != null) {
 			Image iconLogo = new ImageIcon(localPlayer.getSupportCard().getPath())
@@ -375,6 +398,11 @@ public class DigimonScreen extends JFrame {
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			supportCard.setIcon(imageIcon);
 			supportCard.setName(localPlayer.getSupportCard().getName());
+		} else {
+			Image iconLogo = new ImageIcon(pathDefault)
+					.getImage().getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			supportCard.setIcon(imageIcon);
 		}
 
 	}
@@ -383,6 +411,7 @@ public class DigimonScreen extends JFrame {
 		opponentName.setText(remotePlayer.getName());
 		oppDeadCards.setText(String.valueOf(remotePlayer.getDeadCards()));
 		oppDeckSize.setText(String.valueOf(remotePlayer.getDeckSize()));
+		oppDP.setText(String.valueOf(remotePlayer.getDp()));
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) remotePlayer.getHand();
 		ArrayList<JButton> buttonsCardsAdv = (ArrayList<JButton>) buttonsCardsAdv();
 		for (int i = 0; i < hand.size(); i++) {
@@ -407,6 +436,9 @@ public class DigimonScreen extends JFrame {
 					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			oppDigimonCard.setIcon(imageIcon);
+			oppAtk1.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack1()));
+			oppAtk2.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack2()));
+			oppAtk3.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack3()));
 		}
 		if(remotePlayer.getSupportCard() != null) {
 			oppSupportCard.setName(remotePlayer.getSupportCard().getName());
@@ -477,14 +509,6 @@ public class DigimonScreen extends JFrame {
 	}
 
 	public void dissableAllButtons() {
-		Collection<JButton> buttonsCardsAdv = buttonsCardsAdv();
-		Collection<JButton> buttonsCardsPlayer = buttonsCardsPlayer();
-		for (JButton jButton : buttonsCardsAdv) {
-			jButton.setEnabled(false);
-		}
-		for (JButton jButton : buttonsCardsPlayer) {
-			jButton.setEnabled(false);
-		}
 		jump.setEnabled(false);
 		evolute.setEnabled(false);
 		discardHand.setEnabled(false);

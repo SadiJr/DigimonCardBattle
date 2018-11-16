@@ -75,6 +75,7 @@ public class ActorNetGames implements OuvidorProxy {
 	@Override
 	public void finalizarPartidaComErro(String message) {
 		tableController.informError(message);
+		tableController.exit();
 	}
 
 	@Override
@@ -90,7 +91,6 @@ public class ActorNetGames implements OuvidorProxy {
 	@Override
 	public void tratarConexaoPerdida() {
 		tableController.informError("Conexão perdida. Por favor, conecte-se novamente.");
-		
 	}
 
 	@Override

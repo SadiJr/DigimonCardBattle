@@ -3,7 +3,6 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,28 +44,25 @@ public class AttributesScreen extends JFrame {
 	private JButton attack2;
 	private JButton attack3;
 	
-	private boolean buttonsDissable;
-	
 	private ActionListener l = new ActionListener() {
 		public void actionPerformed(final ActionEvent e) {
 			if (e.getSource() == downDigimon) {
-				dissableButtonsExcept(null, null, null);
-				String text = name.getText();
-				player.downDigimonCard(text);
+				enableButtonDownDigimon(false);
+				player.downDigimonCard(name.getText());
 			} else if (e.getSource() == sacrificeCard) {
-				dissableButtonsExcept(null, null, null);
-				String text = name.getText();
-				player.sacrificeCard(text);
+				dissableAllButtons();
+				player.sacrificeCard(name.getText());
 			} else if(e.getSource() == attack1) {
-				dissableButtonsExcept(null, null, null);
+				dissableAllButtons();
 				player.attackChoice(1);
 			} else if(e.getSource() == attack2) {
-				dissableButtonsExcept(null, null, null);
+				dissableAllButtons();
 				player.attackChoice(2);
 			} else if(e.getSource() == attack3) {
-				dissableButtonsExcept(null, null, null);
+				dissableAllButtons();
 				player.attackChoice(3);
 			}
+			pack();
 			repaint();
 		}
 	};
@@ -122,39 +118,13 @@ public class AttributesScreen extends JFrame {
 		attack3.setVisible(false);
 		attack3.setEnabled(false);
 
-//		ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir") + "/pictures/backCard.jpg");
-//		cardImage.setIcon(iconLogo);
 		setPreferredSize(new Dimension(830, 570));
 		setLayout(null);
 
-		add(cardImage);
-		add(jcomp2);
-		add(jcomp3);
-		add(jcomp4);
-		add(jcomp5);
-		add(jcomp6);
-		add(jcomp7);
-		add(jcomp8);
-		add(jcomp9);
-		add(jcomp10);
-		add(jcomp11);
-		add(jcomp12);
-		add(name);
-		add(effectName);
-		add(descriptionEffect);
-		add(hp);
-		add(atk1);
-		add(atk2);
-		add(atk3);
-		add(dp);
-		add(p);
-		add(specialty);
-		add(level);
-		add(downDigimon);
-		add(sacrificeCard);
-		add(attack1);
-		add(attack2);
-		add(attack3);
+		add(cardImage);add(jcomp2);add(jcomp3);add(jcomp4);add(jcomp5);add(jcomp6);add(jcomp7);
+		add(jcomp8);add(jcomp9);add(jcomp10);add(jcomp11);add(jcomp12);add(name);add(effectName);
+		add(descriptionEffect);add(hp);add(atk1);add(atk2);add(atk3);add(dp);add(p);add(specialty);
+		add(level);add(downDigimon);add(sacrificeCard);add(attack1);add(attack2);add(attack3);
 		
 
 		// set component bounds (only needed by Absolute Positioning)
@@ -211,44 +181,16 @@ public class AttributesScreen extends JFrame {
 	}
 
 	public void showOptionCardAttributes(CardPOJO pojo) throws Exception {
-		String phase = pojo.getPhase();
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
 		ImageIcon iconLogo = new ImageIcon(path);
 		cardImage.setIcon(iconLogo);
-
-		switch (phase) {
-		case "Fase de Descarte e Compra":
-			downDigimon.setVisible(true);
-			if(!buttonsDissable) {
-				downDigimon.setEnabled(true);
-				dissableButtonsExcept(downDigimon, null, null);
-			}
-			break;
-		case "Fase de Evolução":
-			sacrificeCard.setVisible(true);
-			if(!buttonsDissable) {
-				sacrificeCard.setEnabled(true);
-				dissableButtonsExcept(sacrificeCard, null, null);
-			}		
-			break;
-		case "Fase de Pré Batalha":
-			downDigimon.setVisible(true);
-			if(!buttonsDissable) {
-				downDigimon.setEnabled(true);
-				dissableButtonsExcept(downDigimon, null, null);
-			}
-			break;
-			
-		default:
-			throw new Exception("Operação não permitida!");
-		}
 	}
 	
 	public void showOptionCardAttributesOpponent(CardPOJO pojo) {
-		dissableViewAllButtons();
+		dissableAllButtons();
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
@@ -258,7 +200,6 @@ public class AttributesScreen extends JFrame {
 	}
 
 	public void showDigimonCardAttributes(CardPOJO pojo) throws Exception {
-		String phase = pojo.getPhase();
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
@@ -273,35 +214,10 @@ public class AttributesScreen extends JFrame {
 		atk3.setText(String.valueOf(pojo.getAttack3()));
 		specialty.setText(pojo.getSpecialty());
 		level.setText(String.valueOf(pojo.getLevel()));
-		
-		switch (phase) {
-		case "Fase de Descarte e Compra":
-			downDigimon.setVisible(true);
-			downDigimon.setEnabled(true);
-			dissableButtonsExcept(downDigimon, null, null);
-			break;
-		case "Fase de Evolução":
-			sacrificeCard.setVisible(true);
-			sacrificeCard.setEnabled(true);
-			dissableButtonsExcept(sacrificeCard, null, null);
-			break;
-		case "Fase de Pré Batalha":
-			attack1.setVisible(true);
-			attack2.setVisible(true);
-			attack3.setVisible(true);
-			attack1.setEnabled(true);
-			attack1.setEnabled(true);
-			attack1.setEnabled(true);
-			dissableButtonsExcept(attack1, attack2, attack3);
-			break;
-			
-		default:
-			throw new Exception("Operação não permitida!");
-		}
 	}
 	
 	public void showDigimonCardAttributesOpponent(CardPOJO pojo) {
-		dissableViewAllButtons();
+		dissableAllButtons();
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
@@ -318,77 +234,67 @@ public class AttributesScreen extends JFrame {
 		level.setText(String.valueOf(pojo.getLevel()));
 	}
 	
-	private void dissableButtonsExcept(JButton button, JButton button2, JButton button3) {
-		ArrayList<JButton> buttons = new ArrayList<>();
-		buttons.add(sacrificeCard);
-		buttons.add(attack1);
-		buttons.add(attack2);
-		buttons.add(attack3);
-		buttons.add(downDigimon);
-		buttons.remove(button);
-		buttons.remove(button2);
-		buttons.remove(button3);
-		for (JButton jButton : buttons) {
-			jButton.setEnabled(false);
-			jButton.setVisible(false);
+	public void showAttributesCardInBattleField(CardPOJO pojo) {
+		name.setText(pojo.getName());
+		effectName.setText(pojo.getEffect());
+		descriptionEffect.setText(pojo.getDescription());
+		String path = pojo.getPath();
+		ImageIcon iconLogo = new ImageIcon(path);
+		cardImage.setIcon(iconLogo);
+		if(!pojo.isOptionCard()) {
+			hp.setText(String.valueOf(pojo.getHp()));
+			dp.setText(String.valueOf(pojo.getDp()));
+			p.setText(String.valueOf(pojo.getP()));
+			atk1.setText(String.valueOf(pojo.getAttack1()));
+			atk2.setText(String.valueOf(pojo.getAttack2()));
+			atk3.setText(String.valueOf(pojo.getAttack3()));
+			specialty.setText(pojo.getSpecialty());
+			level.setText(String.valueOf(pojo.getLevel()));
+			enableButtonsAttack(true);
 		}
-	}
-	
-	public void dissableButtonsAttack() {
-		buttonsDissable = true;
-		attack1.setEnabled(false);
-		attack2.setEnabled(false);
-		attack3.setEnabled(false);
-		attack1.setVisible(false);
-		attack2.setVisible(false);
-		attack3.setVisible(false);
-	}
-	
-	public void enableButtonsAttack() {
-		buttonsDissable = false;
-		attack1.setEnabled(true);
-		attack2.setEnabled(true);
-		attack3.setEnabled(true);
-		attack1.setVisible(true);
-		attack2.setVisible(true);
-		attack3.setVisible(true);
-	}
-	
-	public void dissableButtonSacrificeCard() {
-		buttonsDissable = true;
-		sacrificeCard.setEnabled(false);
-	}
-	
-	public void enableButtonSacrificeCard() {
-		buttonsDissable = false;
-		sacrificeCard.setEnabled(true);
-	}
-	
-	public void dissableButtonsDrawPhase() {
-		buttonsDissable = true;
-		downDigimon.setEnabled(false);
-	}
-	
-	public void enableButtonsDrawPhase() {
-		buttonsDissable = false;
-		downDigimon.setEnabled(true);
 	}
 	
 	public void dissableAllButtons() {
-		dissableButtonsExcept(null, null, null);
+		enableButtonDownDigimon(false);
+		enableButtonSacrificeCard(false);
+		enableButtonsAttack(false);
 	}
 	
-	public void dissableViewAllButtons() {
-		ArrayList<JButton> buttons = new ArrayList<>();
-		buttons.add(sacrificeCard);
-		buttons.add(attack1);
-		buttons.add(attack2);
-		buttons.add(attack3);
-		buttons.add(downDigimon);
-		for (JButton jButton : buttons) {
-			jButton.setEnabled(false);
-			jButton.setVisible(false);
+	public void enableButtonDownDigimon(boolean enable) {
+		if(enable) {
+			downDigimon.setEnabled(true);
+			downDigimon.setVisible(true);
+		} else {
+			downDigimon.setEnabled(false);
+			downDigimon.setVisible(false);
 		}
 	}
-
+	
+	public void enableButtonSacrificeCard(boolean enable) {
+		if(enable) {
+			sacrificeCard.setEnabled(true);
+			sacrificeCard.setVisible(true);
+		} else {
+			sacrificeCard.setEnabled(false);
+			sacrificeCard.setVisible(false);
+		}
+	}
+	
+	public void enableButtonsAttack(boolean enable) {
+		if(enable) {
+			attack1.setEnabled(true);
+			attack1.setVisible(true);
+			attack2.setEnabled(true);
+			attack2.setVisible(true);
+			attack3.setEnabled(true);
+			attack3.setVisible(true);
+		} else {
+			attack1.setEnabled(false);
+			attack1.setVisible(false);
+			attack2.setEnabled(false);
+			attack2.setVisible(false);
+			attack3.setEnabled(false);
+			attack3.setVisible(false);
+		}
+	}
 }
