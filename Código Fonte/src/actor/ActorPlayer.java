@@ -68,7 +68,7 @@ public class ActorPlayer {
 	}
 
 	public void downDigimonCard(String nameCard) {
-		attributesScreen.enableButtonDownDigimon(false);
+		attributesScreen.enableButtonDownDigimon(false, false);
 		attributesScreen.setVisible(false);
 		tableController.downDigimonCard(nameCard);
 	}
@@ -78,7 +78,7 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsDrawPhase() {
-		attributesScreen.enableButtonDownDigimon(true);
+		attributesScreen.enableButtonDownDigimon(true, false);
 		screen.enableButtonsDrawPhase();
 		attributesScreen.pack();
 	}
@@ -90,7 +90,7 @@ public class ActorPlayer {
 	}
 
 	public void dissableButtonsDrawPhase() {
-		attributesScreen.enableButtonDownDigimon(false);
+		attributesScreen.enableButtonDownDigimon(false, false);
 		screen.dissableButtonsDrawPhase();
 		attributesScreen.pack();
 		screen.pack();
@@ -129,7 +129,7 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsBattlePhase() {
-		attributesScreen.enableButtonDownDigimon(true);
+		attributesScreen.enableButtonDownDigimon(true, true);
 	}
 	
 	public void attackChoice(int choice) {
@@ -175,7 +175,7 @@ public class ActorPlayer {
 			Phase phase = tableController.getTable().getPhase();
 			switch (phase) {
 			case DRAW_PHASE:
-				attributesScreen.enableButtonDownDigimon(true);
+				attributesScreen.enableButtonDownDigimon(true, false);
 				break;
 			
 			case DIGIVOLVE_PHASE:
@@ -184,7 +184,7 @@ public class ActorPlayer {
 			
 			case BATTLE_PHASE:
 				if(!opponent) 
-					attributesScreen.enableButtonDownDigimon(true);
+					attributesScreen.enableButtonDownDigimon(true, true);
 				break;
 
 			default:

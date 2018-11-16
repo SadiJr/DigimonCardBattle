@@ -39,6 +39,7 @@ public class AttributesScreen extends JFrame {
 	private JLabel specialty;
 	private JLabel level;
 	private JButton downDigimon;
+	private JButton downSupport;
 	private JButton sacrificeCard;
 	private JButton attack1;
 	private JButton attack2;
@@ -47,8 +48,11 @@ public class AttributesScreen extends JFrame {
 	private ActionListener l = new ActionListener() {
 		public void actionPerformed(final ActionEvent e) {
 			if (e.getSource() == downDigimon) {
-				enableButtonDownDigimon(false);
+				enableButtonDownDigimon(false, false);
 				player.downDigimonCard(name.getText());
+			} else if (e.getSource() == downSupport) {
+				enableButtonDownDigimon(false, true);
+				player.downSupportCard(name.getText());
 			} else if (e.getSource() == sacrificeCard) {
 				dissableAllButtons();
 				player.sacrificeCard(name.getText());
@@ -102,6 +106,7 @@ public class AttributesScreen extends JFrame {
 		specialty = new JLabel("especialidade");
 		level = new JLabel("level");
 		downDigimon = new JButton("Baixar Carta");
+		downSupport = new JButton("Baixar Carta");
 		sacrificeCard = new JButton("Sacrificar Carta");
 		attack1 = new JButton("Ataque 1");
 		attack2 = new JButton("Ataque 2");
@@ -109,6 +114,8 @@ public class AttributesScreen extends JFrame {
 		
 		downDigimon.setVisible(false);
 		downDigimon.setEnabled(false);
+		downSupport.setEnabled(false);
+		downSupport.setVisible(false);
 		sacrificeCard.setVisible(false);
 		sacrificeCard.setEnabled(false);
 		attack1.setVisible(false);
@@ -124,7 +131,7 @@ public class AttributesScreen extends JFrame {
 		add(cardImage);add(jcomp2);add(jcomp3);add(jcomp4);add(jcomp5);add(jcomp6);add(jcomp7);
 		add(jcomp8);add(jcomp9);add(jcomp10);add(jcomp11);add(jcomp12);add(name);add(effectName);
 		add(descriptionEffect);add(hp);add(atk1);add(atk2);add(atk3);add(dp);add(p);add(specialty);
-		add(level);add(downDigimon);add(sacrificeCard);add(attack1);add(attack2);add(attack3);
+		add(level);add(downDigimon);add(sacrificeCard);add(attack1);add(attack2);add(attack3);add(downSupport);
 		
 
 		// set component bounds (only needed by Absolute Positioning)
@@ -152,12 +159,14 @@ public class AttributesScreen extends JFrame {
 		specialty.setBounds(200, 385, 200, 25);
 		level.setBounds(200, 420, 200, 25);
 		downDigimon.setBounds(340, 470, 95, 30);
+		downSupport.setBounds(340, 470, 95, 30);
 		sacrificeCard.setBounds(340, 470, 95, 30);
 		attack1.setBounds (175, 470, 95, 30);
 		attack2.setBounds(340, 470, 95, 30);
         attack3.setBounds (500, 470, 95, 30);
         
         downDigimon.addActionListener(l);
+        downSupport.addActionListener(l);
         sacrificeCard.addActionListener(l);
         attack1.addActionListener(l);
         attack2.addActionListener(l);
@@ -259,19 +268,30 @@ public class AttributesScreen extends JFrame {
 	}
 	
 	public void dissableAllButtons() {
-		enableButtonDownDigimon(false);
+		enableButtonDownDigimon(false, false);
+		enableButtonDownDigimon(false, true);
 		enableButtonSacrificeCard(false);
 		enableButtonsAttack(false);
 		pack();
 	}
 	
-	public void enableButtonDownDigimon(boolean enable) {
+	public void enableButtonDownDigimon(boolean enable, boolean support) {
 		if(enable) {
-			downDigimon.setEnabled(true);
-			downDigimon.setVisible(true);
+			if(support) {
+				downSupport.setEnabled(true);
+				downSupport.setVisible(true);
+			} else {
+				downDigimon.setEnabled(true);
+				downDigimon.setVisible(true);
+			}
 		} else {
-			downDigimon.setEnabled(false);
-			downDigimon.setVisible(false);
+			if(support) {
+				downSupport.setEnabled(false);
+				downSupport.setVisible(false);
+			} else {
+				downDigimon.setEnabled(false);
+				downDigimon.setVisible(false);
+			}
 		}
 	}
 	
