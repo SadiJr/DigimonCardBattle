@@ -549,7 +549,9 @@ public class Table implements Jogada {
 				break;
 
 			default:
-				throw new Exception("Erro de programação na fase de batalha!");
+				System.out.println("Por que caralhos alguém baixaria uma carta de suporte que não possuí "
+						+ "efeito de suporte, você pensa? Bem, existem retardados para tudo.");
+				break;
 			}
 
 			player.setSupportCard(null);

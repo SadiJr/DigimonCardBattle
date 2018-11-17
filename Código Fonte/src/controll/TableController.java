@@ -146,7 +146,7 @@ public class TableController {
 			player.informTurn();
 		} else {
 			player.informMessage("Você não possuí nenhuma DigimonCard em sua mão ou no campo de batalha! "
-				+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
+			+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
 		}
 		player.enableButtonsDrawPhase();
 		updateInterface();
@@ -295,9 +295,10 @@ public class TableController {
 		case WAIT:
 			break;
 		case DRAW_PHASE:
-			if(table.existsDigimonCardOnSlot())
+			if(table.existsDigimonCardOnSlot()) {
+				player.dissableButtonsDrawPhase();
 				digivolvePhase();
-			else
+			} else
 				player.informError("Você precisa ter uma DigimonCard em campo para realizar essa operação!");
 			break;
 		
@@ -322,6 +323,7 @@ public class TableController {
 			battle();
 		} else {
 			table.setPhase(Phase.WAIT);
+			updateInterface();
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
 	}
@@ -337,6 +339,7 @@ public class TableController {
 
 	public void battle() {
 		System.out.println("Iniciando combate");
+		updateInterface();
 		Player first = table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer();
 		Player second= table.getLocalPlayer().getId() == 1 ? table.getRemotePlayer() : table.getLocalPlayer();
 		player.notifyPhase("Batalha!");
@@ -384,6 +387,7 @@ public class TableController {
 			table.setTurns(0);
 			drawPhase();
 		} else {
+			updateInterface();
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
 	}

@@ -445,9 +445,6 @@ public class DigimonScreen extends JFrame {
 			vict3.setSelected(false);
 			break;
 		}
-		digimonCard.repaint();
-		supportCard.repaint();
-		repaint();
 	}
 
 	public void updateRemotePlayer(PlayerMovePOJO remotePlayer) {
@@ -473,7 +470,6 @@ public class DigimonScreen extends JFrame {
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
-			repaint();
 		}
 		if(remotePlayer.getDigimonCard() != null) {
 			oppDigimonCard.setName(remotePlayer.getDigimonCard().getName());
@@ -484,6 +480,7 @@ public class DigimonScreen extends JFrame {
 			oppAtk1.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack1()));
 			oppAtk2.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack2()));
 			oppAtk3.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack3()));
+			oppDigimonCard.repaint();
 		} else {
 			oppDigimonCard.setName(null);
 			Image iconLogo = new ImageIcon(pathDefault).getImage()
@@ -494,7 +491,6 @@ public class DigimonScreen extends JFrame {
 			oppAtk2.setText("Atk2");
 			oppAtk3.setText("Atk3");
 		}
-		repaint();
 		if(remotePlayer.getSupportCard() != null) {
 			oppSupportCard.setName(remotePlayer.getSupportCard().getName());
 			Image iconLogo = new ImageIcon(remotePlayer.getSupportCard().getPath()).getImage()
@@ -502,11 +498,11 @@ public class DigimonScreen extends JFrame {
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			oppSupportCard.setIcon(imageIcon);
 		} else {
-			oppDigimonCard.setName(null);
+			oppSupportCard.setName(null);
 			Image iconLogo = new ImageIcon(pathDefault).getImage()
 					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
-			oppDigimonCard.setIcon(imageIcon);
+			oppSupportCard.setIcon(imageIcon);
 		}
 		int victories = remotePlayer.getVictories();
 		switch (victories) {
@@ -528,9 +524,6 @@ public class DigimonScreen extends JFrame {
 			oppVict3.setSelected(false);
 			break;
 		}
-		oppDigimonCard.repaint();
-		oppSupportCard.repaint();
-		repaint();
 	}
 
 	private Collection<JButton> buttonsCardsAdv() {

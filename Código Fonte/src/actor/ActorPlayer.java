@@ -87,7 +87,7 @@ public class ActorPlayer {
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		screen.updateInterface(remotePlayer, localPlayer);
-		screen.repaint();
+		screen.pack();
 		screen.revalidate();
 	}
 
