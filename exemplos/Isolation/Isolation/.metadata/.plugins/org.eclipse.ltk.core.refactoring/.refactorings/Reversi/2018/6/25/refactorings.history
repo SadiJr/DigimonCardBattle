@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;AtorNetGames.java&apos; to &apos;Rede&apos;&#x0D;&#x0A;- Original project: &apos;Reversi&apos;&#x0D;&#x0A;- Destination element: &apos;Rede&apos;&#x0D;&#x0A;- Original element: &apos;Rede.AtorNetGames.java&apos;" description="Copy compilation unit" element1="/&lt;Rede{AtorNetGames.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1529446841448" target="/Isolation/Rede" units="1" version="1.0"/>
-</session>
