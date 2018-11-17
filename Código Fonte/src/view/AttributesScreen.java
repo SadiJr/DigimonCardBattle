@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import actor.ActorPlayer;
 import model.CardPOJO;
@@ -194,16 +196,18 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(path);
-		cardImage.setIcon(iconLogo);
-		hp.setVisible(false);
-		atk1.setVisible(false);
-		atk2.setVisible(false);
-		atk3.setVisible(false);
-		dp.setVisible(false);
-		p.setVisible(false);
-		specialty.setVisible(false);
-		level.setVisible(false);
+		Image iconLogo = new ImageIcon(path).getImage()
+				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		cardImage.setIcon(imageIcon);
+		hp.setText("");
+		atk1.setText("");
+		atk2.setText("");
+		atk3.setText("");
+		dp.setText("");
+		p.setText("");
+		specialty.setText("");
+		level.setText("");
 		repaint();
 	}
 	
@@ -213,26 +217,30 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(path);
-		cardImage.setIcon(iconLogo);
-		hp.setVisible(false);
-		atk1.setVisible(false);
-		atk2.setVisible(false);
-		atk3.setVisible(false);
-		dp.setVisible(false);
-		p.setVisible(false);
-		specialty.setVisible(false);
-		level.setVisible(false);
+		Image iconLogo = new ImageIcon(path).getImage()
+				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		cardImage.setIcon(imageIcon);
+		hp.setText("");
+		atk1.setText("");
+		atk2.setText("");
+		atk3.setText("");
+		dp.setText("");
+		p.setText("");
+		specialty.setText("");
+		level.setText("");
 		repaint();
 	}
 
 	public void showDigimonCardAttributes(CardPOJO pojo) throws Exception {
 		name.setText(pojo.getName());
-		effectName.setText(pojo.getEffect());
-		descriptionEffect.setText(pojo.getDescription());
+		effectName.setText("Não Há");
+		descriptionEffect.setText("Não Há");
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(path);
-		cardImage.setIcon(iconLogo);
+		Image iconLogo = new ImageIcon(path).getImage()
+				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		cardImage.setIcon(imageIcon);
 		hp.setText(String.valueOf(pojo.getHp()));
 		dp.setText(String.valueOf(pojo.getDp()));
 		p.setText(String.valueOf(pojo.getP()));
@@ -247,11 +255,13 @@ public class AttributesScreen extends JFrame {
 	public void showDigimonCardAttributesOpponent(CardPOJO pojo) {
 		dissableAllButtons();
 		name.setText(pojo.getName());
-		effectName.setText(pojo.getEffect());
-		descriptionEffect.setText(pojo.getDescription());
+		effectName.setText("Não Há");
+		descriptionEffect.setText("Não Há");
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(path);
-		cardImage.setIcon(iconLogo);
+		Image iconLogo = new ImageIcon(path).getImage()
+				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		cardImage.setIcon(imageIcon);
 		hp.setText(String.valueOf(pojo.getHp()));
 		dp.setText(String.valueOf(pojo.getDp()));
 		p.setText(String.valueOf(pojo.getP()));
@@ -268,8 +278,10 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		ImageIcon iconLogo = new ImageIcon(path);
-		cardImage.setIcon(iconLogo);
+		Image iconLogo = new ImageIcon(path).getImage()
+				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(iconLogo);
+		cardImage.setIcon(imageIcon);
 		if(!pojo.isOptionCard()) {
 			hp.setText(String.valueOf(pojo.getHp()));
 			dp.setText(String.valueOf(pojo.getDp()));
@@ -279,6 +291,15 @@ public class AttributesScreen extends JFrame {
 			atk3.setText(String.valueOf(pojo.getAttack3()));
 			specialty.setText(pojo.getSpecialty());
 			level.setText(String.valueOf(pojo.getLevel()));
+		} else {
+			hp.setText("");
+			atk1.setText("");
+			atk2.setText("");
+			atk3.setText("");
+			dp.setText("");
+			p.setText("");
+			specialty.setText("");
+			level.setText("");
 		}
 		repaint();
 	}
@@ -309,6 +330,7 @@ public class AttributesScreen extends JFrame {
 				downDigimon.setVisible(false);
 			}
 		}
+		repaint();
 	}
 	
 	public void enableButtonSacrificeCard(boolean enable) {

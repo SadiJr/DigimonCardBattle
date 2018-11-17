@@ -316,12 +316,14 @@ public class TableController {
 
 	public void choiceAttack(int attack) {
 		table.getLocalPlayer().setAttackChoice(attack);
+		System.out.println("Escolheu o ataque " + attack);
 //		player.dissableButtonsAttack();
 		player.dissableAllButtons();
 		network.sendMove(table);
 		if(table.getTurns() == 2) {
 			battle();
 		} else {
+			table.setPhase(Phase.WAIT);
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
 	}
@@ -338,12 +340,14 @@ public class TableController {
 	public void battle() {
 		Player first = table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer();
 		Player second= table.getLocalPlayer().getId() == 1 ? table.getRemotePlayer() : table.getLocalPlayer();
+		player.notifyPhase("Batalha!");
 		DigimonCard aux1 = DigimonCard.copy(first.getDigimonCard());
 		DigimonCard aux2 = DigimonCard.copy(second.getDigimonCard());
 		
 		try {
 			table.supportCardEffect(first);
 			table.supportCardEffect(second);
+			updateInterface();
 			table.battleTurn();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
@@ -513,5 +517,11 @@ public class TableController {
 		} else {
 			player.informError("Você não possuí nenhuma carta em campo de batalha");
 		}
+	}
+	
+	public boolean existsSupportCardInBattleField() {
+		if(table.getLocalPlayer().getSupportCard() != null)
+			return true;
+		return false;
 	}
 }

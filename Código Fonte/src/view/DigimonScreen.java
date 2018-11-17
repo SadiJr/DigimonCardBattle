@@ -136,6 +136,7 @@ public class DigimonScreen extends JFrame {
 	}
 
 	private void config() {
+		setTitle("Digimon Card Battle");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenu menuMenu = new JMenu("Menu");
 		JMenuItem conectarItem = new JMenuItem("Conectar");
@@ -343,6 +344,8 @@ public class DigimonScreen extends JFrame {
 			oppDP.setText("0");
 			oppDeckSize.setText("0");
 			opponentName.setText("Seu inimigo");
+			oppDeadCards.setText("0");
+			oppDeckSize.setText("0");
 			oppVict1.setSelected(false);
 			oppVict2.setSelected(false);
 			oppVict3.setSelected(false);
@@ -463,6 +466,15 @@ public class DigimonScreen extends JFrame {
 			oppAtk1.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack1()));
 			oppAtk2.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack2()));
 			oppAtk3.setText(String.valueOf(remotePlayer.getDigimonCard().getAttack3()));
+		} else {
+			oppDigimonCard.setName(null);
+			Image iconLogo = new ImageIcon(pathDefault).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			oppDigimonCard.setIcon(imageIcon);
+			oppAtk1.setText("Atk1");
+			oppAtk2.setText("Atk2");
+			oppAtk3.setText("Atk3");
 		}
 		if(remotePlayer.getSupportCard() != null) {
 			oppSupportCard.setName(remotePlayer.getSupportCard().getName());
@@ -470,6 +482,12 @@ public class DigimonScreen extends JFrame {
 					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 			ImageIcon imageIcon = new ImageIcon(iconLogo);
 			oppSupportCard.setIcon(imageIcon);
+		} else {
+			oppDigimonCard.setName(null);
+			Image iconLogo = new ImageIcon(pathDefault).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			oppDigimonCard.setIcon(imageIcon);
 		}
 		int victories = remotePlayer.getVictories();
 		switch (victories) {

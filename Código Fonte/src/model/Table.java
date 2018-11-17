@@ -15,6 +15,7 @@ import com.google.gson.stream.MalformedJsonException;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
+import controll.TableController;
 import enums.Effect;
 import enums.Level;
 import enums.Phase;
@@ -444,7 +445,8 @@ public class Table implements Jogada {
 	public void addMissingCards() {
 		ArrayList<Card> cards = (ArrayList<Card>) localPlayer.getDeck().getCards();
 		int size = cards.size();
-		int index = (int) Math.random() * size;
+		int index = (int) (Math.random() * size);
+		System.out.println("O índice aletório é " + index + " e o tamanho é " + size);
 		Card card = cards.get(index);
 		localPlayer.getDeck().getCards().remove(card);
 		localPlayer.getHand().add(card);

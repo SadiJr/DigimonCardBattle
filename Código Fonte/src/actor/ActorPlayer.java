@@ -13,6 +13,7 @@ public class ActorPlayer {
 	private DigimonScreen screen;
 	private AttributesScreen attributesScreen;
 	private UpdateScreen update;
+	private boolean isSacrificeCompleted;
 
 	public ActorPlayer(TableController tableController) {
 		this.tableController = tableController;
@@ -98,12 +99,10 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsDigivolvePhase() {
+		attributesScreen.dissableAllButtons();
 		attributesScreen.enableButtonSacrificeCard(true);
 		screen.enableButtonsDigivolvePhase(true);
 		update.enableUpdate(true);
-//		attributesScreen.pack();
-//		screen.pack();
-//		update.pack();
 	}
 
 	public void dissableButtonsDigivolvePhase() {
@@ -174,32 +173,41 @@ public class ActorPlayer {
 
 	public void viewAttributes(CardPOJO pojo, boolean opponent) {
 		try {
-//			Phase phase = tableController.getTable().getPhase();
-//			switch (phase) {
-//			case DRAW_PHASE:
-////				attributesScreen.dissableAllButtons();
-////				attributesScreen.enableButtonDownDigimon(true, false);
-//				break;
-//			
-//			case DIGIVOLVE_PHASE:
-////				attributesScreen.dissableAllButtons();
-////				attributesScreen.enableButtonSacrificeCard(true);
-//				break;
-//			
-//			case BATTLE_PHASE:
-//				if(!opponent) 
-//					attributesScreen.dissableAllButtons();
-////					attributesScreen.enableButtonDownDigimon(true, true);
-//				break;
-//
-//			default:
-//				attributesScreen.dissableAllButtons();
-//				break;
-//			}
-			attributesScreen.showAttributes(pojo, opponent);
-			attributesScreen.pack();
-			attributesScreen.repaint();
-			attributesScreen.setVisible(true);
+			if(opponent) {
+				attributesScreen.showAttributes(pojo, opponent);
+				attributesScreen.pack();
+				attributesScreen.repaint();
+				attributesScreen.setVisible(true); 
+			} else {
+				Phase phase = tableController.getTable().getPhase();
+				switch (phase) {
+				case DRAW_PHASE:
+					attributesScreen.dissableAllButtons();
+					attributesScreen.enableButtonDownDigimon(true, false);
+					isSacrificeCompleted = false;
+					break;
+				
+				case DIGIVOLVE_PHASE:
+					attributesScreen.dissableAllButtons();
+					if(!isSacrificeCompleted)
+						attributesScreen.enableButtonSacrificeCard(true);
+					break;
+				
+				case BATTLE_PHASE:
+						attributesScreen.dissableAllButtons();
+						if(!tableController.existsSupportCardInBattleField())
+							attributesScreen.enableButtonDownDigimon(true, true);
+					break;
+	
+				default:
+					attributesScreen.dissableAllButtons();
+					break;
+				}
+				attributesScreen.showAttributes(pojo, opponent);
+				attributesScreen.pack();
+				attributesScreen.repaint();
+				attributesScreen.setVisible(true); 
+			}
 		} catch (Exception e) {
 			informError(e.getMessage());
 		}
@@ -264,7 +272,8 @@ public class ActorPlayer {
 
 	public void viewAttributesDigimonCardInBattleField(CardPOJO createCardPOJO) {
 		attributesScreen.dissableAllButtons();
-		attributesScreen.enableButtonsAttack(true);
+		if(tableController.getTable().getPhase().equals(Phase.BATTLE_PHASE))
+			attributesScreen.enableButtonsAttack(true);
 		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
 		attributesScreen.pack();
 		attributesScreen.setVisible(true);
@@ -272,6 +281,7 @@ public class ActorPlayer {
 
 	public void dissableButtonSacrifice() {
 		attributesScreen.enableButtonSacrificeCard(false);
+		isSacrificeCompleted = true;
 		attributesScreen.pack();
 	}
 
