@@ -69,6 +69,8 @@ public class DigimonScreen extends JFrame {
 	private JLabel playerName;
 
 	private String pathDefault = "pictures/backCard.jpg";
+	private String pathCemitery = "pictures/cemitery.png";
+	private String pathDp = "pictures/power.png";
 
 	private ActionListener l = new ActionListener() {
 
@@ -279,6 +281,18 @@ public class DigimonScreen extends JFrame {
 		iconLogo.getScaledInstance(deckSizeIcon.getWidth(), deckSizeIcon.getHeight(), Image.SCALE_SMOOTH);
 		deckSizeIcon.setIcon(new ImageIcon(iconLogo));
 		oppDeckSizeIcon.setIcon(new ImageIcon(iconLogo));
+		Image iconCemitery = new ImageIcon(pathCemitery).getImage()
+				.getScaledInstance(oppCemiteryIcon.getWidth(), oppCemiteryIcon.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon cemitery = new ImageIcon(iconCemitery);
+		deadCardsIcon.setIcon(cemitery);
+		oppCemiteryIcon.setIcon(cemitery);
+		
+		Image iconDp = new ImageIcon(pathDp).getImage()
+				.getScaledInstance(dpIcon.getWidth(), dpIcon.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon dpIc = new ImageIcon(iconDp);
+		dpIcon.setIcon(dpIc);
+		oppDPIcon.setIcon(dpIc);
+		
 		card1.addActionListener(l);
 		card2.addActionListener(l);
 		card3.addActionListener(l);
@@ -431,7 +445,9 @@ public class DigimonScreen extends JFrame {
 			vict3.setSelected(false);
 			break;
 		}
-
+		digimonCard.repaint();
+		supportCard.repaint();
+		repaint();
 	}
 
 	public void updateRemotePlayer(PlayerMovePOJO remotePlayer) {
@@ -451,11 +467,13 @@ public class DigimonScreen extends JFrame {
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			} else {
+				jButton.setName(null);
 				Image iconLogo = new ImageIcon(pathDefault).getImage()
 						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(iconLogo);
 				jButton.setIcon(imageIcon);
 			}
+			repaint();
 		}
 		if(remotePlayer.getDigimonCard() != null) {
 			oppDigimonCard.setName(remotePlayer.getDigimonCard().getName());
@@ -476,6 +494,7 @@ public class DigimonScreen extends JFrame {
 			oppAtk2.setText("Atk2");
 			oppAtk3.setText("Atk3");
 		}
+		repaint();
 		if(remotePlayer.getSupportCard() != null) {
 			oppSupportCard.setName(remotePlayer.getSupportCard().getName());
 			Image iconLogo = new ImageIcon(remotePlayer.getSupportCard().getPath()).getImage()
@@ -509,6 +528,9 @@ public class DigimonScreen extends JFrame {
 			oppVict3.setSelected(false);
 			break;
 		}
+		oppDigimonCard.repaint();
+		oppSupportCard.repaint();
+		repaint();
 	}
 
 	private Collection<JButton> buttonsCardsAdv() {
@@ -531,8 +553,8 @@ public class DigimonScreen extends JFrame {
 
 	public void notifyPhase(String phase) {
 		phaseName.setText(phase);
-		repaint();
 		pack();
+		repaint();
 
 	}
 

@@ -117,7 +117,6 @@ public class TableController {
 			} else {
 				int turns = table.getTurns();
 				if(turns < 2) {
-					table.createHandLocalPlayer();
 					drawPhase();
 				} else if(turns == 2) {
 					battle();
@@ -141,16 +140,15 @@ public class TableController {
 		table.setTurns(table.getTurns() + 1);
 		table.setPhase(Phase.DRAW_PHASE);
 		player.notifyPhase(Phase.DRAW_PHASE.getDescription());
+		table.createHandLocalPlayer();
 		updateInterface();
 		if(table.existsDigimonCardInHand() || table.existsDigimonCardOnSlot()) {
 			player.informTurn();
-			player.enableButtonsDrawPhase();
 		} else {
-			table.createHandLocalPlayer();
 			player.informMessage("Você não possuí nenhuma DigimonCard em sua mão ou no campo de batalha! "
-					+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
-			player.enableButtonsDrawPhase();
+				+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
 		}
+		player.enableButtonsDrawPhase();
 		updateInterface();
 	}
 
@@ -338,6 +336,7 @@ public class TableController {
 	}
 
 	public void battle() {
+		System.out.println("Iniciando combate");
 		Player first = table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer();
 		Player second= table.getLocalPlayer().getId() == 1 ? table.getRemotePlayer() : table.getLocalPlayer();
 		player.notifyPhase("Batalha!");
@@ -356,11 +355,12 @@ public class TableController {
 		if(first.getDigimonCard().getHp() <= 0 || second.getDigimonCard().getHp() <= 0) {
 			for(Player player : table.getListPlayers()) {
 				if(player.getDigimonCard().getHp() <= 0) {
-					this.player.notifyWinnerTurn(player.equals(table.getLocalPlayer()) ? table.getRemotePlayer().getName() 
-							: table.getLocalPlayer().getName());
+					this.player.notifyWinnerTurn(player.getId() == table.getLocalPlayer().getId() ? 
+							table.getRemotePlayer().getName() : table.getLocalPlayer().getName());
 					table.addCardToCemiteryByPlayer(player, player.getDigimonCard());
 					player.setDigimonCard(null);
-					Player winner = player.equals(table.getLocalPlayer()) ? table.getLocalPlayer() : table.getRemotePlayer();
+					Player winner = player.getId() == table.getLocalPlayer().getId() ? table.getRemotePlayer() : 
+						table.getLocalPlayer();
 					winner.setVictories(winner.getVictories() + 1);
 				}
 			}

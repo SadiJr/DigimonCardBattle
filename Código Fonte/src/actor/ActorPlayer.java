@@ -87,8 +87,8 @@ public class ActorPlayer {
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
 		screen.updateInterface(remotePlayer, localPlayer);
-		screen.pack();
 		screen.repaint();
+		screen.revalidate();
 	}
 
 	public void dissableButtonsDrawPhase() {

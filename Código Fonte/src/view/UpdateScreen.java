@@ -180,50 +180,51 @@ public class UpdateScreen extends JFrame {
 		jcomp42 = new JLabel("P");
 		jcomp43 = new JLabel("Especialidade");
 		jcomp44 = new JLabel("Level");
-		jcomp45 = new JLabel();
-		jcomp46 = new JLabel();
-		jcomp47 = new JLabel();
-		jcomp48 = new JLabel();
-		jcomp49 = new JLabel();
-		jcomp50 = new JLabel();
-		jcomp51 = new JLabel();
-		jcomp52 = new JLabel();
-		jcomp53 = new JLabel();
-		jcomp54 = new JLabel();
-		jcomp55 = new JLabel();
-		jcomp56 = new JLabel();
-		jcomp57 = new JLabel();
-		jcomp58 = new JLabel();
-		jcomp59 = new JLabel();
-		jcomp60 = new JLabel();
-		jcomp61 = new JLabel();
-		jcomp62 = new JLabel();
-		jcomp63 = new JLabel();
-		jcomp64 = new JLabel();
-		jcomp65 = new JLabel();
-		jcomp66 = new JLabel();
-		jcomp67 = new JLabel();
-		jcomp68 = new JLabel();
-		jcomp69 = new JLabel();
-		jcomp70 = new JLabel();
-		jcomp71 = new JLabel();
-		jcomp72 = new JLabel();
-		jcomp73 = new JLabel();
-		jcomp74 = new JLabel();
-		jcomp75 = new JLabel();
-		jcomp76 = new JLabel();
-		jcomp77 = new JLabel();
-		jcomp78 = new JLabel();
-		jcomp79 = new JLabel();
-		jcomp80 = new JLabel();
-		jcomp81 = new JLabel();
-		jcomp82 = new JLabel();
-		jcomp83 = new JLabel();
-		jcomp84 = new JLabel();
-		jcomp85 = new JLabel();
-		jcomp86 = new JLabel();
+		jcomp45 = new JLabel("1");
+		jcomp46 = new JLabel("2");
+		jcomp47 = new JLabel("3");
+		jcomp48 = new JLabel("4");
+		jcomp49 = new JLabel("5");
+		jcomp50 = new JLabel("6");
+		jcomp51 = new JLabel("7");
+		jcomp52 = new JLabel("8");
+		jcomp53 = new JLabel("9");
+		jcomp54 = new JLabel("10");
+		jcomp55 = new JLabel("11");
+		jcomp56 = new JLabel("12");
+		jcomp57 = new JLabel("13");
+		jcomp58 = new JLabel("14");
+		jcomp59 = new JLabel("15");
+		jcomp60 = new JLabel("16");
+		jcomp61 = new JLabel("17");
+		jcomp62 = new JLabel("18");
+		jcomp63 = new JLabel("19");
+		jcomp64 = new JLabel("20");
+		jcomp65 = new JLabel("21");
+		jcomp66 = new JLabel("22");
+		jcomp67 = new JLabel("23");
+		jcomp68 = new JLabel("24");
+		jcomp69 = new JLabel("25");
+		jcomp70 = new JLabel("26");
+		jcomp71 = new JLabel("27");
+		jcomp72 = new JLabel("28");
+		jcomp73 = new JLabel("29");
+		jcomp74 = new JLabel("30");
+		jcomp75 = new JLabel("31");
+		jcomp76 = new JLabel("32");
+		jcomp77 = new JLabel("33");
+		jcomp78 = new JLabel("34");
+		jcomp79 = new JLabel("35");
+		jcomp80 = new JLabel("36");
+		jcomp81 = new JLabel("37");
+		jcomp82 = new JLabel("38");
+		jcomp83 = new JLabel("39");
+		jcomp84 = new JLabel("40");
+		jcomp85 = new JLabel("41");
+		jcomp86 = new JLabel("42");
 
 		// adjust size and set layout
+		setTitle("Detalhes de Evolução");
 		setPreferredSize(new Dimension(1088, 664));
 		setLayout(null);
 
@@ -355,13 +356,12 @@ public class UpdateScreen extends JFrame {
 		for(int i =0; i < hand2.size(); i++) {
 			CardPOJO pojo = hand2.get(i);
 			if(pojo != null && pojo.isOptionCard()) {
-				ImageIcon iconLogo = new ImageIcon("pictures/backCard.jpg");
+				ImageIcon iconLogo = new ImageIcon(pojo.getPath());
+				ArrayList<JLabel> arrayList = labels.get(i);
+				arrayList.get(0).setText(pojo.getName());
+				arrayList.get(1).setText(pojo.getEffect());
 				buttons.get(i).setIcon(iconLogo);
 				buttons.get(i).setEnabled(false);
-				ArrayList<JLabel> arrayList = labels.get(i);
-				for (JLabel jLabel : arrayList) {
-					jLabel.setVisible(false);
-				}
 			} else if(pojo != null){
 				ImageIcon iconLogo = new ImageIcon(pojo.getPath());
 				buttons.get(i).setIcon(iconLogo);
@@ -376,6 +376,14 @@ public class UpdateScreen extends JFrame {
 				arrayList.get(7).setText(String.valueOf(pojo.getP()));
 				arrayList.get(8).setText(pojo.getSpecialty());
 				arrayList.get(9).setText(String.valueOf(pojo.getLevel()));
+			} else {
+				ImageIcon iconLogo = new ImageIcon("pictures/backCard.jpg");
+				buttons.get(i).setIcon(iconLogo);
+				buttons.get(i).setEnabled(false);
+				ArrayList<JLabel> arrayList = labels.get(i);
+				for (JLabel jLabel : arrayList) {
+					jLabel.setText("");
+				}
 			}
 		}
 
@@ -412,7 +420,7 @@ public class UpdateScreen extends JFrame {
 		labelsCard3.add(jcomp83);labelsCard3.add(jcomp84);labelsCard3.add(jcomp85);
 		labelsCard3.add(jcomp86);
 		
-		labelsCard4.add(jcomp67);labelsCard4.add(jcomp68);labelsCard4.add(jcomp79);
+		labelsCard4.add(jcomp67);labelsCard4.add(jcomp68);labelsCard4.add(jcomp69);
 		labelsCard4.add(jcomp70);labelsCard4.add(jcomp71);labelsCard4.add(jcomp72);
 		labelsCard4.add(jcomp73);labelsCard4.add(jcomp74);labelsCard4.add(jcomp75);
 		labelsCard4.add(jcomp76);
