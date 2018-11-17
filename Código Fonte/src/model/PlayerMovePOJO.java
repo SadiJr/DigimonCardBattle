@@ -5,14 +5,14 @@ public class PlayerMovePOJO {
 	private String name;
 	private int deadCards;
 	private int deckSize;
-	private Collection<Card> hand;
-	private DigimonCard digimonCard;
-	private Card supportCard;
+	private Collection<CardPOJO> hand;
+	private CardPOJO digimonCard;
+	private CardPOJO supportCard;
 	private int dp;
 	private int victories;
 	
-	public PlayerMovePOJO(String name, int deadCards, int deckSize, Collection<Card> hand, DigimonCard digimon, 
-			Card support, int dp, int victories) {
+	public PlayerMovePOJO(String name, int deadCards, int deckSize, Collection<CardPOJO> hand, CardPOJO digimon, 
+			CardPOJO support, int dp, int victories) {
 		this.setName(name);
 		this.deadCards = deadCards;
 		this.deckSize = deckSize;
@@ -39,27 +39,27 @@ public class PlayerMovePOJO {
 		this.deckSize = deckSize;
 	}
 
-	public Collection<Card> getHand() {
+	public Collection<CardPOJO> getHand() {
 		return this.hand;
 	}
 
-	public void setHand(Collection<Card> hand) {
+	public void setHand(Collection<CardPOJO> hand) {
 		this.hand = hand;
 	}
 
-	public DigimonCard getDigimonCard() {
+	public CardPOJO getDigimonCard() {
 		return this.digimonCard;
 	}
 
-	public void setDigimonCard(DigimonCard digimonCard) {
+	public void setDigimonCard(CardPOJO digimonCard) {
 		this.digimonCard = digimonCard;
 	}
 
-	public Card getSupportCard() {
+	public CardPOJO getSupportCard() {
 		return this.supportCard;
 	}
 
-	public void setSupportCard(Card supportCard) {
+	public void setSupportCard(CardPOJO supportCard) {
 		this.supportCard = supportCard;
 	}
 

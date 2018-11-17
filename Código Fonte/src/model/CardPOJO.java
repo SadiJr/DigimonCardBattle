@@ -13,9 +13,11 @@ public class CardPOJO {
 	private String effect;
 	private String description;
 	private boolean optionCard;
+	private String path;
+	private String phase;
 	
 	public CardPOJO(int hp, int attack1, int attack2, int attack3, int dp, int p, String specialty,
-			char level, String name, String effect, String description) {
+			char level, String name, String effect, String description, String path, String phase) {
 		this.hp = hp;
 		this.attack1 = attack1;
 		this.attack2 = attack2;
@@ -28,18 +30,21 @@ public class CardPOJO {
 		this.effect = effect;
 		this.description = description;
 		this.optionCard = false;
-		
+		this.path = path;
+		this.phase = phase;
 	}
 
 	public int getHp() {
 		return this.hp;
 	}
 	
-	public CardPOJO(String name, String effect, String description) {
+	public CardPOJO(String name, String effect, String description, String path, String phase) {
 		this.name = name;
 		this.effect = effect;
 		this.description = description;
 		this.optionCard = true;
+		this.path = path;
+		this.phase = phase;
 	}
 
 	/**
@@ -180,6 +185,22 @@ public class CardPOJO {
 	 */
 	public void setOptionCard(boolean optionCard) {
 		this.optionCard = optionCard;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPhase() {
+		return phase;
+	}
+
+	public void setPhase(String phase) {
+		this.phase = phase;
 	}
 
 }

@@ -34,7 +34,7 @@ public class AtorJogador {
 			if(tabuleiro.getJogador1().isVencedor()){
 				this.notificar("Venceu a campanha");
 				if(tabuleiro.getJogador1().getNumeroDeVitorias() < 2){
-					this.notificar("Uma nova campanha será iniciada, o outro jogador inicia. Aguarde.");
+					this.notificar("Uma nova campanha serï¿½ iniciada, o outro jogador inicia. Aguarde.");
 				}else{
 					this.notificar("Venceu o jogo");
 				}
@@ -47,7 +47,7 @@ public class AtorJogador {
 			this.tela.setaImagemJogador();
 		}
 		else{
-			throw new Exception("Não é sua vez");
+			throw new Exception("Nï¿½o ï¿½ sua vez");
 		}
 	}
 
@@ -88,7 +88,7 @@ public class AtorJogador {
 
 	public void receberJogada(Tabuleiro tab) throws NaoConectadoException, NaoJogandoException{
 		if (tab == null) {
-			int opt = this.tela.perguntar("O outro jogador deseja reiniciar a partida. Você iniciará com o lado branco.");
+			int opt = this.tela.perguntar("O outro jogador deseja reiniciar a partida. Vocï¿½ iniciarï¿½ com o lado branco.");
 			if (opt == 0) {
 				this.reiniciar();
 				return;
@@ -116,14 +116,14 @@ public class AtorJogador {
 			this.notificar("Derrota!");
 			this.tabuleiro.setPartidaEmAndamento(false);
 			if(tabuleiro.getJogador2().getNumeroDeVitorias() < 2){
-				this.notificar("Uma nova campanha será iniciada, você inicia.");
+				this.notificar("Uma nova campanha serï¿½ iniciada, vocï¿½ inicia.");
 				this.iniciarNovaCampanha(1);
 			}else{
 				this.tela.notificar("Perdeu a melhor de 3");
 				return;
 			}
 		}
-		this.tela.notificar("É a sua vez " + this.tabuleiro.getJogador1().getNome());
+		this.tela.notificar("ï¿½ a sua vez " + this.tabuleiro.getJogador1().getNome());
 		tela.setaImagemJogador();
 	}
 
@@ -157,18 +157,19 @@ public class AtorJogador {
 
 
 	public void iniciarNovaPartida(Integer posicao) {
+		System.err.println(posicao);
 		tabuleiro = new Tabuleiro();
 		String idAdversario = rede.getNomeAdversario(posicao);
 		tabuleiro.criarJogadores(idUsuario, idAdversario, posicao);
 		tabuleiro.setPartidaEmAndamento(true);
 		tela.limpar();
-		tela.notificar("Partida encontrada, o nome de seu adversário é: " + idAdversario);
+		tela.notificar("Partida encontrada, o nome de seu adversï¿½rio ï¿½: " + idAdversario);
 		tela.iniciarPartida.setEnabled(false);
 		tela.conectar.setEnabled(false);
 		if(tabuleiro.getJogador1().isJogadorDaVez()){
 			tela.setaImagemJogador();
 		}else{
-			this.tela.notificar("Agora é a vez do jogador " +idAdversario+".Aguarde sua jogada");
+			this.tela.notificar("Agora ï¿½ a vez do jogador " +idAdversario+".Aguarde sua jogada");
 		}
 		
 	}

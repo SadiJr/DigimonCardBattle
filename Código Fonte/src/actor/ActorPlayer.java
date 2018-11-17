@@ -1,21 +1,25 @@
 package actor;
 
 import controll.TableController;
+import enums.Phase;
 import model.CardPOJO;
 import model.PlayerMovePOJO;
 import view.AttributesScreen;
 import view.DigimonScreen;
+import view.UpdateScreen;
 
 public class ActorPlayer {
-
 	private TableController tableController;
 	private DigimonScreen screen;
 	private AttributesScreen attributesScreen;
+	private UpdateScreen update;
+	private boolean isSacrificeCompleted;
 
 	public ActorPlayer(TableController tableController) {
 		this.tableController = tableController;
-		screen = new DigimonScreen();
-		attributesScreen = new AttributesScreen();
+		screen = new DigimonScreen(this);
+		attributesScreen = new AttributesScreen(this);
+		update = new UpdateScreen(this);
 	}
 
 	public void connect() {
@@ -45,8 +49,7 @@ public class ActorPlayer {
 	}
 
 	public void notifyPhase(String phase) {
-		// TODO - implement ActorPlayer.notifyPhase
-		throw new UnsupportedOperationException();
+		screen.notifyPhase(phase);
 	}
 
 	public void informTurn() {
@@ -66,6 +69,8 @@ public class ActorPlayer {
 	}
 
 	public void downDigimonCard(String nameCard) {
+		attributesScreen.enableButtonDownDigimon(false, false);
+		attributesScreen.setVisible(false);
 		tableController.downDigimonCard(nameCard);
 	}
 
@@ -74,40 +79,49 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsDrawPhase() {
-		// TODO - implement ActorPlayer.enableButtonsDrawPhase
-		throw new UnsupportedOperationException();
+		attributesScreen.enableButtonDownDigimon(true, false);
+		screen.enableButtonsDrawPhase();
+		attributesScreen.pack();
+		attributesScreen.repaint();
 	}
 
 	public void updateInterface(PlayerMovePOJO remotePlayer, PlayerMovePOJO localPlayer) {
-		// TODO - implement ActorPlayer.updateInterface
-		throw new UnsupportedOperationException();
+		screen.updateInterface(remotePlayer, localPlayer);
+		screen.pack();
+		screen.revalidate();
 	}
 
 	public void dissableButtonsDrawPhase() {
-		// TODO - implement ActorPlayer.dissableButtonsDrawPhase
-		throw new UnsupportedOperationException();
+		attributesScreen.enableButtonDownDigimon(false, false);
+		screen.dissableButtonsDrawPhase();
+		attributesScreen.pack();
+		screen.pack();
 	}
 
 	public void enableButtonsDigivolvePhase() {
-		// TODO - implement ActorPlayer.enableButtonsDigivolvePhase
-		throw new UnsupportedOperationException();
+		attributesScreen.dissableAllButtons();
+		attributesScreen.enableButtonSacrificeCard(true);
+		screen.enableButtonsDigivolvePhase(true);
+		update.enableUpdate(true);
 	}
 
 	public void dissableButtonsDigivolvePhase() {
-		// TODO - implement ActorPlayer.dissableButtonsDigivolvePhase
-		throw new UnsupportedOperationException();
-	}
-
-	public void dissableButtonSacrificeCard() {
-		// TODO - implement ActorPlayer.dissableButtonSacrificeCard
-		throw new UnsupportedOperationException();
+		screen.enableButtonsDigivolvePhase(false);
+		screen.pack();
+		attributesScreen.enableButtonSacrificeCard(false);
+		attributesScreen.pack();
+		update.setVisible(false);
 	}
 
 	public void sacrificeCard(String name) {
+		attributesScreen.enableButtonSacrificeCard(false);
+		attributesScreen.pack();
 		tableController.sacrificeCard(name);
 	}
 
 	public void updateCard(String name) {
+		update.enableUpdate(false);
+		update.pack();
 		tableController.updateCard(name);
 	}
 
@@ -116,17 +130,16 @@ public class ActorPlayer {
 	}
 
 	public void enableButtonsBattlePhase() {
-		// TODO - implement ActorPlayer.enableButtonsBattlePhase
-		throw new UnsupportedOperationException();
+		attributesScreen.enableButtonDownDigimon(true, true);
 	}
 	
 	public void attackChoice(int choice) {
+		attributesScreen.enableButtonsAttack(false);
 		tableController.choiceAttack(choice);
 	}
 
 	public void dissableButtonsAttack() {
-		// TODO - implement ActorPlayer.dissableButtonsAttack
-		throw new UnsupportedOperationException();
+		attributesScreen.enableButtonsAttack(false);
 	}
 
 	public void downSupportCard(String supportName) {
@@ -134,12 +147,20 @@ public class ActorPlayer {
 	}
 
 	public void dissableAllButtons() {
-		// TODO - implement ActorPlayer.dissableAllButtons
-		throw new UnsupportedOperationException();
+		attributesScreen.dissableAllButtons();
+		screen.dissableAllButtons();
 	}
 
-	public void viewAttributes(String name) {
-		tableController.viewAttributes(name);
+	public void viewAttributes(String name, boolean opponent) {
+		tableController.viewAttributes(name, opponent);
+	}
+	
+	public void viewAttributesDigimonCardInBattleField(String name) {
+		tableController.viewAttributesDigimonCardInBattleField(name);
+	}
+	
+	public void viewAttributesSupportCardInBattleField(String name) {
+		tableController.viewAttributesSupportCardInBattleField(name);
 	}
 
 	public AttributesScreen getAttributesScreen() {
@@ -150,9 +171,46 @@ public class ActorPlayer {
 		this.attributesScreen = attributesScreen;
 	}
 
-	public void viewAttributes(CardPOJO pojo) {
-		// TODO - implement ActorPlayer.viewAttributes
-		throw new UnsupportedOperationException();
+	public void viewAttributes(CardPOJO pojo, boolean opponent) {
+		try {
+			if(opponent) {
+				attributesScreen.showAttributes(pojo, opponent);
+				attributesScreen.pack();
+				attributesScreen.repaint();
+				attributesScreen.setVisible(true); 
+			} else {
+				Phase phase = tableController.getTable().getPhase();
+				switch (phase) {
+				case DRAW_PHASE:
+					attributesScreen.dissableAllButtons();
+					attributesScreen.enableButtonDownDigimon(true, false);
+					isSacrificeCompleted = false;
+					break;
+				
+				case DIGIVOLVE_PHASE:
+					attributesScreen.dissableAllButtons();
+					if(!isSacrificeCompleted)
+						attributesScreen.enableButtonSacrificeCard(true);
+					break;
+				
+				case BATTLE_PHASE:
+						attributesScreen.dissableAllButtons();
+						if(!tableController.existsSupportCardInBattleField())
+							attributesScreen.enableButtonDownDigimon(true, true);
+					break;
+	
+				default:
+					attributesScreen.dissableAllButtons();
+					break;
+				}
+				attributesScreen.showAttributes(pojo, opponent);
+				attributesScreen.pack();
+				attributesScreen.repaint();
+				attributesScreen.setVisible(true); 
+			}
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
 	}
 
 	public void notifyWinnerTurn(String name) {
@@ -164,6 +222,73 @@ public class ActorPlayer {
 	}
 
 	public void init() {
+		screen.pack();
 		screen.setVisible(true);
+	}
+	
+	public void viewAttributesDigimonCard(boolean opponent) {
+		tableController.viewAttributesDigimonCard(opponent);
+	}
+
+	public void viewAttributesDigimonCard(CardPOJO pojo, boolean opponent) {
+		try {
+			if(opponent) {
+				attributesScreen.showDigimonCardAttributesOpponent(pojo);
+			}else {
+				attributesScreen.showDigimonCardAttributes(pojo);
+			}
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
+		attributesScreen.pack();
+		attributesScreen.repaint();
+		attributesScreen.setVisible(true);
+	}
+	
+	public void viewAttributesOptionCard(boolean opponent) {
+		tableController.viewAttributesOptionCard(opponent);
+	}
+
+	public void viewAttributesOptionCard(CardPOJO pojo, boolean opponent) {
+		try {
+			if (opponent) {
+				attributesScreen.showOptionCardAttributesOpponent(pojo);
+			} else {
+				attributesScreen.showOptionCardAttributes(pojo);
+			}
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
+	}
+
+	public void viewOptionsUpdate() {
+		PlayerMovePOJO createPOJOPlayer = tableController.createPOJOPlayer(tableController.getTable().getLocalPlayer());
+		update.viewOptions(createPOJOPlayer.getHand());
+		update.pack();
+		update.setVisible(true);
+	}
+
+	public void viewAttributesDigimonCardInBattleField(CardPOJO createCardPOJO) {
+		attributesScreen.dissableAllButtons();
+		if(tableController.getTable().getPhase().equals(Phase.BATTLE_PHASE))
+			attributesScreen.enableButtonsAttack(true);
+		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
+	}
+
+	public void dissableButtonSacrifice() {
+		attributesScreen.enableButtonSacrificeCard(false);
+		isSacrificeCompleted = true;
+		attributesScreen.pack();
+	}
+
+	public void viewAttributesSupportCardInBattleField(CardPOJO createCardPOJO) {
+		attributesScreen.dissableAllButtons();
+		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+		attributesScreen.pack();
+		attributesScreen.setVisible(true);
 	}
 }

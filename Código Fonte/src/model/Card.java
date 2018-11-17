@@ -1,9 +1,10 @@
 package model;
 
+import br.ufsc.inf.leobr.cliente.Jogada;
 import enums.Effect;
 
-public abstract class Card {
-
+public abstract class Card implements Jogada {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Effect effect;
 	private String path;

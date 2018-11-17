@@ -3,8 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Player {
-	private Integer id;
+import br.ufsc.inf.leobr.cliente.Jogada;
+
+public class Player implements Jogada {
+	private int id;
 	private String name;
 	private Deck deck;
 	private Collection<Card> hand;
@@ -13,12 +15,22 @@ public class Player {
 	private DigimonCard digimonCard;
 	private Card supportCard;
 	private int attackChoice;
+	
+	public Player(String name) {
+		this.name = name;
+		deck = new Deck();
+		hand = new ArrayList<>();
+		digimonCard = null;
+		supportCard = null;
+	}
 		
 	public Player(String name, int id) {
 		this.id = id;
 		this.name = name;
 		deck = new Deck();
 		hand = new ArrayList<>();
+		digimonCard = null;
+		supportCard = null;
 	}
 
 	public String getName() {
@@ -83,15 +95,15 @@ public class Player {
 
 	public void setDigimonCardIrregularLevelC(DigimonCard digimonCard) {
 		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.50));
-		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.50));
-		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.50));
+		digimonCard.setAttack2((int) (digimonCard.getAttack2() * 0.50));
+		digimonCard.setAttack3((int) (digimonCard.getAttack3() * 0.50));
 		setDigimonCard(digimonCard);
 	}
 
 	public void setDigimonCardIrregularLevelU(DigimonCard digimonCard) {
 		digimonCard.setAttack1((int) (digimonCard.getAttack1() * 0.25));
-		digimonCard.setAttack1((int) (digimonCard.getAttack2() * 0.25));
-		digimonCard.setAttack1((int) (digimonCard.getAttack3() * 0.25));
+		digimonCard.setAttack2((int) (digimonCard.getAttack2() * 0.25));
+		digimonCard.setAttack3((int) (digimonCard.getAttack3() * 0.25));
 		setDigimonCard(digimonCard);
 	}
 

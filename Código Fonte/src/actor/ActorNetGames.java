@@ -12,7 +12,6 @@ import controll.TableController;
 import model.Table;
 
 public class ActorNetGames implements OuvidorProxy {
-
 	private TableController tableController;
 	private Proxy proxy;
 
@@ -28,60 +27,46 @@ public class ActorNetGames implements OuvidorProxy {
 			return true;
 		} catch (JahConectadoException e) {
 			tableController.informError("Você já está conectado!");
+			e.printStackTrace();
 			return false;
 		} catch(NaoPossivelConectarException | ArquivoMultiplayerException e) {
 			tableController.informError("Ocorreu um erro ao tentar estabelecer conexão com o servidor.");
+			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public boolean disconnect() {
+	public void disconnect() {
 		try {
 			proxy.desconectar();
-			tableController.disconnect();
 		} catch (NaoConectadoException e) {
 			tableController.informMessage("Você já está desconectado");
 		}
-		return true;
 	}
 
-	public String getNameRemotePlayer() {
-		String nameLocalPlayer = tableController.getNameLocalPlayer();
-		for(String name : proxy.obterNomeAdversarios()) {
-			if(!name.equals(nameLocalPlayer))
-				return name;
-		}
-		return "Anônimo";
+	public String getNameRemotePlayer() throws Exception {
+		return proxy.obterNomeAdversarios().get(0);
 	}
 	
-	public void sendRequestMove() {
+	public void startGame() {
 		try {
-			proxy.iniciarNovaPartida(new Integer(2));
+			proxy.iniciarPartida(2);
 		} catch (Exception e) {
 			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
+			e.printStackTrace();
 		}
-	}
-
-	public boolean startGame() {
-		try {
-			proxy.iniciarNovaPartida(new Integer(2));
-		} catch (Exception e) {
-			tableController.informError("Houve um erro ao tentar iniciar uma partida. Você está conectado?");
-		}
-		return true;
 	}
 
 	public void sendMove(Table table) {
 		try {
-			proxy.enviaJogada(table);
+			Jogada move = (Jogada) table;
+			proxy.enviaJogada(move);
 		} catch (NaoJogandoException e) {
 			tableController.informError("Você deve estar logado para realizar essa ação!");
+			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * Por motivos que desconheco, esse é o método responsável por receber uma solicitação de início.
-	 */
 	@Override
 	public void iniciarNovaPartida(Integer posicao) {
 		tableController.startNewGame(posicao);
@@ -106,7 +91,6 @@ public class ActorNetGames implements OuvidorProxy {
 	@Override
 	public void tratarConexaoPerdida() {
 		tableController.informError("Conexão perdida. Por favor, conecte-se novamente.");
-		
 	}
 
 	@Override

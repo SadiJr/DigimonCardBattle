@@ -1,5 +1,7 @@
 package controll;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
@@ -11,6 +13,7 @@ import model.DigimonCard;
 import model.Player;
 import model.PlayerMovePOJO;
 import model.Table;
+import sun.util.logging.resources.logging;
 
 public class TableController {
 
@@ -50,6 +53,7 @@ public class TableController {
 	
 	public void connect(String player, String server) {
 		boolean connect = network.connect(player, server);
+		table.setLocalPlayer(new Player(player));
 		if(connect)
 			this.player.informMessage("Conexão estabelecida com sucesso");
 	}
@@ -68,9 +72,14 @@ public class TableController {
 			table.distributeCards();
 			table.setPhase(Phase.START_GAME);
 			table.setGameInProggress(true);
-			table.setFirstPlayer(table.getRemotePlayer());
-			network.sendMove(table);
-			player.informWaitMoveRemotePlayer(nameRemotePlayer);
+			if(table.getLocalPlayer().getId() == 1) {
+				table.createHandLocalPlayer();
+				drawPhase();
+			} else {
+				player.informWaitMoveRemotePlayer(nameRemotePlayer);
+				player.notifyPhase("Aguardando jogada do adversário...");
+				updateInterface();
+			}
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 			e.printStackTrace();
@@ -86,7 +95,7 @@ public class TableController {
 	}
 
 	public void start() {
-		network.sendRequestMove();
+		network.startGame();
 	}
 	
 	public void init() {
@@ -108,7 +117,6 @@ public class TableController {
 			} else {
 				int turns = table.getTurns();
 				if(turns < 2) {
-					table.setTurns(turns + 1);
 					drawPhase();
 				} else if(turns == 2) {
 					battle();
@@ -129,18 +137,19 @@ public class TableController {
 	}
 
 	public void drawPhase() {
+		table.setTurns(table.getTurns() + 1);
 		table.setPhase(Phase.DRAW_PHASE);
 		player.notifyPhase(Phase.DRAW_PHASE.getDescription());
-		updateInterface();
 		table.createHandLocalPlayer();
+		updateInterface();
 		if(table.existsDigimonCardInHand() || table.existsDigimonCardOnSlot()) {
 			player.informTurn();
-			player.enableButtonsDrawPhase();
 		} else {
 			player.informMessage("Você não possuí nenhuma DigimonCard em sua mão ou no campo de batalha! "
-					+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
-			player.enableButtonsDrawPhase();
+			+ "Favor, descartar sua mão para tentar obter uma DigimonCard e prosseguir o jogo");
 		}
+		player.enableButtonsDrawPhase();
+		updateInterface();
 	}
 
 	public void quit() {
@@ -156,19 +165,16 @@ public class TableController {
 	}
 
 	public void discardHand() {
-		if(table.getLocalPlayer().getHand().isEmpty()) {
-			player.informError("Você não possuí cartas na mão para descartar!");
-			return;
-		}
-		
-		if(table.existsDigimonCardOnSlot() || table.existsDigimonCardInDeck()) {
-			table.addNewHand();
-		} else {
-			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck!\nPelas regras do jogo, você perdeu!");
+		if(table.getLocalPlayer().getHand().isEmpty() && !table.existsDigimonCardInDeck() && !table.existsDigimonCardOnSlot()) {
+			player.informError("Você não possuí mais nenhuma DigimonCard em seu deck, no campo ou em sua mão!"
+					+ "\nPelas regras do jogo, você perdeu!");
 			table.getRemotePlayer().setVictories(3);
 			player.informWinner(getNameRemotePlayer());
 			network.sendMove(this.table);
 			exit();
+		} else  {
+			table.addNewHand();
+			updateInterface();
 		}
 	}
 
@@ -176,8 +182,10 @@ public class TableController {
 		try {
 			table.downDigimonCard(nameCard);
 			player.dissableButtonsDrawPhase();
+			updateInterface();
 			digivolvePhase();
 		} catch (Exception e) {
+			player.enableButtonsDrawPhase();
 			player.informError(e.getMessage());
 		}
 	}
@@ -193,17 +201,17 @@ public class TableController {
 	public void sacrificeCard(String nameCard) {
 		try {
 			table.sacrificeCard(nameCard);
-			player.dissableButtonSacrificeCard();
+			player.dissableButtonSacrifice();
 			updateInterface();
 		} catch (Exception e) {
+			player.enableButtonsDigivolvePhase();
 			player.informError(e.getMessage());
 		}
 	}
 
 	public boolean isYourTurn() {
-		if(table.getLocalPlayer().equals(table.getFirstPlayer()))
-			return true;
-		return false;
+		boolean turn = table.getLocalPlayer().getId() == 1 ? true : false;
+		return turn;
 	}
 
 	public Table invertOrderCemiteryReceivedTable(Table receivedTable) {
@@ -218,13 +226,29 @@ public class TableController {
 		int size = player.getDeck().getCards().size();
 		int cemiterySize = table.getLocalPlayer().equals(player) ? table.getCemiteryLocalPlayer().getDeadCards().size() 
 				: table.getCemiteryRemotePlayer().getDeadCards().size();
-		Collection<Card> hand = player.getHand();
-		DigimonCard digimonCard = player.getDigimonCard();
-		Card supportCard = player.getSupportCard();
+		ArrayList<Card> hand = (ArrayList<Card>) player.getHand();
+		ArrayList<CardPOJO> hand2 = new ArrayList<>();
+		for(int i = 0; i < hand.size(); i++) {
+			Card card = hand.get(i);
+			if(card == null) {
+				hand2.add(null);
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(card);
+				hand2.add(createCardPOJO);
+			}
+		}
+		CardPOJO digimonCard = null;
+		CardPOJO supportCard = null;
+		if(player.getDigimonCard() != null) {
+			digimonCard = createCardPOJO(player.getDigimonCard());
+		}
+		if(player.getSupportCard() != null) {
+			supportCard = createCardPOJO(player.getSupportCard());
+		}
 		int dp = player.getDp();
 		int victories = player.getVictories();
 		
-		return new PlayerMovePOJO(name, cemiterySize, size, hand, digimonCard, supportCard, dp, victories);
+		return new PlayerMovePOJO(name, cemiterySize, size, hand2, digimonCard, supportCard, dp, victories);
 	}
 
 	public void updateInterface() {
@@ -243,10 +267,16 @@ public class TableController {
 
 	public void updateCard(String name) {
 		try {
-			table.updateCard(name);
-			player.dissableButtonsDigivolvePhase();
-			battlePhase();
+			if(name != null) {
+				table.updateCard(name);
+				player.dissableButtonsDigivolvePhase();
+				battlePhase();
+			} else {
+				player.enableButtonsDigivolvePhase();
+				player.informError("Você deve escolher uma carta válida para evolução");
+			}
 		} catch (Exception e) {
+			player.enableButtonsDigivolvePhase();
 			player.informError(e.getMessage());
 		}
 	}
@@ -262,14 +292,18 @@ public class TableController {
 	public void jumpPhase() {
 		Phase phase = table.getPhase();
 		switch(phase) {
+		case WAIT:
+			break;
 		case DRAW_PHASE:
-			if(table.existsDigimonCardOnSlot())
+			if(table.existsDigimonCardOnSlot()) {
+				player.dissableButtonsDrawPhase();
 				digivolvePhase();
-			else
+			} else
 				player.informError("Você precisa ter uma DigimonCard em campo para realizar essa operação!");
 			break;
 		
 		case DIGIVOLVE_PHASE:
+			player.dissableButtonsDigivolvePhase();
 			battlePhase();
 			break;
 
@@ -281,36 +315,41 @@ public class TableController {
 
 	public void choiceAttack(int attack) {
 		table.getLocalPlayer().setAttackChoice(attack);
-		player.dissableButtonsAttack();
+		System.out.println("Escolheu o ataque " + attack);
+//		player.dissableButtonsAttack();
+		player.dissableAllButtons();
+		network.sendMove(table);
+		if(table.getTurns() == 2) {
+			battle();
+		} else {
+			table.setPhase(Phase.WAIT);
+			updateInterface();
+			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
+		}
 	}
 
 	public void downSupportCard(String supportName) {
 		try {
 			table.downSupportCard(supportName);
-			player.dissableAllButtons();
-			network.sendMove(table);
-			int turns = table.getTurns();
-			if(turns < 2) {
-				player.informWaitMoveRemotePlayer(getNameRemotePlayer());
-			} else if(turns == 2) {
-				battle();
-			} else {
-				throw new Exception("Erro de programação na linha 208 na classe TabbeController! Possível erro de lógica ou de implementação");
-			}
+			updateInterface();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
 		}
 	}
 
 	public void battle() {
-		Player first = table.getLocalPlayer().equals(table.getFirstPlayer()) ? table.getLocalPlayer() : table.getRemotePlayer();
-		Player second= table.getLocalPlayer().equals(table.getFirstPlayer()) ? table.getRemotePlayer() : table.getLocalPlayer();
+		System.out.println("Iniciando combate");
+		updateInterface();
+		Player first = table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer();
+		Player second= table.getLocalPlayer().getId() == 1 ? table.getRemotePlayer() : table.getLocalPlayer();
+		player.notifyPhase("Batalha!");
 		DigimonCard aux1 = DigimonCard.copy(first.getDigimonCard());
 		DigimonCard aux2 = DigimonCard.copy(second.getDigimonCard());
 		
 		try {
 			table.supportCardEffect(first);
 			table.supportCardEffect(second);
+			updateInterface();
 			table.battleTurn();
 		} catch (Exception e) {
 			player.informError(e.getMessage());
@@ -319,13 +358,13 @@ public class TableController {
 		if(first.getDigimonCard().getHp() <= 0 || second.getDigimonCard().getHp() <= 0) {
 			for(Player player : table.getListPlayers()) {
 				if(player.getDigimonCard().getHp() <= 0) {
-					this.player.notifyWinnerTurn(player.equals(table.getLocalPlayer()) ? table.getRemotePlayer().getName() 
-							: table.getLocalPlayer().getName());
+					this.player.notifyWinnerTurn(player.getId() == table.getLocalPlayer().getId() ? 
+							table.getRemotePlayer().getName() : table.getLocalPlayer().getName());
 					table.addCardToCemiteryByPlayer(player, player.getDigimonCard());
 					player.setDigimonCard(null);
-					Player winner = player.equals(table.getLocalPlayer()) ? table.getLocalPlayer() : table.getRemotePlayer();
+					Player winner = player.getId() == table.getLocalPlayer().getId() ? table.getRemotePlayer() : 
+						table.getLocalPlayer();
 					winner.setVictories(winner.getVictories() + 1);
-					return;
 				}
 			}
 
@@ -344,31 +383,30 @@ public class TableController {
 				second.getDigimonCard().setHp(hp2);
 		}
 		
-		if(table.getLocalPlayer().equals(table.getFirstPlayer())) {
-			table.setTurns(1);
+		if(table.getLocalPlayer().getId() == 1) {
+			table.setTurns(0);
 			drawPhase();
 		} else {
-			sendMove(this.table);
+			updateInterface();
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}
 	}
 
-	public void viewAttributes(String name) {
-		Card card = table.getCardByName(name);
+	public void viewAttributes(String name, boolean opponent) {
+		Card card = table.getCardByName(name, opponent);
 		if(card == null) {
-			player.informError("Um erro inesperado ocorreu, revise o código!");
+			player.informError("A carta clicada não existe atualmente.");
 			return;
 		}
-		player.viewAttributes(createCardPOJO(card));
+		player.viewAttributes(createCardPOJO(card), opponent);
 	}
 
 	public CardPOJO createCardPOJO(Card card) {
 		CardPOJO pojo = null;
 		
 		String name = card.getName();
-		String effect = card.getCardEffect().name();
-		String description = card.getDescriptionEffect();
-		
+		String path = card.getPathToImage();
+		String phase = table.getPhase().getDescription();
 		if(table.isDigimonCard(card)) {
 			DigimonCard digimon = (DigimonCard) card;
 			int attack1 = digimon.getAttack1();
@@ -380,21 +418,22 @@ public class TableController {
 			int p = digimon.getP();
 			String specialty = digimon.getSpecialty().name();
 			pojo = new CardPOJO(hp, attack1, attack2, attack3, dp, p, specialty, level, name, 
-					effect, description);
+					"Não há", "Não Há", path, phase);
 		} else {
-			pojo = new CardPOJO(name, effect, description);
+			String effect = card.getCardEffect().name();
+			String description = card.getDescriptionEffect();
+			pojo = new CardPOJO(name, effect, description, path, phase);
 		}		
 		return pojo;
 	}
 
 	public void exit() {
-		String name = table.getLocalPlayer().getName();
-		Integer id = table.getLocalPlayer().getId();
-		table = null;
-		table = new Table();
-		table.setLocalPlayer(new Player(name, id));
+		table.restartAll();
+		table.getLocalPlayer().setHand(new ArrayList<Card>(){{add(null);add(null);add(null);add(null);}});
 		PlayerMovePOJO createPOJOPlayer = createPOJOPlayer(table.getLocalPlayer());
+		player.notifyPhase("Aguardando jogadores");
 		player.updateInterface(null, createPOJOPlayer);
+		table.getLocalPlayer().setHand(new ArrayList<>());
 	}
 
 	public void sendMove(Table table) {
@@ -408,5 +447,85 @@ public class TableController {
 
 	public String getNameLocalPlayer() {
 		return table.getLocalPlayer().getName();
+	}
+
+	public void viewAttributesDigimonCard(boolean opponent) {
+		if(opponent) {
+			if(table.getRemotePlayer() == null) {
+				player.informError("O adversário não possuí nenhuma carta de suporte no campo de batalha");
+			} else {
+				DigimonCard digimonCard = table.getRemotePlayer().getDigimonCard();
+				if(digimonCard == null) {
+					player.informError("O adversário não possuí nenhuma DigimonCard em campo de batalha!");
+				} else {
+					CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+					player.viewAttributesDigimonCard(createCardPOJO, opponent);
+				}
+			}
+		} else {
+			DigimonCard digimonCard = table.getLocalPlayer().getDigimonCard();
+			if(digimonCard == null) {
+				player.informError("Você não possuí nenhuma DigimonCard em campo de batalha!");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+				player.viewAttributesDigimonCard(createCardPOJO, opponent);
+			}
+		}
+	}
+
+	public void viewAttributesOptionCard(boolean opponent) {
+		if(opponent) {
+			if(table.getRemotePlayer() == null) {
+				player.informError("O adversário não possuí nenhuma carta de suporte no campo de batalha");
+			} else {
+				Card supportCard = table.getRemotePlayer().getSupportCard();
+				if(supportCard == null) {
+					player.informError("O adversário não possuí nenhuma carta de suporte no campo de batalha");
+				} else {
+					CardPOJO createCardPOJO = createCardPOJO(supportCard);
+					player.viewAttributesOptionCard(createCardPOJO, opponent);
+				}
+			}
+		} else {
+			Card supportCard = table.getRemotePlayer().getSupportCard();
+			if(supportCard == null) {
+				player.informError("Você não possuí nenhuma carta de suporte no campo de batalha");
+			} else {
+				CardPOJO createCardPOJO = createCardPOJO(supportCard);
+				player.viewAttributesDigimonCard(createCardPOJO, opponent);
+			}
+		}
+	}
+
+	public void viewAttributesDigimonCardInBattleField(String name) {
+		if(table.getLocalPlayer() == null) {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
+		DigimonCard digimonCard = table.getLocalPlayer().getDigimonCard();
+		if(digimonCard != null) {
+			CardPOJO createCardPOJO = createCardPOJO(digimonCard);
+			player.viewAttributesDigimonCardInBattleField(createCardPOJO);
+		} else {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
+	}
+	
+	public void viewAttributesSupportCardInBattleField(String name) {
+		if(table.getLocalPlayer() == null) {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
+		Card supportCard = table.getLocalPlayer().getSupportCard();
+		if(supportCard != null) {
+			CardPOJO createCardPOJO = createCardPOJO(supportCard);
+			player.viewAttributesSupportCardInBattleField(createCardPOJO);
+		} else {
+			player.informError("Você não possuí nenhuma carta em campo de batalha");
+		}
+	}
+	
+	public boolean existsSupportCardInBattleField() {
+		if(table.getLocalPlayer().getSupportCard() != null)
+			return true;
+		return false;
 	}
 }
