@@ -376,22 +376,33 @@ public class DigimonScreen extends JFrame {
 		deckSize.setText(String.valueOf(localPlayer.getDeckSize()));
 		dp.setText(String.valueOf(localPlayer.getDp()));
 		ArrayList<CardPOJO> hand = (ArrayList<CardPOJO>) localPlayer.getHand();
-		ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
-		for (int i = 0; i < hand.size(); i++) {
-			System.out.println(hand.size());
-			CardPOJO pojo = hand.get(i);
-			JButton jButton = buttonsCardsPlayer.get(i);
-			if (pojo != null) {
-				jButton.setName(pojo.getName());
-				Image iconLogo = new ImageIcon(pojo.getPath()).getImage()
-						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
-				ImageIcon imageIcon = new ImageIcon(iconLogo);
+		if(hand.isEmpty() || hand == null) {
+			Image iconLogo = new ImageIcon(pathDefault).getImage()
+					.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+			ImageIcon imageIcon = new ImageIcon(iconLogo);
+			ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
+			for (JButton jButton : buttonsCardsPlayer) {
+				jButton.setName(null);
 				jButton.setIcon(imageIcon);
-			} else {
-				Image iconLogo = new ImageIcon(pathDefault).getImage()
-						.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
-				ImageIcon imageIcon = new ImageIcon(iconLogo);
-				jButton.setIcon(imageIcon);
+			}
+		} else {
+			ArrayList<JButton> buttonsCardsPlayer = (ArrayList<JButton>) buttonsCardsPlayer();
+			for (int i = 0; i < hand.size(); i++) {
+				System.out.println(hand.size());
+				CardPOJO pojo = hand.get(i);
+				JButton jButton = buttonsCardsPlayer.get(i);
+				if (pojo != null) {
+					jButton.setName(pojo.getName());
+					Image iconLogo = new ImageIcon(pojo.getPath()).getImage()
+							.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon imageIcon = new ImageIcon(iconLogo);
+					jButton.setIcon(imageIcon);
+				} else {
+					Image iconLogo = new ImageIcon(pathDefault).getImage()
+							.getScaledInstance(card1.getWidth() + 20, card1.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon imageIcon = new ImageIcon(iconLogo);
+					jButton.setIcon(imageIcon);
+				}
 			}
 		}
 		if(localPlayer.getDigimonCard() != null) {

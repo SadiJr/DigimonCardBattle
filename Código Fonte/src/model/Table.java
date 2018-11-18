@@ -424,6 +424,12 @@ public class Table implements Jogada {
 				size++;
 			}
 		}
+		if(size < 4) {
+			while(size < 4) {
+				localPlayer.getHand().add(null);
+				size++;
+			}
+		}
 	}
 
 	public Collection<Player> getListPlayers() {
