@@ -475,85 +475,86 @@ public class Table implements Jogada {
 		Card supportCard = player.getSupportCard();
 		if (supportCard != null) {
 			Effect cardEffect = supportCard.getCardEffect();
-			switch (cardEffect) {
-
-			case ATK1_100:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 100);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case ATK1_X2:
-				digimonCard.setAttack1(digimonCard.getAttack1() * 2);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case ATK300:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 300);
-				digimonCard.setAttack2(digimonCard.getAttack2() + 300);
-				digimonCard.setAttack3(digimonCard.getAttack3() + 300);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case ATK3_X2:
-				digimonCard.setAttack3(digimonCard.getAttack3() * 2);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case ATK500:
-				digimonCard.setAttack1(digimonCard.getAttack1() + 500);
-				digimonCard.setAttack2(digimonCard.getAttack2() + 500);
-				digimonCard.setAttack3(digimonCard.getAttack3() + 500);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case C_ATK400:
-				if (digimonCard.getLevel().equals(Level.C)) {
-					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
-					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
-					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+			if(cardEffect != null) {
+				switch (cardEffect) {
+	
+				case ATK1_100:
+					digimonCard.setAttack1(digimonCard.getAttack1() + 100);
 					player.setDigimonCard(digimonCard);
-				}
-				break;
-
-			case HP1000:
-				digimonCard.setHp(digimonCard.getHp() + 1000);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case HP1_500_HP2_200:
-				player.getDigimonCard().setHp(player.getDigimonCard().getHp() + 500);
-				if (player.equals(localPlayer)) {
-					remotePlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
-				} else {
-					localPlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
-				}
-				break;
-
-			case HP300:
-				digimonCard.setHp(digimonCard.getHp() + 300);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case HP500:
-				digimonCard.setHp(digimonCard.getHp() + 500);
-				player.setDigimonCard(digimonCard);
-				break;
-
-			case U_ATK400:
-				if (digimonCard.getLevel().equals(Level.U)) {
-					digimonCard.setAttack1(digimonCard.getAttack1() + 400);
-					digimonCard.setAttack2(digimonCard.getAttack2() + 400);
-					digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+					break;
+	
+				case ATK1_X2:
+					digimonCard.setAttack1(digimonCard.getAttack1() * 2);
 					player.setDigimonCard(digimonCard);
+					break;
+	
+				case ATK300:
+					digimonCard.setAttack1(digimonCard.getAttack1() + 300);
+					digimonCard.setAttack2(digimonCard.getAttack2() + 300);
+					digimonCard.setAttack3(digimonCard.getAttack3() + 300);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case ATK3_X2:
+					digimonCard.setAttack3(digimonCard.getAttack3() * 2);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case ATK500:
+					digimonCard.setAttack1(digimonCard.getAttack1() + 500);
+					digimonCard.setAttack2(digimonCard.getAttack2() + 500);
+					digimonCard.setAttack3(digimonCard.getAttack3() + 500);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case C_ATK400:
+					if (digimonCard.getLevel().equals(Level.C)) {
+						digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+						digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+						digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+						player.setDigimonCard(digimonCard);
+					}
+					break;
+	
+				case HP1000:
+					digimonCard.setHp(digimonCard.getHp() + 1000);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case HP1_500_HP2_200:
+					player.getDigimonCard().setHp(player.getDigimonCard().getHp() + 500);
+					if (player.equals(localPlayer)) {
+						remotePlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
+					} else {
+						localPlayer.getDigimonCard().setHp(remotePlayer.getDigimonCard().getHp() + 200);
+					}
+					break;
+	
+				case HP300:
+					digimonCard.setHp(digimonCard.getHp() + 300);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case HP500:
+					digimonCard.setHp(digimonCard.getHp() + 500);
+					player.setDigimonCard(digimonCard);
+					break;
+	
+				case U_ATK400:
+					if (digimonCard.getLevel().equals(Level.U)) {
+						digimonCard.setAttack1(digimonCard.getAttack1() + 400);
+						digimonCard.setAttack2(digimonCard.getAttack2() + 400);
+						digimonCard.setAttack3(digimonCard.getAttack3() + 400);
+						player.setDigimonCard(digimonCard);
+					}
+					break;
+	
+				default:
+					System.out.println("Por que caralhos alguém baixaria uma carta de suporte que não possuí "
+							+ "efeito de suporte, você pensa? Bem, existem retardados para tudo.");
+					break;
 				}
-				break;
-
-			default:
-				System.out.println("Por que caralhos alguém baixaria uma carta de suporte que não possuí "
-						+ "efeito de suporte, você pensa? Bem, existem retardados para tudo.");
-				break;
-			}
-
+			}			
 			player.setSupportCard(null);
 			addCardToCemiteryByPlayer(player, supportCard);
 		}
