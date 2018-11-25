@@ -271,12 +271,16 @@ public class ActorPlayer {
 	}
 
 	public void viewAttributesDigimonCardInBattleField(CardPOJO createCardPOJO) {
-		attributesScreen.dissableAllButtons();
-		if(tableController.getTable().getPhase().equals(Phase.BATTLE_PHASE))
-			attributesScreen.enableButtonsAttack(true);
-		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
-		attributesScreen.pack();
-		attributesScreen.setVisible(true);
+		try {
+			attributesScreen.dissableAllButtons();
+			if (tableController.getTable().getPhase().equals(Phase.BATTLE_PHASE))
+				attributesScreen.enableButtonsAttack(true);
+			attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+			attributesScreen.pack();
+			attributesScreen.setVisible(true);
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
 	}
 
 	public void dissableButtonSacrifice() {
@@ -286,9 +290,13 @@ public class ActorPlayer {
 	}
 
 	public void viewAttributesSupportCardInBattleField(CardPOJO createCardPOJO) {
-		attributesScreen.dissableAllButtons();
-		attributesScreen.showAttributesCardInBattleField(createCardPOJO);
-		attributesScreen.pack();
-		attributesScreen.setVisible(true);
+		try {
+			attributesScreen.dissableAllButtons();
+			attributesScreen.showAttributesCardInBattleField(createCardPOJO);
+			attributesScreen.pack();
+			attributesScreen.setVisible(true);
+		} catch (Exception e) {
+			informError(e.getMessage());
+		}
 	}
 }

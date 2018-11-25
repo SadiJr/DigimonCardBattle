@@ -4,12 +4,13 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 
 import actor.ActorPlayer;
 import model.CardPOJO;
@@ -196,7 +197,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		Image iconLogo = new ImageIcon(path).getImage()
+		Image iconLogo = new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream(path))).getImage()
 				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		cardImage.setIcon(imageIcon);
@@ -211,13 +212,13 @@ public class AttributesScreen extends JFrame {
 		repaint();
 	}
 	
-	public void showOptionCardAttributesOpponent(CardPOJO pojo) {
+	public void showOptionCardAttributesOpponent(CardPOJO pojo) throws IOException {
 		dissableAllButtons();
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		Image iconLogo = new ImageIcon(path).getImage()
+		Image iconLogo = new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream(path))).getImage()
 				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		cardImage.setIcon(imageIcon);
@@ -237,7 +238,7 @@ public class AttributesScreen extends JFrame {
 		effectName.setText("Não Há");
 		descriptionEffect.setText("Não Há");
 		String path = pojo.getPath();
-		Image iconLogo = new ImageIcon(path).getImage()
+		Image iconLogo = new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream(path))).getImage()
 				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		cardImage.setIcon(imageIcon);
@@ -252,13 +253,13 @@ public class AttributesScreen extends JFrame {
 		repaint();
 	}
 	
-	public void showDigimonCardAttributesOpponent(CardPOJO pojo) {
+	public void showDigimonCardAttributesOpponent(CardPOJO pojo) throws IOException {
 		dissableAllButtons();
 		name.setText(pojo.getName());
 		effectName.setText("Não Há");
 		descriptionEffect.setText("Não Há");
 		String path = pojo.getPath();
-		Image iconLogo = new ImageIcon(path).getImage()
+		Image iconLogo = new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream(path))).getImage()
 				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		cardImage.setIcon(imageIcon);
@@ -273,12 +274,12 @@ public class AttributesScreen extends JFrame {
 		repaint();
 	}
 	
-	public void showAttributesCardInBattleField(CardPOJO pojo) {
+	public void showAttributesCardInBattleField(CardPOJO pojo) throws IOException {
 		name.setText(pojo.getName());
 		effectName.setText(pojo.getEffect());
 		descriptionEffect.setText(pojo.getDescription());
 		String path = pojo.getPath();
-		Image iconLogo = new ImageIcon(path).getImage()
+		Image iconLogo = new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream(path))).getImage()
 				.getScaledInstance(cardImage.getWidth(), cardImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(iconLogo);
 		cardImage.setIcon(imageIcon);

@@ -2,8 +2,7 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,10 +11,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonStreamParser;
 import com.google.gson.stream.MalformedJsonException;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import br.ufsc.inf.leobr.cliente.Jogada;
-import controll.TableController;
 import enums.Effect;
 import enums.Level;
 import enums.Phase;
@@ -80,14 +77,10 @@ public class Table implements Jogada {
 	}
 
 	public void createDeck() throws FileNotFoundException, MalformedJsonException {
-		FileReader digimonFire = new FileReader("cards/digimonFire.json");
-		FileReader digimonGrass = new FileReader("cards/digimonGrass.json");
-		FileReader optionCard = new FileReader("cards/optionCard.json");
-
 		Gson gson = new GsonBuilder().create();
-		BufferedReader fire = new BufferedReader(digimonFire);
-		BufferedReader grass = new BufferedReader(digimonGrass);
-		BufferedReader option = new BufferedReader(optionCard);
+		BufferedReader fire = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/cards/digimonFire.json")));
+		BufferedReader grass = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/cards/digimonGrass.json")));
+		BufferedReader option = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/cards/optionCard.json")));
 
 		JsonStreamParser f = new JsonStreamParser(fire);
 		JsonStreamParser g = new JsonStreamParser(grass);

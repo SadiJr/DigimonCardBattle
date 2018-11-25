@@ -1,7 +1,5 @@
 package controll;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
@@ -13,7 +11,6 @@ import model.DigimonCard;
 import model.Player;
 import model.PlayerMovePOJO;
 import model.Table;
-import sun.util.logging.resources.logging;
 
 public class TableController {
 

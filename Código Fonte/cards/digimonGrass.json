@@ -1,7 +1,7 @@
 {
 	"name" : "KUNEMON",
 	"effect" : null,
-	"path" : "pictures/grass/kunemon.jpg",
+	"path" : "/pictures/grass/kunemon.jpg",
 	"hp" : 680,
 	"attack1" : 350,
 	"attack2" : 220,
@@ -14,7 +14,7 @@
 {
 	"name" : "GOTSUMON",
 	"effect" : null,
-	"path" : "pictures/grass/gotsumon.jpg",
+	"path" : "/pictures/grass/gotsumon.jpg",
 	"hp" : 700,
 	"attack1" : 290,
 	"attack2" : 180,
@@ -27,7 +27,7 @@
 {
 	"name" : "SALAMON",
 	"effect" : null,
-	"path" : "pictures/grass/salamon.jpg",
+	"path" : "/pictures/grass/salamon.jpg",
 	"hp" : 600,
 	"attack1" : 300,
 	"attack2" : 230,
@@ -40,7 +40,7 @@
 {
 	"name" : "PALMON",
 	"effect" : null,
-	"path" : "pictures/grass/palmon.jpg",
+	"path" : "/pictures/grass/palmon.jpg",
 	"hp" : 500,
 	"attack1" : 370,
 	"attack2" : 240,
@@ -53,7 +53,7 @@
 {
 	"name" : "TENTOMON",
 	"effect" : null,
-	"path" : "pictures/grass/tentomon.jpg",
+	"path" : "/pictures/grass/tentomon.jpg",
 	"hp" : 670,
 	"attack1" : 380,
 	"attack2" : 220,
@@ -66,7 +66,7 @@
 {
 	"name" : "ELECMON",
 	"effect" : null,
-	"path" : "pictures/grass/elecmon.jpg",
+	"path" : "/pictures/grass/elecmon.jpg",
 	"hp" : 650,
 	"attack1" : 310,
 	"attack2" : 310,
@@ -79,7 +79,7 @@
 {
 	"name" : "KOKATORIMON",
 	"effect" : null,
-	"path" : "pictures/grass/kokatorimon.jpg",
+	"path" : "/pictures/grass/kokatorimon.jpg",
 	"hp" : 910,
 	"attack1" : 350,
 	"attack2" : 260,
@@ -92,7 +92,7 @@
 {
 	"name" : "VEGIEMON",
 	"effect" : null,
-	"path" : "pictures/grass/vegiemon.jpg",
+	"path" : "/pictures/grass/vegiemon.jpg",
 	"hp" : 810,
 	"attack1" : 390,
 	"attack2" : 270,
@@ -105,7 +105,7 @@
 {
 	"name" : "DRIMOGEMON",
 	"effect" : null,
-	"path" : "pictures/grass/drimogemon.jpg",
+	"path" : "/pictures/grass/drimogemon.jpg",
 	"hp" : 850,
 	"attack1" : 450,
 	"attack2" : 310,
@@ -118,7 +118,7 @@
 {
 	"name" : "NINJAMON",
 	"effect" : null,
-	"path" : "pictures/grass/ninjamon.jpg",
+	"path" : "/pictures/grass/ninjamon.jpg",
 	"hp" : 650,
 	"attack1" : 440,
 	"attack2" : 350,
@@ -131,7 +131,7 @@
 {
 	"name" : "KABUTERIMON",
 	"effect" : null,
-	"path" : "pictures/grass/kabuterimon.jpg",
+	"path" : "/pictures/grass/kabuterimon.jpg",
 	"hp" : 950,
 	"attack1" : 550,
 	"attack2" : 360,
@@ -144,7 +144,7 @@
 {
 	"name" : "MEGA KABUTERIMON",
 	"effect" : null,
-	"path" : "pictures/grass/megaKabuterimon.jpg",
+	"path" : "/pictures/grass/megaKabuterimon.jpg",
 	"hp" : 1480,
 	"attack1" : 700,
 	"attack2" : 400,
@@ -157,7 +157,7 @@
 {
 	"name" : "MAGMA ANGEMON",
 	"effect" : null,
-	"path" : "pictures/grass/magnaAngemon.jpg",
+	"path" : "/pictures/grass/magnaAngemon.jpg",
 	"hp" : 1320,
 	"attack1" : 770,
 	"attack2" : 570,
@@ -170,7 +170,7 @@
 {
 	"name" : "SERAPHIMON",
 	"effect" : null,
-	"path" : "pictures/grass/seraphimon.jpg",
+	"path" : "/pictures/grass/seraphimon.jpg",
 	"hp" : 1650,
 	"attack1" : 900,
 	"attack2" : 510,
