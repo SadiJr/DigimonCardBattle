@@ -1,7 +1,5 @@
 package controll;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 import actor.ActorNetGames;
 import actor.ActorPlayer;
@@ -13,7 +11,6 @@ import model.DigimonCard;
 import model.Player;
 import model.PlayerMovePOJO;
 import model.Table;
-import sun.util.logging.resources.logging;
 
 public class TableController {
 
@@ -339,10 +336,11 @@ public class TableController {
 
 	public void battle() {
 		System.out.println("Iniciando combate");
+		table.setPhase(Phase.BATTLE);
+		player.notifyPhase(Phase.BATTLE.getDescription());
 		updateInterface();
 		Player first = table.getLocalPlayer().getId() == 1 ? table.getLocalPlayer() : table.getRemotePlayer();
 		Player second= table.getLocalPlayer().getId() == 1 ? table.getRemotePlayer() : table.getLocalPlayer();
-		player.notifyPhase("Batalha!");
 		DigimonCard aux1 = DigimonCard.copy(first.getDigimonCard());
 		DigimonCard aux2 = DigimonCard.copy(second.getDigimonCard());
 		
@@ -387,6 +385,8 @@ public class TableController {
 			table.setTurns(0);
 			drawPhase();
 		} else {
+			table.setPhase(Phase.WAIT);
+			player.notifyPhase(Phase.WAIT.getDescription());
 			updateInterface();
 			player.informWaitMoveRemotePlayer(getNameRemotePlayer());
 		}

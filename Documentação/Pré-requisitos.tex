@@ -80,7 +80,14 @@
 								    							    Higor Nocetti\newline
 								  							    Sadi Júnior Domingos Jacinto}&
 				\parbox[c][\linewidth][c]{\linewidth}{\centering 08/09/2018} &
-				\parbox[c][\linewidth][c]{\linewidth}{\centering Inclusão do Protótipo de \textit{GUI} na documentação}\\\hline 
+				\parbox[c][\linewidth][c]{\linewidth}{\centering Inclusão do Protótipo de \textit{GUI} na documentação}\\\hline
+				
+				\parbox[c][\linewidth][c]{\linewidth}{\centering 1.2} &
+				\parbox[c][\linewidth][c]{\linewidth}{\centering Heithor Simões Marques\newline
+								    							    Higor Nocetti\newline
+								  							    Sadi Júnior Domingos Jacinto}&
+				\parbox[c][\linewidth][c]{\linewidth}{\centering 18/11/2018} &
+				\parbox[c][\linewidth][c]{\linewidth}{\centering Revisão de todos os diagramas, tendo como embasamento o código}\\\hline 
 			\end{tabular}
 			\end{center}
 		\end{table}
@@ -94,7 +101,7 @@
 \section{\normalsize INTRODUÇÃO}
 	\subsection{\normalsize OBJETIVOS}
 	
-		Desenvolvimento de um programa que suporta emulação virtual distribuída em rede, permitindo a dois usuários disputarem uma partida do jogo Digimon Card Battle$\cdots$
+		Desenvolvimento de um programa que suporta emulação virtual distribuída em rede, permitindo a dois usuários disputarem uma partida do jogo Digimon Card Battle.
 	
 	\subsection{\normalsize O JOGO}
 		Trata-se de um jogo de cartas, onde o objetivo principal é ser o primeiro a derrotar 03(três) Digimon Cards do adversário.
@@ -111,7 +118,7 @@
      					\item Ataque 2;
 						\item Ataque 3:
 						\item DP (Digivolve Points)\\É a quantidade de pontos que você precisa para poder usá-la no campo de batalha com 100\% do potencial;
-     					\item +P\\A quantidade de pontos que a carta adiciona aos DP;
+     					\item +P\\A quantidade de pontos que a carta adiciona ao DP do jogador;
      					\item Especialidade da carta\\Pode ser fogo ou grama;
      					\item Nível\\R, C ou U\\
 							\begin{itemize}
@@ -125,19 +132,19 @@
 				\item Option Cards tem apenas o atributo Efeito da Carta.
 			\end{itemize}				
 		\subsubsection{\normalsize FUNCIONAMENTO DO JOGO}
-			A partida é composta de 3 fases:
+			A partida é composta de 4 fases:
 			\begin{enumerate}
 				\item {\bf Fase de compra:}\\
 					Nessa fase o jogador compra cartas do deck até que sua mão tenha 4 cartas.
 					
-					Se você não gostar das cartas, o jogador pode descartar toda a sua mão para o cemitério e comprar até ter 4 cartas novamente em sua mão. Não é permitido o descarte de um número de cartas menor que 4, sendo necessário o descarte da mão inteira, mesmo que apenas para trocar uma única carta. 
+					Se não gostar das cartas, o jogador pode descartar toda a sua mão para o cemitério e comprar até ter 4 cartas novamente em sua mão. Não é permitido o descarte de um número de cartas menor que 4, sendo necessário o descarte da mão inteira, mesmo que apenas para trocar uma única carta. 
 
 					Após a compra, se o jogador estiver satisfeito com suas cartas e não possuir nenhum Digimon Card no campo de batalha, o jogador escolhe um Digimon Card para pôr no campo de batalha, 
 					
 					Caso já haja um Digimon Card inicia-se a fase 2.
 				
 				\item {\bf Fase de evolução:}\\
-					Nessa fase o jogador pode sacrificar um Digimon Card para acumular DP.
+					Nessa fase o jogador pode sacrificar uma, única e exclusivamente uma, Digimon Card para acumular DP.
 					
 					Se o jogador já tiver acumulado DP suficiente, o mesmo pode evoluir o Digimon no campo de batalha para um que esteja na sua mão.
 					
@@ -147,24 +154,17 @@
 					
 					Também é necessário que a Especialidade das cartas sejam as mesmas.
 					
+				\item {\bf Fase de Pré-Batalha:}\\
+					Nessa fase o jogador, se assim desejar, escolhe uma Option Card para servir de suporte para seu Digimon em campo.
+					É nessa fase também que o jogador escolhe um entre os três possíveis ataques para ser usado. Após escolher o ataque, segue-se para a próxima fase.
+				
 				\item {\bf Fase de Batalha:}\\
 					Nessa fase é onde o combate ocorre. 
 					
-					Se o adversário não possuir algum Digimon no campo de batalha, esse turno é passado. 
-					
-					Se ambos os jogadores possuírem Digimons no campo de batalha, cada um escolherá um ataque.
-					
-					Após escolherem os ataques, ambos tem a opção de usar uma carta como suporte podendo ser uma Option Card ou um Digimon Card. O adversário escolhe primeiro a carta de suporte e depois o jogador atual do turno.
-					
-					A seguir, as seguintes ações são realizadas, na ordem apresentada:
-						\begin{enumerate}
-							\item A carta de suporte do jogador atual do turno tem seu efeito;
-							\item A carta de suporte do adversário tem seu efeito;
-							\item Ataque do jogador atual do turno;
-							\item Ataque do adversário.
-						\end{enumerate}
+					O combate é composto, simplesmente, pela subtração do HP do Digimon do jogador, pelo ataque escolhido do adversário.
+					Se o adversário não possuir algum Digimon no campo de batalha, esse turno é passado.
 
-					O Digimon adversário é derrotado quando seu HP chega a 0.
+					Um Digimon é derrotado quando seu HP chega a 0.
 
 					Ao fim da fase de batalha, é o turno do adversário e tudo se repete.
 			\end{enumerate}
@@ -200,7 +200,7 @@
 				O programa deve apresentar a opção de menu ``Iniciar'' para o início de uma nova partida, operação em que é definido a identificação do(s) jogador(es).
 			
 			\item {\bf Abandonar partida:}\\
-				O programa deve apresentar a opção de menu ``Fugir'' para encerrar a partida atual e voltar para o menu principal.
+				O programa deve apresentar a opção de menu ``Sair'' para encerrar a partida atual e voltar para o menu principal.
 
 			\item {\bf Realizar jogada/lance:}\\
 				O programa deve permitir aos jogadores, através do uso do mouse, realizar suas jogadas, em seus respectivos turnos, desde que obedecidas as regras do jogo.
@@ -209,9 +209,9 @@
 				O programa deve apresentar aos jogadores, através de uma interface gráfica, informações sobre a partida atual, incluindo:
 					\begin{itemize}
 						\item Se existe um vencedor.
-						\item O nome do jogador vencedor, caso o mesmo exista./
-						\item Alertas de jogadas inválidas (fora do turno, tentar comprar do baralho quando a mão já está completa, $\cdots$)
-						\item O nome do jogador cujo turno é o atual.
+						\item O nome do jogador vencedor, caso o mesmo exista.
+						\item Alertas de jogadas inválidas (fora do turno, tentar comprar do baralho quando a mão já está completa, $\cdot$)
+						\item Informar quando é o turno do jogador.
 					\end{itemize}
 			
 		\end{enumerate}

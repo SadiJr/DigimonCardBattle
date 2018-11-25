@@ -1,7 +1,7 @@
 {
 	"name" : "SOLARMON",
 	"effect" : null,
-	"path" : "pictures/fire/solarmon.jpg",
+	"path" : "/pictures/fire/solarmon.jpg",
 	"hp" : 500,
 	"attack1" : 350,
 	"attack2" : 210,
@@ -14,7 +14,7 @@
 {
 	"name" : "AGUMON",
 	"effect" : null,
-	"path" : "pictures/fire/agumon.jpg",
+	"path" : "/pictures/fire/agumon.jpg",
 	"hp" : 570,
 	"attack1" : 380,
 	"attack2" : 200,
@@ -27,7 +27,7 @@
 {
 	"name" : "BIYOMON",
 	"effect" : null,
-	"path" : "pictures/fire/biyomon.jpg",
+	"path" : "/pictures/fire/biyomon.jpg",
 	"hp" : 510,
 	"attack1" : 350,
 	"attack2" : 170,
@@ -40,7 +40,7 @@
 {
 	"name" : "GOBURIMON",
 	"effect" : null,
-	"path" : "pictures/fire/goburimon.jpg",
+	"path" : "/pictures/fire/goburimon.jpg",
 	"hp" : 500,
 	"attack1" : 300,
 	"attack2" : 300,
@@ -53,7 +53,7 @@
 {
 	"name" : "MUCHOMON",
 	"effect" : null,
-	"path" : "pictures/fire/muchomon.jpg",
+	"path" : "/pictures/fire/muchomon.jpg",
 	"hp" : 600,
 	"attack1" : 320,
 	"attack2" : 220,
@@ -66,7 +66,7 @@
 {
 	"name" : "CANDLEMON",
 	"effect" : null,
-	"path" : "pictures/fire/candlemon.jpg",
+	"path" : "/pictures/fire/candlemon.jpg",
 	"hp" : 480,
 	"attack1" : 380,
 	"attack2" : 270,
@@ -79,7 +79,7 @@
 {
 	"name" : "FLARERIZAMON",
 	"effect" : null,
-	"path" : "pictures/fire/flarerizamon.jpg",
+	"path" : "/pictures/fire/flarerizamon.jpg",
 	"hp" : 730,
 	"attack1" : 550,
 	"attack2" : 320,
@@ -92,7 +92,7 @@
 {
 	"name" : "AKATORIMON",
 	"effect" : null,
-	"path" : "pictures/fire/akatorimon.jpg",
+	"path" : "/pictures/fire/akatorimon.jpg",
 	"hp" : 600,
 	"attack1" : 400,
 	"attack2" : 460,
@@ -105,7 +105,7 @@
 {
 	"name" : "TANKMON",
 	"effect" : null,
-	"path" : "pictures/fire/tankmon.jpg",
+	"path" : "/pictures/fire/tankmon.jpg",
 	"hp" : 1000,
 	"attack1" : 400,
 	"attack2" : 290,
@@ -118,7 +118,7 @@
 {
 	"name" : "BIRDRAMON",
 	"effect" : null,
-	"path" : "pictures/fire/birdramon.jpg",
+	"path" : "/pictures/fire/birdramon.jpg",
 	"hp" : 710,
 	"attack1" : 500,
 	"attack2" : 310,
@@ -131,7 +131,7 @@
 {
 	"name" : "CENTARUMON",
 	"effect" : null,
-	"path" : "pictures/fire/centarumon.jpg",
+	"path" : "/pictures/fire/centarumon.jpg",
 	"hp" : 800,
 	"attack1" : 450,
 	"attack2" : 360,
@@ -144,7 +144,7 @@
 {
 	"name" : "METAL GREYMON",
 	"effect" : null,
-	"path" : "pictures/fire/metalGreymon.jpg",
+	"path" : "/pictures/fire/metalGreymon.jpg",
 	"hp" : 1540,
 	"attack1" : 720,
 	"attack2" : 540,
@@ -157,7 +157,7 @@
 {
 	"name" : "MASTER TYRANNOMON",
 	"effect" : null,
-	"path" : "pictures/fire/masterTyrannomon.jpg",
+	"path" : "/pictures/fire/masterTyrannomon.jpg",
 	"hp" : 1280,
 	"attack1" : 850,
 	"attack2" : 520,
@@ -170,7 +170,7 @@
 {
 	"name" : "OMNIMON",
 	"effect" : null,
-	"path" : "pictures/fire/omnimon.jpg",
+	"path" : "/pictures/fire/omnimon.jpg",
 	"hp" : 1800,
 	"attack1" : 60,
 	"attack2" : 560,

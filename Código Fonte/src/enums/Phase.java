@@ -5,6 +5,7 @@ public enum Phase {
 	BATTLE_PHASE("Fase de Pré Batalha"),
 	START_GAME("Iniciando o Jogo"),
 	QUIT("Saindo do Jogo"),
+	BATTLE("Batalha!"),
 	WAIT("Esperando ação do jogador");
 	
 	private String description;
