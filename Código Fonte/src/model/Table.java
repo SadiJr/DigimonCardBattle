@@ -372,7 +372,7 @@ public class Table implements Jogada {
 
 		case U:
 			if (levelPlayer.equals(Level.C))
-				return false;
+				return true;
 		default:
 			throw new Exception("Essa carta não pode ser evoluída para esse nível!");
 		}

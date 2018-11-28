@@ -363,6 +363,11 @@ public class TableController {
 					Player winner = player.getId() == table.getLocalPlayer().getId() ? table.getRemotePlayer() : 
 						table.getLocalPlayer();
 					winner.setVictories(winner.getVictories() + 1);
+				} else {
+					int hp = player.getDigimonCard().getHp();
+					player.setDigimonCard(aux1);
+					player.getDigimonCard().setHp(hp);
+					
 				}
 			}
 

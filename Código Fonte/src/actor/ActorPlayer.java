@@ -103,6 +103,7 @@ public class ActorPlayer {
 		attributesScreen.enableButtonSacrificeCard(true);
 		screen.enableButtonsDigivolvePhase(true);
 		update.enableUpdate(true);
+		attributesScreen.repaint();
 	}
 
 	public void dissableButtonsDigivolvePhase() {
@@ -110,7 +111,7 @@ public class ActorPlayer {
 		screen.pack();
 		attributesScreen.enableButtonSacrificeCard(false);
 		attributesScreen.pack();
-		update.setVisible(false);
+		isSacrificeCompleted = false;
 	}
 
 	public void sacrificeCard(String name) {
